@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="323752e7-2969-4245-ae02-507a5bb97420" name="更改" comment="111">
-      <change afterPath="$PROJECT_DIR$/src/modules/matrix/Matrix.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/matrix/functions/ElementaryTransformation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CaltulatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C.iml" beforeDir="false" afterPath="$PROJECT_DIR$/C.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CaltulatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CaltulatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/matrix/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/matrix/Matrix.java" afterDir="false" />
     </list>
     <list id="e74306c9-d7f6-4d5d-868a-141b4ca2a862" name="新建更改列表" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,13 +74,17 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "17",
     "last_opened_file_path": "G:/GitHub/C",
-    "project.structure.last.edited": "模块",
+    "project.structure.last.edited": "项目",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
   }
