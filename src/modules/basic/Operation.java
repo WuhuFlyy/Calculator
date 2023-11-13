@@ -1,5 +1,7 @@
 package modules.basic;
 
+import modules.GlobalVariable;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -9,17 +11,6 @@ import java.math.RoundingMode;
  * @date 2023/11/13 16:14
  */
 public class Operation {
-    private static int scale=10;
-
-    /**
-     * @Description 设置除法保留小数位数
-     * @param scale 要设置的保留小数位数
-     * @author 岳宗翰
-     * @date 2023/11/13 16:37
-    **/
-    public static void setScale(int scale){
-        Operation.scale=scale;
-    }
 
     /**
      * @Description 高精度加法运算
@@ -74,6 +65,6 @@ public class Operation {
     public static String divide(String a, String b){
         BigDecimal A=new BigDecimal(a);
         BigDecimal B=new BigDecimal(b);
-        return A.divide(B,scale,RoundingMode.HALF_UP).toString();
+        return A.divide(B, GlobalVariable.decimalScale,RoundingMode.HALF_UP).toString();
     }
 }

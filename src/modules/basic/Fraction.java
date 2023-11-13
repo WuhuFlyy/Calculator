@@ -1,6 +1,9 @@
 package modules.basic;
 
+import modules.GlobalVariable;
+
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * @author 岳宗翰
@@ -24,8 +27,26 @@ public class Fraction {
         this.numerator=numerator;
     }
 
+    /**
+     * @Description 重载toString方法，直接以分数打印
+     * @return java.lang.String
+     * @author 岳宗翰
+     * @date 2023/11/13 18:44
+    **/
     public String toString(){
         return this.numerator+"/"+this.denominator;
+    }
+
+    /**
+     * @Description 转换为小数
+     * @return java.lang.String
+     * @author 岳宗翰
+     * @date 2023/11/13 18:45
+    **/
+    public String toDecimal(){
+        BigDecimal numerator=new BigDecimal(this.numerator);
+        BigDecimal denominator=new BigDecimal(this.denominator);
+        return numerator.divide(denominator,GlobalVariable.decimalScale, RoundingMode.HALF_UP).toString();
     }
 
     /**
