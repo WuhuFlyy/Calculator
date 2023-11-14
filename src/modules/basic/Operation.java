@@ -123,6 +123,53 @@ public class Operation {
         }
         return result;
     }
+
+    public static String pow(String base,Fraction exp){
+        BigDecimal A=new BigDecimal(base);
+        BigDecimal result;
+        boolean flag;
+        BigDecimal zero=new BigDecimal(0);
+        BigDecimal one=new BigDecimal(1);
+        BigDecimal two=new BigDecimal(2);
+        BigDecimal numerator=new BigDecimal(exp.numerator);
+        BigDecimal denominator=new BigDecimal(exp.denominator);
+        BigDecimal Base=powInt(A,numerator);
+
+        if(exp.denominator.equals("1")){
+            return Base.toString();
+        }
+        if(Base.compareTo(one)>0){
+            flag=true;
+        }
+        else if(Base.compareTo(one)<0){
+            flag=false;
+        }
+        else{
+            return "1";
+        }
+
+        BigDecimal left=new BigDecimal(0);
+        BigDecimal right=new BigDecimal(Base.toString());
+        BigDecimal mid;
+        BigDecimal esp= BigDecimal.valueOf(Math.pow(10, -1 * GlobalVariable.decimalScale));
+
+        if(!flag){
+            right=new BigDecimal(1);
+        }
+        while(right.subtract(left).compareTo(esp)>0){
+            mid=right.add(left).divide(two,GlobalVariable.decimalScale,RoundingMode.HALF_UP);
+            result=powInt(mid,denominator);
+            if(result.compareTo(Base)>0){
+                right=mid.add(zero);
+            }
+            else{
+                left=mid.add(zero);
+            }
+
+        }
+        return left.toString();
+    }
+
     /**
      * @Description  高精度指数求值
      * @param base 底数
@@ -162,24 +209,18 @@ public class Operation {
         BigDecimal mid;
         BigDecimal esp= BigDecimal.valueOf(Math.pow(10, -1 * GlobalVariable.decimalScale));
 
+        if(!flag){
+            right=new BigDecimal(1);
+        }
+
         while(right.subtract(left).compareTo(esp)>0){
             mid=right.add(left).divide(two,GlobalVariable.decimalScale,RoundingMode.HALF_UP);
             result=powInt(mid,denominator);
-            if(flag){
-                if(result.compareTo(Base)>0){
-                    right=mid.add(zero);
-                }
-                else{
-                    left=mid.add(zero);
-                }
+            if(result.compareTo(Base)>0){
+                right=mid.add(zero);
             }
             else{
-                if(result.compareTo(Base)<0){
-                    right=mid.add(zero);
-                }
-                else{
-                    left=mid.add(zero);
-                }
+                left=mid.add(zero);
             }
         }
         return left.toString();

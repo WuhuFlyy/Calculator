@@ -4,6 +4,7 @@ import modules.GlobalVariable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Objects;
 import java.util.function.DoublePredicate;
 
 /**
@@ -32,8 +33,46 @@ public class Fraction {
             this.denominator="1";
         }
         else{
-            this.numerator=numerator;
-            this.denominator=denominator;
+            int len1=numerator.length()-1;
+            int len2=denominator.length()-1;
+            int l=0;
+            BigDecimal n=new BigDecimal(numerator);
+            BigDecimal d=new BigDecimal(denominator);
+            BigDecimal m=new BigDecimal(10);
+            while(len1>=0&&numerator.charAt(len1)!='.')len1--;
+            while(len2>=0&&denominator.charAt(len2)!='.')len2--;
+            if(len1==-1&&len2==-1){
+                this.numerator=numerator;
+                this.denominator=denominator;
+            }
+            else {
+                if (len1 == -1) {
+                    l = denominator.length() - len2;
+                } else if (len2 == -1) {
+                    l = numerator.length() - len1;
+                } else {
+                    len1 = numerator.length() - len1;
+                    len2 = denominator.length() - len2;
+                    l = Math.max(len1, len2);
+                }
+                m=m.pow(l-1);
+                n=n.multiply(m);
+                d=d.multiply(m);
+                String sn=n.toString();
+                String sd=d.toString();
+                len1=sn.length();
+                len2=sd.length();
+                StringBuilder s1= new StringBuilder();
+                StringBuilder s2= new StringBuilder();
+                for(int i=0;i<len1&&sn.charAt(i)!='.';i++){
+                    s1.append(sn.charAt(i));
+                }
+                for(int i=0;i<len2&&sd.charAt(i)!='.';i++){
+                    s2.append(sd.charAt(i));
+                }
+                this.numerator=s1.toString();
+                this.denominator=s2.toString();
+            }
         }
     }
 
@@ -44,6 +83,8 @@ public class Fraction {
      * @date 2023/11/13 18:44
     **/
     public String toString(){
+        this.reduce();
+        if(this.denominator.equals("1"))return this.numerator;
         return this.numerator+"/"+this.denominator;
     }
 
@@ -99,6 +140,10 @@ public class Fraction {
         this.numerator=numerator.toString();
         this.denominator=denominator.toString();
         return this;
+    }
+
+    public boolean equals(Fraction n){
+        return this.numerator.equals(n.numerator)&&this.denominator.equals(n.denominator);
     }
 
     /**

@@ -1,5 +1,7 @@
 package modules.matrix.functions;
 
+import modules.basic.Fraction;
+import modules.basic.Operation;
 import modules.matrix.Matrix;
 
 /**
@@ -17,11 +19,11 @@ public class ElementaryTransformation {
      * @author 岳宗翰
      * @date 2023/11/12 15:05
     **/
-    public double[][] rowELT1(Matrix m, int row1, int row2){
+    public Fraction[][] rowELT1(Matrix m, int row1, int row2){
         int row=m.row,col=m.column;
-        double[][] newM=m.matrix;
+        Fraction[][] newM=m.matrix;
         for(int i=1;i<=col;i++){
-            double temp=newM[row1][i];
+            Fraction temp=newM[row1][i];
             newM[row1][i]=newM[row2][i];
             newM[row2][i]=temp;
         }
@@ -36,10 +38,10 @@ public class ElementaryTransformation {
      * @author 岳宗翰
      * @date 2023/11/12 15:15
     **/
-    public double[][] rowELT2(Matrix m, int row, double mul){
-        double[][] newM=m.matrix;
+    public Fraction[][] rowELT2(Matrix m, int row, double mul){
+        Fraction[][] newM=m.matrix;
         for(int i=1;i<=m.column;i++){
-            newM[row][i]*=mul;
+            newM[row][i]=newM[row][i].multiply(Operation.toFraction(String.valueOf(mul)));
         }
         return newM;
     }
@@ -53,10 +55,10 @@ public class ElementaryTransformation {
      * @author 岳宗翰
      * @date 2023/11/12 15:19
     **/
-    public double[][] rowELT3(Matrix m, int row1, int row2, double mul){
-        double[][] newM=m.matrix;
+    public Fraction[][] rowELT3(Matrix m, int row1, int row2, double mul){
+        Fraction[][] newM=m.matrix;
         for(int i=1;i<=m.column;i++){
-            newM[row2][i]+=newM[row1][i]*mul;
+            newM[row2][i]=newM[row1][i].multiply(Operation.toFraction(String.valueOf(mul))).add(newM[row2][i]);
         }
         return newM;
     }
@@ -69,11 +71,11 @@ public class ElementaryTransformation {
      * @author 岳宗翰
      * @date 2023/11/12 15:21
     **/
-    public double[][] columnELT1(Matrix m, int col1, int col2){
+    public Fraction[][] columnELT1(Matrix m, int col1, int col2){
         int row=m.row,col=m.column;
-        double[][] newM=m.matrix;
+        Fraction[][] newM=m.matrix;
         for(int i=1;i<=row;i++){
-            double temp=newM[i][col1];
+            Fraction temp=newM[i][col1];
             newM[i][col1]=newM[i][col2];
             newM[i][col2]=temp;
         }
@@ -88,10 +90,10 @@ public class ElementaryTransformation {
      * @author 岳宗翰
      * @date 2023/11/12 15:25
     **/
-    public double[][] columnELT2(Matrix m, int col, int mul){
-        double[][] newM=m.matrix;
+    public Fraction[][] columnELT2(Matrix m, int col, int mul){
+        Fraction[][] newM=m.matrix;
         for(int i=1;i<=m.row;i++){
-            newM[i][col]*=mul;
+            newM[i][col]=newM[i][col].multiply(Operation.toFraction(String.valueOf(mul)));
         }
         return newM;
     }
@@ -105,10 +107,10 @@ public class ElementaryTransformation {
      * @author 岳宗翰
      * @date 2023/11/12 15:25
     **/
-    public double[][] columnELT3(Matrix m, int col1, int col2, double mul){
-        double[][] newM=m.matrix;
+    public Fraction[][] columnELT3(Matrix m, int col1, int col2, double mul){
+        Fraction[][] newM=m.matrix;
         for(int i=1;i<=m.row;i++){
-            newM[i][col2]+=newM[i][col1]*mul;
+            newM[i][col2]=newM[i][col1].multiply(Operation.toFraction(String.valueOf(mul))).add(newM[i][col2]);
         }
         return newM;
     }

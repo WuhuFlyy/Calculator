@@ -1,14 +1,18 @@
 package modules.matrix;
 
+import modules.basic.Fraction;
+
 /**
  * @author 岳宗翰
  * @Description: 基本矩阵类
  * @date 2023/11/12 13:45
  */
 public class Matrix {
-    public double[][] matrix;
+    public Fraction[][] matrix;
     public int row;
     public int column;
+    public int rank;
+
     /**
      * @Description 带参构造
      * @param m 矩阵数组
@@ -17,11 +21,12 @@ public class Matrix {
      * @author 岳宗翰
      * @date 2023/11/12 15:33
     **/
-    public Matrix(double[][] m,int row,int column){
+    public Matrix(Fraction[][] m,int row,int column){
         super();
         this.matrix=m;
         this.row=row;
         this.column=column;
+        this.rank=rank();
     }
     public Matrix(){
         super();
@@ -36,11 +41,11 @@ public class Matrix {
      * @date 2023/11/12 15:44
     **/
     private boolean equivalentRow(int row1, int row2){
-        double[][] matrix=this.matrix;
-        double mul1=matrix[row1][1];
-        double mul2=matrix[row2][1];
+        Fraction[][] matrix=this.matrix;
+        Fraction mul1=matrix[row1][1];
+        Fraction mul2=matrix[row2][1];
         for(int i=2;i<=this.column;i++){
-            if (matrix[row1][i] * mul2 != matrix[row2][i] * mul1) {
+            if (matrix[row1][i].multiply(mul2).equals(matrix[row2][i].multiply(mul1))) {
                 return false;
             }
         }
@@ -55,11 +60,11 @@ public class Matrix {
      * @date 2023/11/12 15:46
     **/
     private boolean equivalentCol(int col1, int col2){
-        double[][] matrix=this.matrix;
-        double mul1=matrix[1][col1];
-        double mul2=matrix[1][col2];
+        Fraction[][] matrix=this.matrix;
+        Fraction mul1=matrix[1][col1];
+        Fraction mul2=matrix[1][col2];
         for(int i=2;i<=this.row;i++){
-            if (matrix[i][col1] * mul2 != matrix[i][col2] * mul1) {
+            if (!matrix[i][col1].multiply(mul2).equals(matrix[i][col2].multiply(mul1))) {
                 return false;
             }
         }
@@ -72,8 +77,8 @@ public class Matrix {
      * @author 岳宗翰
      * @date 2023/11/12 13:55
      **/
-    public int rank(){
-        double[][] m=this.matrix;
+    private int rank(){
+        Fraction[][] m=this.matrix;
         int r=this.row;
         for(int i=2;i<=this.row;i++){
             boolean flag=true;
@@ -98,10 +103,15 @@ public class Matrix {
     **/
     public boolean invertible(){
         int r=this.rank();
-        if(this.row==r&&this.column==r)return true;
-        return false;
+        return this.row == r && this.column == r;
     }
-    /*
-    其他矩阵运算类似这样写
-     */
+
+    public Matrix inverse(){
+        if(!this.invertible()){
+            throw new ArithmeticException("该矩阵不可逆");
+        }
+        else{
+            return this;
+        }
+    }
 }

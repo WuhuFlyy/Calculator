@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class CaltulatorTest {
     public static void main(String[] args) {
-        System.out.println(Operation.pow("11893647182347513512135.4","54.5"));
+        System.out.println(Operation.pow("0.21235",new Fraction("3.5","2.222")));
     }
 
 }
