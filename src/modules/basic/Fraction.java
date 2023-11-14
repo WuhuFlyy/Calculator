@@ -4,6 +4,7 @@ import modules.GlobalVariable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.function.DoublePredicate;
 
 /**
  * @author 岳宗翰
@@ -11,8 +12,8 @@ import java.math.RoundingMode;
  * @date 2023/11/13 16:47
  */
 public class Fraction {
-    private String denominator;
-    private String numerator;
+    public String denominator;
+    public String numerator;
 
     /**
      * @Description 只提供带参构造方法（应该不会构造没有分子分母的分数吧）
@@ -23,8 +24,17 @@ public class Fraction {
     **/
     public Fraction(String numerator,String denominator){
         super();
-        this.denominator=denominator;
-        this.numerator=numerator;
+        if(Double.parseDouble(denominator)==0){
+            throw new ArithmeticException("分母不能为0");
+        }
+        else if(Double.parseDouble(numerator)==0){
+            this.numerator="0";
+            this.denominator="1";
+        }
+        else{
+            this.numerator=numerator;
+            this.denominator=denominator;
+        }
     }
 
     /**
@@ -79,7 +89,7 @@ public class Fraction {
         BigDecimal m=new BigDecimal(-1);
         BigDecimal denominator=new BigDecimal(this.denominator);
         BigDecimal numerator=new BigDecimal(this.numerator);
-        BigDecimal q=new BigDecimal(gcd(this.denominator,this.numerator));
+        BigDecimal q=new BigDecimal(gcd(this.numerator,this.denominator));
         denominator=denominator.divideAndRemainder(q)[0];
         numerator=numerator.divideAndRemainder(q)[0];
         if(denominator.toString().charAt(0)=='-'){

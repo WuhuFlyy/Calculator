@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="323752e7-2969-4245-ae02-507a5bb97420" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/src/modules/GlobalVariable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/production/C/CaltulatorTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/CaltulatorTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CaltulatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CaltulatorTest.java" afterDir="false" />
@@ -98,19 +98,6 @@
     <configuration name="CaltulatorTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CaltulatorTest" />
       <module name="C" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="untitled" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="untitled" />
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

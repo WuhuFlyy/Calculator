@@ -1,4 +1,5 @@
 import modules.basic.Fraction;
+import modules.basic.Operation;
 import modules.matrix.Matrix;
 
 import java.util.Scanner;
@@ -10,9 +11,7 @@ import java.util.Scanner;
  */
 public class CaltulatorTest {
     public static void main(String[] args) {
-        Fraction a=new Fraction("-3","2");
-        Fraction b=new Fraction("1","6");
-        System.out.println(a.multiply(b));
+        System.out.println(Operation.pow("11893647182347513512135.4","54.5"));
     }
 
 }
