@@ -1,7 +1,4 @@
-import modules.basic.Fraction;
-import modules.matrix.Matrix;
-
-import java.util.Scanner;
+import ui.CalculatorUI;
 
 /**
  * @author 岳宗翰
@@ -10,9 +7,7 @@ import java.util.Scanner;
  */
 public class CaltulatorTest {
     public static void main(String[] args) {
-        Fraction a=new Fraction("-3","2");
-        Fraction b=new Fraction("1","6");
-        System.out.println(a.multiply(b));
+        new CalculatorUI();
     }
 
 }
