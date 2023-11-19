@@ -3,6 +3,7 @@ import modules.basic.Operation;
 import modules.matrix.Matrix;
 
 import java.util.Scanner;
+import ui.CalculatorUI;
 
 /**
  * @author 岳宗翰
@@ -11,7 +12,11 @@ import java.util.Scanner;
  */
 public class CaltulatorTest {
     public static void main(String[] args) {
+
         System.out.println(Operation.pow("0.21235",new Fraction("3.5","2.222")));
+
+        new CalculatorUI();
+
     }
 
 }
