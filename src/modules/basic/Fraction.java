@@ -42,8 +42,9 @@ public class Fraction {
             while(len1>=0&&numerator.charAt(len1)!='.')len1--;
             while(len2>=0&&denominator.charAt(len2)!='.')len2--;
             if(len1==-1&&len2==-1){
-                this.numerator=numerator;
-                this.denominator=denominator;
+                BigDecimal gcd=new BigDecimal(gcd(numerator,denominator));
+                this.numerator=new BigDecimal(numerator).divideAndRemainder(gcd)[0].toString();
+                this.denominator=new BigDecimal(denominator).divideAndRemainder(gcd)[0].toString();
             }
             else {
                 if (len1 == -1) {
@@ -70,8 +71,11 @@ public class Fraction {
                 for(int i=0;i<len2&&sd.charAt(i)!='.';i++){
                     s2.append(sd.charAt(i));
                 }
-                this.numerator=s1.toString();
-                this.denominator=s2.toString();
+                numerator=s1.toString();
+                denominator=s2.toString();
+                BigDecimal gcd=new BigDecimal(gcd(numerator,denominator));
+                this.numerator=new BigDecimal(numerator).divideAndRemainder(gcd)[0].toString();
+                this.denominator=new BigDecimal(denominator).divideAndRemainder(gcd)[0].toString();
             }
         }
     }
@@ -142,12 +146,19 @@ public class Fraction {
         return this;
     }
 
+    /**
+     * @Description 判断两个分数相等
+     * @param n 另一个分数
+     * @return boolean
+     * @author 岳宗翰
+     * @date 2023/11/20 13:31
+    **/
     public boolean equals(Fraction n){
         return this.numerator.equals(n.numerator)&&this.denominator.equals(n.denominator);
     }
 
     /**
-     * @Description 分数加法，可以当减法用
+     * @Description 分数加法
      * @param adder 分数加数
      * @return 分数和
      * @author 岳宗翰
@@ -165,6 +176,18 @@ public class Fraction {
         numerator3=numerator3.add(numerator4);
         Fraction newFraction=new Fraction(numerator3.toString(),denominator.toString());
         return newFraction.reduce();
+    }
+
+    /**
+     * @Description 分数减法
+     * @param subtractor 减数
+     * @return 分数
+     * @author 岳宗翰
+     * @date 2023/11/20 13:37
+    **/
+    public Fraction subtract(Fraction subtractor){
+        subtractor=subtractor.multiply(new Fraction("-1","1"));
+        return this.add(subtractor);
     }
 
     /**

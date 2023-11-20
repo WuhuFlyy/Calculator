@@ -13,7 +13,7 @@ import ui.CalculatorUI;
 public class CaltulatorTest {
     public static void main(String[] args) {
 
-        System.out.println(Operation.pow("0.21235",new Fraction("3.5","2.222")));
+        System.out.println(new Fraction("3.5","4.5").subtract(new Fraction("4","9")));
 
         new CalculatorUI();
 
