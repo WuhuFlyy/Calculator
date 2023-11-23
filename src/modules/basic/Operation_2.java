@@ -1,3 +1,5 @@
+package modules.basic;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -43,7 +45,7 @@ public class Operation_2{
      * @author 黄文杰
      * @date 2023/11/19 23:48
      */
-    Operation_2(int ac){         
+    public Operation_2(int ac){
         accuracy = ac + 2;
         accuracyNum = BigDecimal.ONE.divide(BigDecimal.TEN.pow(accuracy));
         atan05 = new BigDecimal(atan("0.5"));

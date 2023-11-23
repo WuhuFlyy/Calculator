@@ -95,6 +95,19 @@ public class Operation {
     }
 
     /**
+     * @Description 高精度取模运算
+     * @param a 被除数
+     * @param b 除数
+     * @return java.lang.String
+     * @author 罗孝俊
+     * @date 2023/11/22 16:32
+    **/
+    public static String remainder(String a, String b){
+        BigDecimal A=new BigDecimal(a);
+        BigDecimal B=new BigDecimal(b);
+        return A.remainder(B).toString();
+    }
+    /**
      * @Description 整数指数的高精度运算
      * @param base 底数
      * @param exp 整数型指数
