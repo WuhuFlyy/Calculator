@@ -17,6 +17,19 @@ public class Fraction {
     public String numerator;
 
     /**
+     * @Description 只通过一个数字作为分子的构造方法
+     * @param numerator 整数小数均可
+     * @author 岳宗翰
+     * @date 2023/11/25 13:40
+    **/
+    public Fraction(String numerator){
+        super();
+        Fraction newFraction=Operation.toFraction(numerator);
+        this.numerator= newFraction.numerator;
+        this.denominator= newFraction.denominator;
+    }
+
+    /**
      * @Description 只提供带参构造方法（应该不会构造没有分子分母的分数吧）
      * @param numerator 分子
      * @param denominator 分母
