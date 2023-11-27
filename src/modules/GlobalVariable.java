@@ -7,4 +7,5 @@ package modules;
  */
 public class GlobalVariable {
     public static int decimalScale=10;
+
 }
