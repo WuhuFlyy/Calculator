@@ -4,7 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="323752e7-2969-4245-ae02-507a5bb97420" name="更改" comment="" />
+    <list default="true" id="323752e7-2969-4245-ae02-507a5bb97420" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/src/MatrixTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/C/CaltulatorTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/CaltulatorTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/C/Operation_2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/C/modules/GlobalVariable.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/modules/GlobalVariable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/C/modules/basic/Fraction.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/modules/basic/Fraction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/C/modules/basic/Operation.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/modules/basic/Operation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/C/modules/matrix/Matrix.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/modules/matrix/Matrix.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/C/modules/matrix/functions/ElementaryTransformation.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/modules/matrix/functions/ElementaryTransformation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/C/modules/probabilityStatistics/Bayesian.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/modules/probabilityStatistics/Bayesian.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/C/modules/probabilityStatistics/Classical.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/modules/probabilityStatistics/Classical.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/C/modules/probabilityStatistics/Conditional.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/modules/probabilityStatistics/Conditional.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/C/modules/probabilityStatistics/Independence.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/modules/probabilityStatistics/Independence.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/C/modules/probabilityStatistics/TotalProbability.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/modules/probabilityStatistics/TotalProbability.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/C/ui/ButtonPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/ui/ButtonPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/C/ui/CalculatorUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/ui/CalculatorUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/production/C/ui/UIValues.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/ui/UIValues.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/basic/Fraction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/basic/Fraction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/matrix/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/matrix/Matrix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/matrix/functions/ElementaryTransformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/matrix/functions/ElementaryTransformation.java" afterDir="false" />
+    </list>
     <list id="e74306c9-d7f6-4d5d-868a-141b4ca2a862" name="新建更改列表" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
