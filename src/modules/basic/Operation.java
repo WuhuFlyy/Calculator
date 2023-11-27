@@ -239,4 +239,33 @@ public class Operation {
         return left.toString();
     }
 
+    /**
+     * @Description  计算k的阶乘 k!
+     * @param k k的阶乘
+     * @return java.lang.String
+     * @author 吕顺
+     * @date 2023/11/25 10:38
+    **/
+    public static String calFactorial(String k){
+        BigDecimal res = new BigDecimal(1);
+        for(int i = 1; i <= Integer.parseInt(k); i++){
+            res = res.multiply(new BigDecimal(i));
+        }
+        return res.toString();
+    }
+
+    /**
+     * @Description  计算组合数C(n, k)
+     * @param k C(n, k)
+     * @param n C(n, k)
+     * @return java.lang.String
+     * @author 吕顺
+     * @date 2023/11/25 10:38
+    **/
+    public static String calCombination(String k, String n){
+        String m = Integer.toString(Integer.parseInt(n) - Integer.parseInt(k));
+        BigDecimal denominator = new BigDecimal(multiply(calFactorial(k), calFactorial(m)));
+        BigDecimal numerator = new BigDecimal(calFactorial(n));
+        return divide(numerator.toString(), denominator.toString());
+    }
 }
