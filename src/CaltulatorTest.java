@@ -1,11 +1,7 @@
 import modules.basic.Fraction;
-import modules.basic.Operation;
-import modules.matrix.Matrix;
-
-import java.util.Scanner;
 
 import modules.probabilityStatistics.*;
-import ui.CalculatorUI;
+import ui.uigeneral.GeneralUI;
 
 /**
  * @author 岳宗翰
@@ -31,6 +27,7 @@ public class CaltulatorTest {
         System.out.println(new Independence(2, P_Bi).calP_mulA());
         System.out.println(new Independence(2, P_Bi).calP_sumA());
         System.out.println(new Independence(2, P_Bi).calP_sumnotA());
+        new GeneralUI();
     }
 
 }

@@ -4,9 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
-
-import modules.basic.Operation;
-import ui.UIValues.*;
+import static ui.UIValues.*;
 
 /**
  * @author 罗孝俊
@@ -14,9 +12,6 @@ import ui.UIValues.*;
  * @date 2023/11/17 21:33
  */
 public class ButtonPanel extends JPanel{
-
-    public static final String ZERO_REGEX = "[0]*";
-    public static final String NUMBER_REGEX = "([-]?\\d+[.]\\d*)|(\\d+)|(-\\d+)";
     private static ButtonPanel buttonPanel;
     public JTextField inputScreen, outputScreen;
     public JButton btnC;
@@ -47,19 +42,23 @@ public class ButtonPanel extends JPanel{
     private boolean go = true; // For calculate with Opt != (=)
     private boolean addToDisplay = true; // Connect numbers in display
 
+    public int nowMode; //Denote which mode of panel is it now
+
     /**
      * @Description  构造ButtonPanel类
      * @param inputScreen 用户输入栏的JTextField
      * @param outputScreen 输出栏JTextField
+     * @param mode 模式选择，即选择是否需要使用计算功能（0为需要，1为不需要）
      * @author 罗孝俊
      * @date 2023/11/17 23:00
     **/
-    private ButtonPanel(JTextField inputScreen, JTextField outputScreen){
+    private ButtonPanel(JTextField inputScreen, JTextField outputScreen, int mode){
         //setBounds(UIValues.MARGIN_X, UIValues.MARGIN_Y, BUTTON_PANEL_WIDTH, BUTTON_PANEL_HEIGHT);
         setLayout(new GridLayout(5, 5, 10, 30));
         typedValue = "0";
         this.inputScreen = inputScreen;
         this.outputScreen = outputScreen;
+        nowMode = mode;
         initButton();
         add(btnC);
         add(btnBack);
@@ -86,21 +85,45 @@ public class ButtonPanel extends JPanel{
         add(btnEqual);
         add(btnSquare);
         add(btnEmpty[3]);
-//        add(btnAtan);
+        if(mode == 1){
+            btnMod.setEnabled(false);
+            btnMul.setEnabled(false);
+            btnDiv.setEnabled(false);
+            btnAtan.setEnabled(false);
+            btnSub.setEnabled(false);
+            btnEqual.setEnabled(false);
+            btnAdd.setEnabled(false);
+            btnSquare.setEnabled(false);
+        }else if(mode == 0){
+            btnMod.setEnabled(true);
+            btnMul.setEnabled(true);
+            btnAtan.setEnabled(true);
+            btnSub.setEnabled(true);
+            btnEqual.setEnabled(true);
+            btnAdd.setEnabled(true);
+            btnSquare.setEnabled(true);
+        }
+
     }
 
     /**
-     * @Description  单实例模式构造ButtonPanel
-     * @param inputScreen 用户输入栏的JTextField
-     * @param outputScreen 输出栏TextField
-     * @return ui.ButtonPanel  按钮Panel
+     * @Description
+     * @param inputScreen 输入栏的JTextField
+     * @param outputScreen  输出栏的JTextField
+     * @param mode  模式选择，即选择是否需要使用计算功能（0为需要，1为不需要）
+     * @return ui.ButtonPanel
      * @author 罗孝俊
-     * @date 2023/11/17 23:01
+     * @date 2023/11/26 9:54
     **/
-    public static ButtonPanel getButtonPanel(JTextField inputScreen, JTextField outputScreen){
-        if(buttonPanel == null){
-            buttonPanel = new ButtonPanel(inputScreen, outputScreen);
+    public static ButtonPanel getButtonPanel(JTextField inputScreen, JTextField outputScreen, int mode){
+        if(inputScreen == null || outputScreen == null){
+            return null;
+        }
+        if(buttonPanel == null || buttonPanel.nowMode != mode){
+            buttonPanel = new ButtonPanel(inputScreen, outputScreen, mode);
+            buttonPanel.nowMode = mode;
         }else{
+            buttonPanel.initParameter();
             buttonPanel.setTextField(inputScreen, outputScreen);
         }
         return buttonPanel;
@@ -127,7 +150,7 @@ public class ButtonPanel extends JPanel{
      * @author 罗孝俊
      * @date 2023/11/17 19:58
      **/
-    public JButton createButton(String label) {
+    public static JButton createButton(String label) {
         JButton btn = new JButton(label);
         //btn.setBounds(x, y, UIValues.BUTTON_WIDTH, BUTTON_HEIGHT);
         btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
@@ -176,7 +199,7 @@ public class ButtonPanel extends JPanel{
 
         btnMod = createButton("%");
         btnMod.addActionListener(event -> {
-            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()))
+            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
                 return;
 
             if(go){
@@ -195,8 +218,13 @@ public class ButtonPanel extends JPanel{
 
         btnDiv = createButton("/");
         btnDiv.addActionListener(event -> {
-            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()))
-                return;
+            if(nowMode == 1){
+                if(!Pattern.matches(INTEGER_REGEX, inputScreen.getText()))
+                    return;
+            }else if(nowMode == 0){
+                if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
+                    return;
+            }
 
             if(go){
                 typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
@@ -214,7 +242,7 @@ public class ButtonPanel extends JPanel{
 
         btnMul = createButton("*");
         btnMul.addActionListener(event -> {
-            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()))
+            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
                 return;
 
             if(go){
@@ -233,7 +261,7 @@ public class ButtonPanel extends JPanel{
 
         btnAdd = createButton("+");
         btnAdd.addActionListener(event -> {
-            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()))
+            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
                 return;
 
             if(go){
@@ -252,7 +280,7 @@ public class ButtonPanel extends JPanel{
 
         btnSub = createButton("-");
         btnSub.addActionListener(event -> {
-            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()))
+            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
                 return;
 
             if(go){
@@ -284,7 +312,7 @@ public class ButtonPanel extends JPanel{
 
         btnSquare = createButton("^");
         btnSquare.addActionListener(event -> {
-            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()))
+            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
                 return;
 
             if(go){
@@ -322,7 +350,11 @@ public class ButtonPanel extends JPanel{
                 if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
                     inputScreen.setText(inputScreen.getText() + "1");
                 }else{
-                    inputScreen.setText("1");
+                    if(inputScreen.getText().charAt(0) == '-'){
+                        inputScreen.setText("-1");
+                    }else{
+                        inputScreen.setText("1");
+                    }
                 }
             }else{
                 inputScreen.setText("1");
@@ -337,7 +369,11 @@ public class ButtonPanel extends JPanel{
                 if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
                     inputScreen.setText(inputScreen.getText() + "2");
                 }else{
-                    inputScreen.setText("2");
+                    if(inputScreen.getText().charAt(0) == '-'){
+                        inputScreen.setText("-2");
+                    }else{
+                        inputScreen.setText("2");
+                    }
                 }
             }else{
                 inputScreen.setText("2");
@@ -352,7 +388,11 @@ public class ButtonPanel extends JPanel{
                 if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
                     inputScreen.setText(inputScreen.getText() + "3");
                 }else{
-                    inputScreen.setText("3");
+                    if(inputScreen.getText().charAt(0) == '-'){
+                        inputScreen.setText("-3");
+                    }else{
+                        inputScreen.setText("3");
+                    }
                 }
             }else{
                 inputScreen.setText("3");
@@ -367,7 +407,11 @@ public class ButtonPanel extends JPanel{
                 if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
                     inputScreen.setText(inputScreen.getText() + "4");
                 }else{
-                    inputScreen.setText("4");
+                    if(inputScreen.getText().charAt(0) == '-'){
+                        inputScreen.setText("-4");
+                    }else{
+                        inputScreen.setText("4");
+                    }
                 }
             }else{
                 inputScreen.setText("4");
@@ -382,7 +426,11 @@ public class ButtonPanel extends JPanel{
                 if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
                     inputScreen.setText(inputScreen.getText() + "5");
                 }else{
-                    inputScreen.setText("5");
+                    if(inputScreen.getText().charAt(0) == '-'){
+                        inputScreen.setText("-5");
+                    }else{
+                        inputScreen.setText("5");
+                    }
                 }
             }else{
                 inputScreen.setText("5");
@@ -397,7 +445,11 @@ public class ButtonPanel extends JPanel{
                 if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
                     inputScreen.setText(inputScreen.getText() + "6");
                 }else{
-                    inputScreen.setText("6");
+                    if(inputScreen.getText().charAt(0) == '-'){
+                        inputScreen.setText("-6");
+                    }else{
+                        inputScreen.setText("6");
+                    }
                 }
             }else{
                 inputScreen.setText("6");
@@ -412,7 +464,11 @@ public class ButtonPanel extends JPanel{
                 if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
                     inputScreen.setText(inputScreen.getText() + "7");
                 }else{
-                    inputScreen.setText("7");
+                    if(inputScreen.getText().charAt(0) == '-'){
+                        inputScreen.setText("-7");
+                    }else{
+                        inputScreen.setText("7");
+                    }
                 }
             }else{
                 inputScreen.setText("7");
@@ -427,7 +483,11 @@ public class ButtonPanel extends JPanel{
                 if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
                     inputScreen.setText(inputScreen.getText() + "8");
                 }else{
-                    inputScreen.setText("8");
+                    if(inputScreen.getText().charAt(0) == '-'){
+                        inputScreen.setText("-8");
+                    }else{
+                        inputScreen.setText("8");
+                    }
                 }
             }else{
                 inputScreen.setText("8");
@@ -442,7 +502,11 @@ public class ButtonPanel extends JPanel{
                 if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
                     inputScreen.setText(inputScreen.getText() + "9");
                 }else{
-                    inputScreen.setText("9");
+                    if(inputScreen.getText().charAt(0) == '-'){
+                        inputScreen.setText("-9");
+                    }else{
+                        inputScreen.setText("9");
+                    }
                 }
             }else{
                 inputScreen.setText("9");
@@ -453,7 +517,7 @@ public class ButtonPanel extends JPanel{
 
         btnEqual = createButton("=");
         btnEqual.addActionListener(event -> {
-            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()))
+            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
                 return;
 
             if (go) {
@@ -469,7 +533,7 @@ public class ButtonPanel extends JPanel{
 
         btnAtan = createButton("atan");
         btnAtan.addActionListener(event -> {
-            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()))
+            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
                 return;
 
             typedValue = CalculatorUI.calculate(inputScreen.getText(), "atan");
@@ -483,7 +547,7 @@ public class ButtonPanel extends JPanel{
 
         btnReverse = createButton("+/-");
         btnReverse.addActionListener(event -> {
-            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()))
+            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
                 return;
             StringBuilder sb = new StringBuilder(inputScreen.getText());
             if(sb.charAt(0) != '-'){
@@ -496,17 +560,19 @@ public class ButtonPanel extends JPanel{
         btnEmpty = new JButton[4];
         for(int i = 0; i < 4; i++){
             btnEmpty[i] = createButton("");
+            btnEmpty[i].setEnabled(false);
         }
     }
 
     /**
-     * @Description  判断StringBuilder对象的最后一个输入是不是运算符或者小数点
-     * @param sb StringBuilder对象
-     * @return boolean  是则返回True，否则返回false
+     * @Description   初始化控制流的参数
      * @author 罗孝俊
-     * @date 2023/11/18 0:07
+     * @date 2023/11/27 10:53
     **/
-    private boolean checkOperator(StringBuilder sb){
-        return sb == null || sb.isEmpty() || sb.charAt(sb.length() - 1) == '/' || sb.charAt(sb.length() - 1) == '*' || sb.charAt(sb.length() - 1) == '+' || sb.charAt(sb.length() - 1) == '-' || sb.charAt(sb.length() - 1) == '%' || sb.charAt(sb.length() - 1) == '.' || sb.charAt(sb.length() - 1) == '^';
+    public void initParameter(){
+        selectedOperator = ' ';
+        go = true;
+        addToDisplay = true;
     }
+
 }

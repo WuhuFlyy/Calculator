@@ -3,8 +3,9 @@ package ui;
 import javax.swing.*;
 import java.awt.*;
 
-import modules.GlobalVariable;
 import modules.basic.*;
+import ui.uigeneral.GeneralUI;
+
 import static ui.UIValues.*;
 
 /**
@@ -13,34 +14,43 @@ import static ui.UIValues.*;
  * @date 2023/11/17 19:44
  */
 public class CalculatorUI {
-    public JFrame window;
+//    public JFrame window;
 
     public JTextField inputScreen, outputScreen;
+    public JScrollPane inputPane, outputPane;
 
     public ButtonPanel buttonPanel;
 
+    public JButton btnBack;
+
     /**
-     * @Description 计算器模块的UI构造方法，调用后直接生成计算器模块（暂时没把JFrame窗体提出来单独建立）
+     * @Description 计算器模块的UI构造方法，调用后直接生成计算器模块
      * @author 罗孝俊
      * @date 2023/11/17 23:54
     **/
     public CalculatorUI(){
-        //JFrame.setDefaultLookAndFeelDecorated(true);
-
-        window = new JFrame("Calculator");
-        window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        window.setLocationRelativeTo(null);
-
         initInputScreen();
         initOutScreen();
-        buttonPanel = ButtonPanel.getButtonPanel(inputScreen, outputScreen);
+        buttonPanel = ButtonPanel.getButtonPanel(inputScreen, outputScreen, 0);
         buttonPanel.setBounds(MARGIN_X, MARGIN_Y + 160, BUTTON_PANEL_WIDTH, BUTTON_PANEL_HEIGHT);
+        buttonPanel.setVisible(true);
         window.add(buttonPanel);
 
-        window.setLayout(null);
-        window.setResizable(false);
-        inputScreen.setFocusable(true);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        btnBack = ButtonPanel.createButton("<");
+        btnBack.setBounds(MARGIN_X, 10, 70, 40);
+        btnBack.addActionListener(event ->{
+            buttonPanel.setVisible(false);
+            inputScreen.setVisible(false);
+            inputPane.setVisible(false);
+            outputScreen.setVisible(false);
+            outputPane.setVisible(false);
+            new GeneralUI();
+            btnBack.setVisible(false);
+        });
+        window.add(btnBack);
+        btnBack.setVisible(true);
+        btnBack.repaint();
+
         window.setVisible(true);
     }
 
@@ -56,7 +66,12 @@ public class CalculatorUI {
         inputScreen.setFocusable(true);
         inputScreen.setBackground(Color.GRAY);
         inputScreen.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
-        window.add(inputScreen);
+        inputPane = new JScrollPane(inputScreen, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        inputPane.setBounds(MARGIN_X, MARGIN_Y, 500, 70);
+        inputPane.setBackground(Color.GRAY);
+        window.add(inputPane);
+        inputScreen.setVisible(true);
+        inputPane.setVisible(true);
     }
 
     /**
@@ -71,7 +86,11 @@ public class CalculatorUI {
         outputScreen.setFocusable(true);
         //outputScreen.setBackground(Color.WHITE);
         outputScreen.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
-        window.add(outputScreen);
+        outputPane = new JScrollPane(outputScreen, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        outputPane.setBounds(MARGIN_X, MARGIN_Y + 70, 500, 70);
+        window.add(outputPane);
+        outputScreen.setVisible(true);
+        outputPane.setVisible(true);
     }
 
     /**

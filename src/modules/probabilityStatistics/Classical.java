@@ -23,9 +23,7 @@ public class Classical {
     **/
     public Classical(int n, int k){
         if(n <= 0){
-            //throw new ArithmeticException("样本空间中包含的基本事件总数n不合法");
-            System.out.println("样本空间中包含的基本事件总数n不合法");
-            return;
+            throw new ArithmeticException("样本空间中包含的基本事件总数n不合法");
         }
         if(k < 0 || k > n){
             throw new ArithmeticException("事件A发生包含的基本事件数k不合法");
