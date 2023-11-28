@@ -357,7 +357,7 @@ public class Operation_2{
      * @author 黄文杰
      * @date 2023/11/27 10:17
     **/
-    public String getArctan(String x) {
+    public static String getArctan(String x) {
         BigDecimal a=new BigDecimal(x);
         return atan(a).toString();
     }
@@ -369,7 +369,7 @@ public class Operation_2{
      * @author 黄文杰
      * @date 2023/11/27 10:30
     **/
-    public String getLog(String a,String x) {
+    public static String getLog(String a,String x) {
         BigDecimal b=new BigDecimal(x);
         BigDecimal c=new BigDecimal(a);
         return log(c,b).toString();
@@ -381,7 +381,7 @@ public class Operation_2{
      * @param x
      * @return
      */
-    public String getPow(String a,String x) {
+    public static String getPow(String a,String x) {
         BigDecimal A =new BigDecimal(a);
         BigDecimal X =new BigDecimal(x);
         return pow(A,X).toString();
@@ -393,7 +393,7 @@ public class Operation_2{
      * @author 黄文杰
      * @date 2023/11/27 13:08
     **/
-    public String getCos(String x) {
+    public static String getCos(String x) {
         return cos(new BigDecimal(x)).toString();
     }
 
@@ -404,7 +404,7 @@ public class Operation_2{
      * @author 黄文杰
      * @date 2023/11/27 13:15
     **/
-    public String getSin(String x) {
+    public static String getSin(String x) {
         return sin(new BigDecimal(x)).toString();
     }
     /**
@@ -414,7 +414,7 @@ public class Operation_2{
      * @author 黄文杰
      * @date 2023/11/27 13:22
     **/
-    public String getTan(String x) {
+    public static String getTan(String x) {
         return tan(new BigDecimal(x)).toString();
     }
 
