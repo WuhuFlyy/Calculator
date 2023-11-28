@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:src/modules/probabilitystatistics/BinomialDistribution.java
 package modules.probabilitystatistics;
+========
+package modules.probability;
+>>>>>>>> 44979bd461e40833c695cc715e595d57adef151f:src/modules/probability/BinomialDistribution.java
 
 import modules.basic.Fraction;
 import modules.basic.Operation;
@@ -14,7 +18,7 @@ public class BinomialDistribution {
     private int k;
     private Fraction EX;
     private Fraction DX;
-    private Fraction P_Xequalk;
+    private Fraction Xk;
     /**
      * @Description  不带k的构造方法
      * @param n X ~ B(n, p)中的 n
@@ -90,7 +94,7 @@ public class BinomialDistribution {
      * @author 吕顺
      * @date 2023/11/25 10:02
     **/
-    public String calP_Xequalk(){
+    public String calXk(){
         if(k == -1){
             throw new ArithmeticException("未输入k，不可计算P(X=k)");
         }
@@ -106,8 +110,8 @@ public class BinomialDistribution {
         for(int i = 0; i < n - k; i++){
             qnk = qnk.multiply(q);
         }
-        P_Xequalk = com.multiply(pk).multiply(qnk);
-        return P_Xequalk.toString();
+        Xk = com.multiply(pk).multiply(qnk);
+        return Xk.toString();
     }
 
 }

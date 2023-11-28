@@ -1,6 +1,6 @@
 package ui.uiprobabilitystatistics;
 
-import modules.probabilitystatistics.Classical;
+import modules.probability.Classical;
 import ui.ButtonPanel;
 
 import javax.swing.*;
@@ -130,8 +130,8 @@ public class ClassicalUI {
         int k = Integer.parseInt(inputK.getText());
         try{
             Classical classical = new Classical(n, k);
-            outputPA.setText("P(A) = " + classical.calP_A());
-            outputPNotA.setText("~P(A) = " + classical.calP_notA());
+            outputPA.setText("P(A) = " + classical.calA());
+            outputPNotA.setText("~P(A) = " + classical.calNotA());
         }catch(ArithmeticException e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
             return;

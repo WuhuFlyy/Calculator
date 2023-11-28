@@ -1,6 +1,6 @@
 import modules.basic.Fraction;
 
-import modules.probabilitystatistics.*;
+import modules.probability.*;
 import ui.uigeneral.GeneralUI;
 
 /**
@@ -36,11 +36,10 @@ public class CaltulatorTest {
 //        System.out.println(f);
 
         Fraction p = new Fraction("1", "3");
-        //System.out.println(new BinomialDistribution(3, p).calP_Xequalk());
-        System.out.println(new BinomialDistribution(3, p, 0).calP_Xequalk());
-        System.out.println(new BinomialDistribution(3, p, 1).calP_Xequalk());
-        System.out.println(new BinomialDistribution(3, p, 2).calP_Xequalk());
-        System.out.println(new BinomialDistribution(3, p, 3).calP_Xequalk());
+        System.out.println(new BinomialDistribution(3, p, 0).calXk());
+        System.out.println(new BinomialDistribution(3, p, 1).calXk());
+        System.out.println(new BinomialDistribution(3, p, 2).calXk());
+        System.out.println(new BinomialDistribution(3, p, 3).calXk());
         new GeneralUI();
     }
 }

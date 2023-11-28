@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:src/modules/probabilitystatistics/Independence.java
 package modules.probabilitystatistics;
+========
+package modules.probability;
+>>>>>>>> 44979bd461e40833c695cc715e595d57adef151f:src/modules/probability/Independence.java
 
 import modules.basic.Fraction;
 
@@ -8,34 +12,34 @@ import modules.basic.Fraction;
  * @date 2023/11/23 16:32
  */
 public class Independence {
-    private Fraction[] P_Ai;
+    private Fraction[] Ai;
     private int n;
-    private Fraction P_mulA;
-    private Fraction P_sumA;
-    private Fraction P_sumnotA;
+    private Fraction mulA;
+    private Fraction sumA;
+    private Fraction sumNotA;
 
     /**
      * @Description  构造方法
      * @param n 事件个数
-     * @param P_Ai 每个事件的概率
+     * @param Ai 每个事件的概率
      * @author 吕顺
      * @date 2023/11/23 16:35
     **/
-    public Independence(int n, Fraction[] P_Ai){
+    public Independence(int n, Fraction[] Ai){
         if(n <= 0){
             throw new ArithmeticException("事件组的个数n不合法");
         }
-        if(P_Ai.length != n){
+        if(Ai.length != n){
             throw new ArithmeticException("P(Ai)个数不合法");
         }
         for(int i = 0; i < n; i++){
-            double decimal = Double.parseDouble(P_Ai[i].toDecimal());
+            double decimal = Double.parseDouble(Ai[i].toDecimal());
             if(decimal > 1.0 || decimal < 0){
                 throw new ArithmeticException("P(A" + i + ")大小不合法");
             }
         }
         this.n = n;
-        this.P_Ai = P_Ai;
+        this.Ai = Ai;
     }
 
     /**
@@ -44,12 +48,12 @@ public class Independence {
      * @author 吕顺
      * @date 2023/11/23 16:47
     **/
-    public String calP_mulA(){
-        P_mulA = P_Ai[0];
+    public String calMulA(){
+        mulA = Ai[0];
         for(int i = 1; i < n; i++){
-            P_mulA = P_mulA.multiply(P_Ai[i]);
+            mulA = mulA.multiply(Ai[i]);
         }
-        return P_mulA.toString();
+        return mulA.toString();
     }
 
     /**
@@ -58,14 +62,14 @@ public class Independence {
      * @author 吕顺
      * @date 2023/11/23 16:49
     **/
-    public String calP_sumA(){
+    public String calSumA(){
         Fraction one = new Fraction("1", "1");
-        Fraction P_mulnotA = one.subtract(P_Ai[0]);
+        Fraction P_mulnotA = one.subtract(Ai[0]);
         for(int i = 1; i < n; i++){
-            P_mulnotA = P_mulnotA.multiply(one.subtract(P_Ai[i]));
+            P_mulnotA = P_mulnotA.multiply(one.subtract(Ai[i]));
         }
-        P_sumA = one.subtract(P_mulnotA);
-        return P_sumA.toString();
+        sumA = one.subtract(P_mulnotA);
+        return sumA.toString();
     }
 
     /**
@@ -74,13 +78,13 @@ public class Independence {
      * @author 吕顺
      * @date 2023/11/23 16:53
     **/
-    public String calP_sumnotA(){
+    public String calSumNotA(){
         Fraction one = new Fraction("1", "1");
-        Fraction P_mulA = P_Ai[0];
+        Fraction P_mulA = Ai[0];
         for(int i = 1; i < n; i++){
-            P_mulA = P_mulA.multiply(P_Ai[i]);
+            P_mulA = P_mulA.multiply(Ai[i]);
         }
-        P_sumnotA = one.subtract(P_mulA);
-        return P_sumnotA.toString();
+        sumNotA = one.subtract(P_mulA);
+        return sumNotA.toString();
     }
 }
