@@ -1,6 +1,6 @@
 package ui.uiprobabilitystatistics;
 
-import modules.probabilityStatistics.Classical;
+import modules.probabilitystatistics.Classical;
 import ui.ButtonPanel;
 
 import javax.swing.*;

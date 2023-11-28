@@ -1,4 +1,4 @@
-package modules.probabilityStatistics;
+package modules.probabilitystatistics;
 
 import modules.basic.Fraction;
 import modules.basic.Operation;

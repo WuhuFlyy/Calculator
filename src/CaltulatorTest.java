@@ -1,6 +1,6 @@
 import modules.basic.Fraction;
 
-import modules.probabilityStatistics.*;
+import modules.probabilitystatistics.*;
 import ui.uigeneral.GeneralUI;
 
 /**
