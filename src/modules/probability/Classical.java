@@ -1,4 +1,4 @@
-package modules.probabilityStatistics;
+package modules.probability;
 
 import modules.basic.Fraction;
 
@@ -11,8 +11,8 @@ import modules.basic.Fraction;
 public class Classical {
     private int n;
     private int k;
-    private Fraction P_A;
-    private Fraction P_notA;
+    private Fraction A;
+    private Fraction notA;
 
     /**
      * @Description 构造方法
@@ -33,28 +33,28 @@ public class Classical {
     }
 
     /**
-     * @Description 计算事件A发生的概率P_A
+     * @Description 计算事件A发生的概率
      * @return java.lang.String
      * @author 吕顺
      * @date 2023/11/20 10:57
     **/
-    public String calP_A(){
+    public String calA(){
         String numerator = Integer.toString(k);
         String denominator = Integer.toString(n);
-        P_A = new Fraction(numerator, denominator);
-        return P_A.toString();
+        A = new Fraction(numerator, denominator);
+        return A.toString();
     }
 
     /**
-     * @Description 计算事件notA发生的概率P_notA
+     * @Description 计算事件notA发生的概率
      * @return java.lang.String
      * @author 吕顺
      * @date 2023/11/20 11:05
     **/
-    public String calP_notA(){
+    public String calNotA(){
         String numerator = Integer.toString(n-k);
         String denominator = Integer.toString(n);
-        P_notA = new Fraction(numerator, denominator);
-        return P_notA.toString();
+        notA = new Fraction(numerator, denominator);
+        return notA.toString();
     }
 }
