@@ -1,4 +1,4 @@
-package ui.uiprobabilitystatistics;
+package ui.uiprobability;
 
 import modules.probability.Classical;
 import ui.ButtonPanel;

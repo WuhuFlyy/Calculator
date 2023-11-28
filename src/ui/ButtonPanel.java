@@ -574,5 +574,4 @@ public class ButtonPanel extends JPanel{
         go = true;
         addToDisplay = true;
     }
-
 }

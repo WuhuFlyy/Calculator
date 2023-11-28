@@ -143,10 +143,8 @@ public class CalculatorUI {
     **/
     public static String calculate(String number, String operator){
         if(operator.equals("atan")){
-            Operation_2 op = new Operation_2(10);
-            return op.atan(number);
+            return Operation_2.getArctan(number);
         }
-
         return number;
     }
 }

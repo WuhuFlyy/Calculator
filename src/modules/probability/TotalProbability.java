@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/modules/probabilitystatistics/TotalProbability.java
-package modules.probabilitystatistics;
-========
 package modules.probability;
->>>>>>>> 44979bd461e40833c695cc715e595d57adef151f:src/modules/probability/TotalProbability.java
 
 import modules.basic.Fraction;
 

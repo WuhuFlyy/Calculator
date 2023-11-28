@@ -412,8 +412,4 @@ public class Operation_2{
     public static String getTan(String x) {
         return tan(new BigDecimal(x)).toString();
     }
-
-
-
-
 }

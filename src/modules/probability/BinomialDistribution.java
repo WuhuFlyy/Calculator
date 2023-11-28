@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/modules/probabilitystatistics/BinomialDistribution.java
-package modules.probabilitystatistics;
-========
 package modules.probability;
->>>>>>>> 44979bd461e40833c695cc715e595d57adef151f:src/modules/probability/BinomialDistribution.java
 
 import modules.basic.Fraction;
 import modules.basic.Operation;
@@ -113,5 +109,4 @@ public class BinomialDistribution {
         Xk = com.multiply(pk).multiply(qnk);
         return Xk.toString();
     }
-
 }

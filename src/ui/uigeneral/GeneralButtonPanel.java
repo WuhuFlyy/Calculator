@@ -1,7 +1,7 @@
 package ui.uigeneral;
 
 import ui.CalculatorUI;
-import ui.uiprobabilitystatistics.ProbabilityStatisticGeneralUI;
+import ui.uiprobability.ProbabilityStatisticGeneralUI;
 
 import javax.swing.*;
 import java.awt.*;

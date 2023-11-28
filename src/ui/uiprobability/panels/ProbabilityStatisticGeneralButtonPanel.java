@@ -1,8 +1,7 @@
-package ui.uiprobabilitystatistics.panels;
+package ui.uiprobability.panels;
 
 import ui.UIValues;
-import ui.uiprobabilitystatistics.ClassicalUI;
-import ui.uiprobabilitystatistics.ProbabilityStatisticGeneralUI;
+import ui.uiprobability.ClassicalUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,7 +36,7 @@ public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
         add(btnIndependence);
         add(btnTotalProbability);
         add(btnBayesian);
-        add(btnBinomialDistribution);
+        //add(btnBinomialDistribution);
     }
 
     /**
@@ -57,8 +56,6 @@ public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
         btnIndependence = UIValues.createButton("独立事件概率", "宋体");
         btnTotalProbability = UIValues.createButton("全概率", "宋体");
         btnBayesian = UIValues.createButton("贝叶斯公式", "宋体");
-        btnBinomialDistribution = UIValues.createButton("二项分布", "宋体");
+        //btnBinomialDistribution = UIValues.createButton("二项分布", "宋体");
     }
-
-
 }

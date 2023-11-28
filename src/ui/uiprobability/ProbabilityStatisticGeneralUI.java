@@ -1,14 +1,10 @@
-package ui.uiprobabilitystatistics;
+package ui.uiprobability;
 
-import ui.ButtonPanel;
 import ui.UIValues;
 import ui.uigeneral.GeneralUI;
-import ui.uiprobabilitystatistics.panels.ProbabilityStatisticGeneralButtonPanel;
+import ui.uiprobability.panels.ProbabilityStatisticGeneralButtonPanel;
 
 import javax.swing.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import static ui.UIValues.*;
 
