@@ -19,13 +19,18 @@ import static ui.UIValues.*;
 public class ClassicalUI {
     public JTextField inputK, inputN, outputPA, outputPNotA, inputNow;
     public JScrollPane paneK, paneN, panePA, panePNotA;
-
+    public JLabel labelK, labelN;
     public JButton btnSolve, btnBack;
-
     public ButtonPanel buttonPanel;
+
+    /**
+     * @Description 古典概率UI设置
+     * @author 罗孝俊
+     * @date 2023/12/3 11:26
+    **/
     public ClassicalUI() {
-        inputK = new JTextField("A包含的基本事件数K");
-        inputN = new JTextField("基本事件总数N");
+        inputK = new JTextField("0");
+        inputN = new JTextField("0");
         paneK = new JScrollPane(inputK, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         paneN = new JScrollPane(inputN, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         outputPA = new JTextField("P(A) ");
@@ -33,10 +38,11 @@ public class ClassicalUI {
         panePA = new JScrollPane(outputPA, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         panePNotA = new JScrollPane(outputPNotA, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        initInput(inputK, paneK, MARGIN_X, MARGIN_Y);
-        initInput(inputN, paneN, MARGIN_X, MARGIN_Y + 70);
-        initOutput(outputPA, panePA, MARGIN_X + 250, MARGIN_Y);
-        initOutput(outputPNotA, panePNotA, MARGIN_X + 250, MARGIN_Y + 70);
+        initInput(inputK, paneK, MARGIN_X, MARGIN_Y + 55);
+        initInput(inputN, paneN, MARGIN_X, MARGIN_Y + 185);
+        initOutput(outputPA, panePA, MARGIN_X + 350, MARGIN_Y + 55);
+        initOutput(outputPNotA, panePNotA, MARGIN_X + 350, MARGIN_Y + 185);
+        initLabel();
 
         btnSolve = createButton("solve", FONT_NAME);
         btnSolve.setBounds(MARGIN_X_RIGHT - 120, MARGIN_Y_DOWN - 40, 120, 40);
@@ -46,12 +52,14 @@ public class ClassicalUI {
         window.add(btnSolve);
         btnSolve.setVisible(true);
         btnSolve.repaint();
-        btnBack = createButton("<", FONT_NAME);
 
+        btnBack = createButton("<", FONT_NAME);
         initBtnBack(btnBack, event -> {
             if(buttonPanel != null){
                 buttonPanel.setVisible(false);
             }
+            labelK.setVisible(false);
+            labelN.setVisible(false);
             inputK.setVisible(false);
             inputN.setVisible(false);
             outputPA.setVisible(false);
@@ -65,6 +73,7 @@ public class ClassicalUI {
             btnBack.setVisible(false);
         });
     }
+
     /**
      * @Description  初始化输入栏
      * @param text  输入栏的JTextField
@@ -74,6 +83,7 @@ public class ClassicalUI {
      * @author 罗孝俊
      * @date 2023/11/27 10:32
     **/
+
     private void initInput(JTextField text, JScrollPane pane, int positionX, int positionY){
         text.setBounds(positionX, positionY, 200, 60);
         text.setEditable(false);
@@ -89,7 +99,7 @@ public class ClassicalUI {
                 inputNow = text;
                 buttonPanel = ButtonPanel.getButtonPanel(inputNow, inputNow, 1);
                 if(buttonPanel != null){
-                    buttonPanel.setBounds(MARGIN_X, MARGIN_Y + 160, BUTTON_PANEL_WIDTH, BUTTON_PANEL_HEIGHT);
+                    buttonPanel.setBounds(MARGIN_X, MARGIN_Y_DOWN - 400, BUTTON_PANEL_WIDTH, BUTTON_PANEL_HEIGHT);
                     window.add(buttonPanel);
                     buttonPanel.setVisible(true);
                 }
@@ -109,6 +119,15 @@ public class ClassicalUI {
         pane.setVisible(true);
     }
 
+    /**
+     * @Description 初始化输出部分的界面
+     * @param text  文字载体JTextField
+     * @param pane  JTextField对应的滚动窗体
+     * @param positionX 界面左上角X值
+     * @param positionY 界面左上角Y值
+     * @author 罗孝俊
+     * @date 2023/12/3 11:23
+    **/
     private void initOutput(JTextField text, JScrollPane pane, int positionX, int positionY){
         text.setBounds(positionX, positionY, 300, 60);
         text.setEditable(false);
@@ -120,6 +139,11 @@ public class ClassicalUI {
         pane.setVisible(true);
     }
 
+    /**
+     * @Description  solve按钮的点击事件
+     * @author 罗孝俊
+     * @date 2023/12/3 11:22
+    **/
     private void solve(){
         if(!inputK.getText().matches(INTEGER_REGEX) || !inputN.getText().matches(INTEGER_REGEX)){
             JOptionPane.showMessageDialog(null, "请输入一个整数", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -136,5 +160,23 @@ public class ClassicalUI {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
+    }
+
+    /**
+     * @Description  初始化两个输入提示标签
+     * @author 罗孝俊
+     * @date 2023/12/3 11:22
+    **/
+    private void initLabel(){
+        labelK = new JLabel("A包含的基本事件数k");
+        labelN = new JLabel("样本空间事件总数N");
+        labelK.setBounds(MARGIN_X, MARGIN_Y, 300, 50);
+        labelK.setFont(new Font("宋体", Font.PLAIN, 30));
+        labelK.setVisible(true);
+        labelN.setBounds(MARGIN_X, MARGIN_Y + 130, 300, 50);
+        labelN.setFont(new Font("宋体", Font.PLAIN, 30));
+        labelN.setVisible(true);
+        window.add(labelK);
+        window.add(labelN);
     }
 }

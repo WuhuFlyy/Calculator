@@ -1,6 +1,7 @@
 package ui;
 
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
@@ -13,7 +14,7 @@ import static ui.UIValues.*;
  */
 public class ButtonPanel extends JPanel{
     private static ButtonPanel buttonPanel;
-    public JTextField inputScreen, outputScreen;
+    public JTextComponent inputScreen, outputScreen;
     public JButton btnC;
     public JButton btnBack;
     public JButton btnMod;
@@ -36,12 +37,16 @@ public class ButtonPanel extends JPanel{
     public JButton btnEqual;
     public JButton btnAtan;
     public JButton btnReverse;
+    public JButton btnSin;
+    public JButton btnCos;
+    public JButton btnTan;
+    public JButton btnLog;
+    public JButton btnFac;
     public JButton[] btnEmpty;
     public String typedValue;
     private char selectedOperator = ' ';
     private boolean go = true; // For calculate with Opt != (=)
     private boolean addToDisplay = true; // Connect numbers in display
-
     public int nowMode; //Denote which mode of panel is it now
 
     /**
@@ -52,9 +57,9 @@ public class ButtonPanel extends JPanel{
      * @author 罗孝俊
      * @date 2023/11/17 23:00
     **/
-    private ButtonPanel(JTextField inputScreen, JTextField outputScreen, int mode){
+    private ButtonPanel(JTextComponent inputScreen, JTextComponent outputScreen, int mode){
         //setBounds(UIValues.MARGIN_X, UIValues.MARGIN_Y, BUTTON_PANEL_WIDTH, BUTTON_PANEL_HEIGHT);
-        setLayout(new GridLayout(5, 5, 10, 30));
+        setLayout(new GridLayout(5, 6, 10, 30));
         typedValue = "0";
         this.inputScreen = inputScreen;
         this.outputScreen = outputScreen;
@@ -65,57 +70,91 @@ public class ButtonPanel extends JPanel{
         add(btnMod);
         add(btnDiv);
         add(btnReverse);
+        add(btnFac);
         add(btn7);
         add(btn8);
         add(btn9);
         add(btnMul);
         add(btnAtan);
+        add(btnLog);
         add(btn4);
         add(btn5);
         add(btn6);
         add(btnSub);
-        add(btnEmpty[1]);
+        add(btnCos);
+        add(btnEmpty[0]);
         add(btn1);
         add(btn2);
         add(btn3);
         add(btnAdd);
-        add(btnEmpty[2]);
+        add(btnSin);
+        add(btnEmpty[1]);
         add(btnPoint);
         add(btn0);
         add(btnEqual);
         add(btnSquare);
-        add(btnEmpty[3]);
-        if(mode == 1){
-            btnMod.setEnabled(false);
-            btnMul.setEnabled(false);
-            btnDiv.setEnabled(false);
-            btnAtan.setEnabled(false);
-            btnSub.setEnabled(false);
-            btnEqual.setEnabled(false);
-            btnAdd.setEnabled(false);
-            btnSquare.setEnabled(false);
-        }else if(mode == 0){
-            btnMod.setEnabled(true);
-            btnMul.setEnabled(true);
-            btnAtan.setEnabled(true);
-            btnSub.setEnabled(true);
-            btnEqual.setEnabled(true);
-            btnAdd.setEnabled(true);
-            btnSquare.setEnabled(true);
+        add(btnTan);
+        add(btnEmpty[2]);
+        switch (mode){
+            case 1: //only integer
+                btnMod.setEnabled(false);
+                btnMul.setEnabled(false);
+                btnDiv.setEnabled(false);
+                btnSub.setEnabled(false);
+                btnEqual.setEnabled(false);
+                btnAdd.setEnabled(false);
+                btnSquare.setEnabled(false);
+                btnReverse.setVisible(false);
+                btnAtan.setVisible(false);
+                btnLog.setVisible(false);
+                btnCos.setVisible(false);
+                btnSin.setVisible(false);
+                btnTan.setVisible(false);
+                btnFac.setVisible(false);
+                break;
+            case 0: //calculator
+                btnMod.setEnabled(true);
+                btnMul.setEnabled(true);
+                btnSub.setEnabled(true);
+                btnEqual.setEnabled(true);
+                btnAdd.setEnabled(true);
+                btnSquare.setEnabled(true);
+                btnReverse.setVisible(true);
+                btnAtan.setVisible(true);
+                btnLog.setVisible(true);
+                btnCos.setVisible(true);
+                btnSin.setVisible(true);
+                btnTan.setVisible(true);
+                btnFac.setVisible(true);
+                break;
+            case 2: //fraction available
+                btnMod.setEnabled(false);
+                btnMul.setEnabled(false);
+                btnSub.setEnabled(false);
+                btnEqual.setEnabled(false);
+                btnAdd.setEnabled(false);
+                btnSquare.setEnabled(false);
+                btnReverse.setVisible(false);
+                btnAtan.setVisible(false);
+                btnLog.setVisible(false);
+                btnCos.setVisible(false);
+                btnSin.setVisible(false);
+                btnTan.setVisible(false);
+                btnFac.setVisible(false);
+                break;
         }
-
     }
 
     /**
      * @Description
-     * @param inputScreen 输入栏的JTextField
-     * @param outputScreen  输出栏的JTextField
+     * @param inputScreen 输入栏的JTextComponent
+     * @param outputScreen  输出栏的JTextComponent
      * @param mode  模式选择，即选择是否需要使用计算功能（0为需要，1为不需要）
      * @return ui.ButtonPanel
      * @author 罗孝俊
      * @date 2023/11/26 9:54
     **/
-    public static ButtonPanel getButtonPanel(JTextField inputScreen, JTextField outputScreen, int mode){
+    public static ButtonPanel getButtonPanel(JTextComponent inputScreen, JTextComponent outputScreen, int mode){
         if(inputScreen == null || outputScreen == null){
             return null;
         }
@@ -124,7 +163,7 @@ public class ButtonPanel extends JPanel{
             buttonPanel.nowMode = mode;
         }else{
             buttonPanel.initParameter();
-            buttonPanel.setTextField(inputScreen, outputScreen);
+            buttonPanel.setTextComponent(inputScreen, outputScreen);
         }
         return buttonPanel;
     }
@@ -136,7 +175,7 @@ public class ButtonPanel extends JPanel{
      * @author 罗孝俊
      * @date 2023/11/17 23:12
     **/
-    public void setTextField(JTextField inputScreen, JTextField outputScreen){
+    public void setTextComponent(JTextComponent inputScreen, JTextComponent outputScreen){
         buttonPanel.inputScreen = inputScreen;
         buttonPanel.outputScreen = outputScreen;
         this.inputScreen = inputScreen;
@@ -172,18 +211,9 @@ public class ButtonPanel extends JPanel{
 
         btnC = createButton("C");
         btnC.addActionListener(event -> {
-            if(btnC.getLabel().equals("C")){
-                inputScreen.setText("0");
-                typedValue = "0";
-                if(selectedOperator != ' '){
-                    btnC.setLabel("CE");
-                }
-            }else{
-                selectedOperator = ' ';
-                outputScreen.setText("0");
-                btnC.setLabel("C");
-            }
-
+            inputScreen.setText("0");
+            selectedOperator = ' ';
+            typedValue = "0";
         });
 
         btnBack = createButton("<-");
@@ -204,9 +234,11 @@ public class ButtonPanel extends JPanel{
 
             if(go){
                 typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
-                inputScreen.setText(new BigDecimal(typedValue).toPlainString());
                 if(typedValue.matches(NUMBER_REGEX)){
+                    inputScreen.setText(new BigDecimal(typedValue).toPlainString());
                     outputScreen.setText(typedValue);
+                }else{
+                    inputScreen.setText(typedValue);
                 }
                 selectedOperator = '%';
                 go = false;
@@ -218,25 +250,30 @@ public class ButtonPanel extends JPanel{
 
         btnDiv = createButton("/");
         btnDiv.addActionListener(event -> {
-            if(nowMode == 1){
+            if(nowMode == 2){
                 if(!Pattern.matches(INTEGER_REGEX, inputScreen.getText()))
                     return;
+                if(addToDisplay){
+                    inputScreen.setText(inputScreen.getText() + "/");
+                }
+                go = true;
             }else if(nowMode == 0){
                 if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
                     return;
-            }
-
-            if(go){
-                typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
-                inputScreen.setText(new BigDecimal(typedValue).toPlainString());
-                if(typedValue.matches(NUMBER_REGEX)){
-                    outputScreen.setText(typedValue);
+                if(go){
+                    typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
+                    if(typedValue.matches(NUMBER_REGEX)){
+                        inputScreen.setText(new BigDecimal(typedValue).toPlainString());
+                        outputScreen.setText(typedValue);
+                    }else{
+                        inputScreen.setText(typedValue);
+                    }
+                    selectedOperator = '/';
+                    go = false;
+                    addToDisplay = false;
+                }else{
+                    selectedOperator = '/';
                 }
-                selectedOperator = '/';
-                go = false;
-                addToDisplay = false;
-            }else{
-                selectedOperator = '/';
             }
         });
 
@@ -247,9 +284,11 @@ public class ButtonPanel extends JPanel{
 
             if(go){
                 typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
-                inputScreen.setText(new BigDecimal(typedValue).toPlainString());
                 if(typedValue.matches(NUMBER_REGEX)){
+                    inputScreen.setText(new BigDecimal(typedValue).toPlainString());
                     outputScreen.setText(typedValue);
+                }else{
+                    inputScreen.setText(typedValue);
                 }
                 selectedOperator = '*';
                 go = false;
@@ -266,9 +305,11 @@ public class ButtonPanel extends JPanel{
 
             if(go){
                 typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
-                inputScreen.setText(new BigDecimal(typedValue).toPlainString());
                 if(typedValue.matches(NUMBER_REGEX)){
+                    inputScreen.setText(new BigDecimal(typedValue).toPlainString());
                     outputScreen.setText(typedValue);
+                }else{
+                    inputScreen.setText(typedValue);
                 }
                 selectedOperator = '+';
                 go = false;
@@ -285,9 +326,11 @@ public class ButtonPanel extends JPanel{
 
             if(go){
                 typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
-                inputScreen.setText(new BigDecimal(typedValue).toPlainString());
                 if(typedValue.matches(NUMBER_REGEX)){
+                    inputScreen.setText(new BigDecimal(typedValue).toPlainString());
                     outputScreen.setText(typedValue);
+                }else{
+                    inputScreen.setText(typedValue);
                 }
                 selectedOperator = '-';
                 go = false;
@@ -300,7 +343,7 @@ public class ButtonPanel extends JPanel{
         btnPoint = createButton(".");
         btnPoint.addActionListener(event -> {
             if (addToDisplay) {
-                if (!inputScreen.getText().contains(".")) {
+                if (!inputScreen.getText().contains(".") && !inputScreen.getText().contains("/")) {
                     inputScreen.setText(inputScreen.getText() + ".");
                 }
             } else {
@@ -317,9 +360,11 @@ public class ButtonPanel extends JPanel{
 
             if(go){
                 typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
-                inputScreen.setText(new BigDecimal(typedValue).toPlainString());
                 if(typedValue.matches(NUMBER_REGEX)){
+                    inputScreen.setText(new BigDecimal(typedValue).toPlainString());
                     outputScreen.setText(typedValue);
+                }else{
+                    inputScreen.setText(typedValue);
                 }
                 selectedOperator = '^';
                 go = false;
@@ -332,10 +377,14 @@ public class ButtonPanel extends JPanel{
         btn0 = createButton("0");
         btn0.addActionListener(event -> {
             if(addToDisplay){
-                if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
-                    inputScreen.setText(inputScreen.getText() + "0");
-                }else{
+                if(inputScreen.getText().isEmpty()){
                     inputScreen.setText("0");
+                }else{
+                    if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
+                        inputScreen.setText(inputScreen.getText() + "0");
+                    }else{
+                        inputScreen.setText("0");
+                    }
                 }
             }else{
                 inputScreen.setText("0");
@@ -347,13 +396,18 @@ public class ButtonPanel extends JPanel{
         btn1 = createButton("1");
         btn1.addActionListener(event -> {
             if(addToDisplay){
-                if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
-                    inputScreen.setText(inputScreen.getText() + "1");
+                if(inputScreen.getText().isEmpty()){
+                    inputScreen.setText("1");
                 }else{
-                    if(inputScreen.getText().charAt(0) == '-'){
-                        inputScreen.setText("-1");
+                    if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
+                        inputScreen.setText(inputScreen.getText() + "1");
                     }else{
-                        inputScreen.setText("1");
+
+                        if(inputScreen.getText().charAt(0) == '-'){
+                            inputScreen.setText("-1");
+                        }else{
+                            inputScreen.setText("1");
+                        }
                     }
                 }
             }else{
@@ -366,13 +420,18 @@ public class ButtonPanel extends JPanel{
         btn2 = createButton("2");
         btn2.addActionListener(event -> {
             if(addToDisplay){
-                if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
-                    inputScreen.setText(inputScreen.getText() + "2");
+                if(inputScreen.getText().isEmpty()){
+                    inputScreen.setText("2");
                 }else{
-                    if(inputScreen.getText().charAt(0) == '-'){
-                        inputScreen.setText("-2");
+                    if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
+                        inputScreen.setText(inputScreen.getText() + "2");
                     }else{
-                        inputScreen.setText("2");
+
+                        if(inputScreen.getText().charAt(0) == '-'){
+                            inputScreen.setText("-2");
+                        }else{
+                            inputScreen.setText("2");
+                        }
                     }
                 }
             }else{
@@ -385,13 +444,18 @@ public class ButtonPanel extends JPanel{
         btn3 = createButton("3");
         btn3.addActionListener(event -> {
             if(addToDisplay){
-                if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
-                    inputScreen.setText(inputScreen.getText() + "3");
+                if(inputScreen.getText().isEmpty()){
+                    inputScreen.setText("3");
                 }else{
-                    if(inputScreen.getText().charAt(0) == '-'){
-                        inputScreen.setText("-3");
+                    if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
+                        inputScreen.setText(inputScreen.getText() + "3");
                     }else{
-                        inputScreen.setText("3");
+
+                        if(inputScreen.getText().charAt(0) == '-'){
+                            inputScreen.setText("-3");
+                        }else{
+                            inputScreen.setText("3");
+                        }
                     }
                 }
             }else{
@@ -404,13 +468,18 @@ public class ButtonPanel extends JPanel{
         btn4 = createButton("4");
         btn4.addActionListener(event -> {
             if(addToDisplay){
-                if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
-                    inputScreen.setText(inputScreen.getText() + "4");
+                if(inputScreen.getText().isEmpty()){
+                    inputScreen.setText("4");
                 }else{
-                    if(inputScreen.getText().charAt(0) == '-'){
-                        inputScreen.setText("-4");
+                    if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
+                        inputScreen.setText(inputScreen.getText() + "4");
                     }else{
-                        inputScreen.setText("4");
+
+                        if(inputScreen.getText().charAt(0) == '-'){
+                            inputScreen.setText("-4");
+                        }else{
+                            inputScreen.setText("4");
+                        }
                     }
                 }
             }else{
@@ -423,13 +492,18 @@ public class ButtonPanel extends JPanel{
         btn5 = createButton("5");
         btn5.addActionListener(event -> {
             if(addToDisplay){
-                if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
-                    inputScreen.setText(inputScreen.getText() + "5");
+                if(inputScreen.getText().isEmpty()){
+                    inputScreen.setText("5");
                 }else{
-                    if(inputScreen.getText().charAt(0) == '-'){
-                        inputScreen.setText("-5");
+                    if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
+                        inputScreen.setText(inputScreen.getText() + "5");
                     }else{
-                        inputScreen.setText("5");
+
+                        if(inputScreen.getText().charAt(0) == '-'){
+                            inputScreen.setText("-5");
+                        }else{
+                            inputScreen.setText("5");
+                        }
                     }
                 }
             }else{
@@ -442,13 +516,18 @@ public class ButtonPanel extends JPanel{
         btn6 = createButton("6");
         btn6.addActionListener(event -> {
             if(addToDisplay){
-                if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
-                    inputScreen.setText(inputScreen.getText() + "6");
+                if(inputScreen.getText().isEmpty()){
+                    inputScreen.setText("6");
                 }else{
-                    if(inputScreen.getText().charAt(0) == '-'){
-                        inputScreen.setText("-6");
+                    if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
+                        inputScreen.setText(inputScreen.getText() + "6");
                     }else{
-                        inputScreen.setText("6");
+
+                        if(inputScreen.getText().charAt(0) == '-'){
+                            inputScreen.setText("-6");
+                        }else{
+                            inputScreen.setText("6");
+                        }
                     }
                 }
             }else{
@@ -461,13 +540,18 @@ public class ButtonPanel extends JPanel{
         btn7 = createButton("7");
         btn7.addActionListener(event -> {
             if(addToDisplay){
-                if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
-                    inputScreen.setText(inputScreen.getText() + "7");
+                if(inputScreen.getText().isEmpty()){
+                    inputScreen.setText("7");
                 }else{
-                    if(inputScreen.getText().charAt(0) == '-'){
-                        inputScreen.setText("-7");
+                    if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
+                        inputScreen.setText(inputScreen.getText() + "7");
                     }else{
-                        inputScreen.setText("7");
+
+                        if(inputScreen.getText().charAt(0) == '-'){
+                            inputScreen.setText("-7");
+                        }else{
+                            inputScreen.setText("7");
+                        }
                     }
                 }
             }else{
@@ -480,13 +564,18 @@ public class ButtonPanel extends JPanel{
         btn8 = createButton("8");
         btn8.addActionListener(event -> {
             if(addToDisplay){
-                if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
-                    inputScreen.setText(inputScreen.getText() + "8");
+                if(inputScreen.getText().isEmpty()){
+                    inputScreen.setText("8");
                 }else{
-                    if(inputScreen.getText().charAt(0) == '-'){
-                        inputScreen.setText("-8");
+                    if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
+                        inputScreen.setText(inputScreen.getText() + "8");
                     }else{
-                        inputScreen.setText("8");
+
+                        if(inputScreen.getText().charAt(0) == '-'){
+                            inputScreen.setText("-8");
+                        }else{
+                            inputScreen.setText("8");
+                        }
                     }
                 }
             }else{
@@ -499,13 +588,18 @@ public class ButtonPanel extends JPanel{
         btn9 = createButton("9");
         btn9.addActionListener(event -> {
             if(addToDisplay){
-                if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
-                    inputScreen.setText(inputScreen.getText() + "9");
+                if(inputScreen.getText().isEmpty()){
+                    inputScreen.setText("9");
                 }else{
-                    if(inputScreen.getText().charAt(0) == '-'){
-                        inputScreen.setText("-9");
+                    if(!Pattern.matches(ZERO_REGEX, inputScreen.getText())){
+                        inputScreen.setText(inputScreen.getText() + "9");
                     }else{
-                        inputScreen.setText("9");
+
+                        if(inputScreen.getText().charAt(0) == '-'){
+                            inputScreen.setText("-9");
+                        }else{
+                            inputScreen.setText("9");
+                        }
                     }
                 }
             }else{
@@ -522,9 +616,11 @@ public class ButtonPanel extends JPanel{
 
             if (go) {
                 typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
-                inputScreen.setText(new BigDecimal(typedValue).toPlainString());
                 if(typedValue.matches(NUMBER_REGEX)){
+                    inputScreen.setText(new BigDecimal(typedValue).toPlainString());
                     outputScreen.setText(typedValue);
+                }else{
+                    inputScreen.setText(typedValue);
                 }
                 selectedOperator = '=';
                 addToDisplay = false;
@@ -537,9 +633,11 @@ public class ButtonPanel extends JPanel{
                 return;
 
             typedValue = CalculatorUI.calculate(inputScreen.getText(), "atan");
-            inputScreen.setText(new BigDecimal(typedValue).toPlainString());
             if(typedValue.matches(NUMBER_REGEX)){
+                inputScreen.setText(new BigDecimal(typedValue).toPlainString());
                 outputScreen.setText(typedValue);
+            }else{
+                inputScreen.setText(typedValue);
             }
             go = true;
             addToDisplay = false;
@@ -557,10 +655,96 @@ public class ButtonPanel extends JPanel{
             }
             inputScreen.setText(sb.toString());
         });
+
+        btnTan = createButton("tan");
+        btnTan.addActionListener(event -> {
+            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
+                return;
+
+            typedValue = CalculatorUI.calculate(inputScreen.getText(), "tan");
+            if(typedValue.matches(NUMBER_REGEX)){
+                inputScreen.setText(new BigDecimal(typedValue).toPlainString());
+                outputScreen.setText(typedValue);
+            }else{
+                inputScreen.setText(typedValue);
+            }
+            go = true;
+            addToDisplay = false;
+        });
+
+        btnCos = createButton("cos");
+        btnCos.addActionListener(event -> {
+            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
+                return;
+
+            typedValue = CalculatorUI.calculate(inputScreen.getText(), "cos");
+            if(typedValue.matches(NUMBER_REGEX)){
+                inputScreen.setText(new BigDecimal(typedValue).toPlainString());
+                outputScreen.setText(typedValue);
+            }else{
+                inputScreen.setText(typedValue);
+            }
+            go = true;
+            addToDisplay = false;
+        });
+
+        btnSin = createButton("sin");
+        btnSin.addActionListener(event -> {
+            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
+                return;
+
+            typedValue = CalculatorUI.calculate(inputScreen.getText(), "sin");
+            if(typedValue.matches(NUMBER_REGEX)){
+                inputScreen.setText(new BigDecimal(typedValue).toPlainString());
+                outputScreen.setText(typedValue);
+            }else{
+                inputScreen.setText(typedValue);
+            }
+            go = true;
+            addToDisplay = false;
+        });
+
+        btnFac = createButton("!");
+        btnFac.addActionListener(event -> {
+            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
+                return;
+
+            typedValue = CalculatorUI.calculate(inputScreen.getText(), "!");
+            if(typedValue.matches(NUMBER_REGEX)){
+                inputScreen.setText(new BigDecimal(typedValue).toPlainString());
+                outputScreen.setText(typedValue);
+            }else{
+                inputScreen.setText(typedValue);
+            }
+            go = true;
+            addToDisplay = false;
+        });
+
+        btnLog = createButton("loga(b)");
+        btnLog.addActionListener(event -> {
+            if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
+                return;
+
+            if(go){
+                typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
+                if(typedValue.matches(NUMBER_REGEX)){
+                    inputScreen.setText(new BigDecimal(typedValue).toPlainString());
+                    outputScreen.setText(typedValue);
+                }else{
+                    inputScreen.setText(typedValue);
+                }
+                selectedOperator = 'l';
+                go = false;
+                addToDisplay = false;
+            }else{
+                selectedOperator = 'l';
+            }
+        });
+
         btnEmpty = new JButton[4];
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 3; i++){
             btnEmpty[i] = createButton("");
-            btnEmpty[i].setEnabled(false);
+            btnEmpty[i].setVisible(false);
         }
     }
 

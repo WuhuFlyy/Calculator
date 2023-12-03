@@ -15,7 +15,7 @@ public class GeneralUI {
     private int GENERAL_PANEL_HEIGHT = 580;
     public GeneralButtonPanel generalButtonPanel;
     /**
-     * @Description 界面构造方法
+     * @Description 总界面构造方法
      * @author 罗孝俊
      * @date 2023/11/27 8:59
     **/
@@ -32,4 +32,3 @@ public class GeneralUI {
         window.setVisible(true);
     }
 }
-//1120

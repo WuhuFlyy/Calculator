@@ -16,13 +16,13 @@ public class UIValues {
     public static final JFrame window = new JFrame("Calculation Tool");
     public static final String FONT_NAME = "Consolas";
     public static final int WINDOW_WIDTH = 710;
-    public static final int WINDOW_HEIGHT = 700;
+    public static final int WINDOW_HEIGHT = 900;
     public static final int MARGIN_X = 20;
-    public static final int MARGIN_Y = 50;
+    public static final int MARGIN_Y = 55;
 
     public static int MARGIN_X_RIGHT = WINDOW_WIDTH - MARGIN_X;
     public static int MARGIN_Y_DOWN = WINDOW_HEIGHT - MARGIN_Y;
-    public static final int BUTTON_PANEL_WIDTH = 450;
+    public static final int BUTTON_PANEL_WIDTH = 500;
     public static final int BUTTON_PANEL_HEIGHT = 400;
     public static final String POSITIVE_INFINITY = "+Infinity";
     public static final String NEGATIVE_INFINITY = "-Infinity";
@@ -31,6 +31,7 @@ public class UIValues {
     public static final String NUMBER_REGEX = "([-]?\\d+[.]\\d*)|(\\d+)|(-\\d+)";
     public static final String FRACTION_REGEX = "[-]?\\d+[/]\\d+";
     public static final String INTEGER_REGEX = "[-]?\\d+";
+    public static final String POSITIVE_INTEGER_REGEX = "[1-9]\\d*";
 
     /**
      * @Description  初始化一个JButton

@@ -14,8 +14,7 @@ import static ui.UIValues.*;
  * @date 2023/11/17 19:44
  */
 public class CalculatorUI {
-//    public JFrame window;
-
+    private static String ans;
     public JTextField inputScreen, outputScreen;
     public JScrollPane inputPane, outputPane;
 
@@ -32,7 +31,7 @@ public class CalculatorUI {
         initInputScreen();
         initOutScreen();
         buttonPanel = ButtonPanel.getButtonPanel(inputScreen, outputScreen, 0);
-        buttonPanel.setBounds(MARGIN_X, MARGIN_Y + 160, BUTTON_PANEL_WIDTH, BUTTON_PANEL_HEIGHT);
+        buttonPanel.setBounds(MARGIN_X, MARGIN_Y_DOWN - BUTTON_PANEL_HEIGHT, BUTTON_PANEL_WIDTH, BUTTON_PANEL_HEIGHT);
         buttonPanel.setVisible(true);
         window.add(buttonPanel);
 
@@ -103,6 +102,7 @@ public class CalculatorUI {
      * @date 2023/11/22 16:34
     **/
     public static String calculate(String firstNumber, String secondNumber, char operator){
+
         switch (operator){
             case '+':
                 return Operation.add(firstNumber, secondNumber);
@@ -129,6 +129,13 @@ public class CalculatorUI {
                     return ERROR_MATH;
                 }
                 return Operation.pow(firstNumber, secondNumber);
+            case 'l':
+                try{
+                    ans = Operation_2.getLog(firstNumber, secondNumber);
+                }catch (ArithmeticException e){
+                    ans = ERROR_MATH;
+                }
+                return ans;
             default:
                 return secondNumber;
         }
@@ -142,9 +149,26 @@ public class CalculatorUI {
      * @date 2023/11/22 20:39
     **/
     public static String calculate(String number, String operator){
-        if(operator.equals("atan")){
-            return Operation_2.getArctan(number);
+        switch (operator) {
+            case "atan" -> ans = Operation_2.getArctan(number);
+            case "tan" -> {
+                try {
+                    ans = Operation_2.getTan(number);
+                } catch (ArithmeticException e) {
+                    ans = ERROR_MATH;
+                }
+            }
+            case "cos" -> ans = Operation_2.getCos(number);
+            case "sin" -> ans = Operation_2.getSin(number);
+            case "!" -> {
+                if (!number.matches(INTEGER_REGEX) || number.charAt(0) == '-') {
+                    ans = ERROR_MATH;
+                } else {
+                    ans = Operation.calFactorial(number);
+                }
+            }
+            default -> ans = number;
         }
-        return number;
+        return ans;
     }
 }
