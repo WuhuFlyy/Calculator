@@ -40,8 +40,8 @@ public class ClassicalUI {
 
         initInput(inputK, paneK, MARGIN_X, MARGIN_Y + 55);
         initInput(inputN, paneN, MARGIN_X, MARGIN_Y + 185);
-        initOutput(outputPA, panePA, MARGIN_X + 350, MARGIN_Y + 55);
-        initOutput(outputPNotA, panePNotA, MARGIN_X + 350, MARGIN_Y + 185);
+        initOutput(outputPA, panePA, MARGIN_X + 500, MARGIN_Y + 55);
+        initOutput(outputPNotA, panePNotA, MARGIN_X + 500, MARGIN_Y + 185);
         initLabel();
 
         btnSolve = createButton("solve", FONT_NAME);
@@ -158,7 +158,6 @@ public class ClassicalUI {
             outputPNotA.setText("~P(A) = " + classical.calNotA());
         }catch(ArithmeticException e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
         }
     }
 

@@ -31,7 +31,7 @@ public class ProbabilityStatisticGeneralUI {
             btnBack.setVisible(false);
         });
         probabilityStatisticGeneralButtonPanel = new ProbabilityStatisticGeneralButtonPanel(btnBack);
-        probabilityStatisticGeneralButtonPanel.setBounds(MARGIN_X + 165, MARGIN_Y, PANEL_WIDTH, PANEL_HEIGHT);
+        probabilityStatisticGeneralButtonPanel.setBounds(MARGIN_X + 340, MARGIN_Y, PANEL_WIDTH, PANEL_HEIGHT);
         probabilityStatisticGeneralButtonPanel.setVisible(true);
         window.add(probabilityStatisticGeneralButtonPanel);
     }

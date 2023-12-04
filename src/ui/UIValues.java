@@ -1,10 +1,8 @@
 package ui;
 
-import ui.uigeneral.GeneralUI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -15,14 +13,14 @@ import java.awt.event.ActionListener;
 public class UIValues {
     public static final JFrame window = new JFrame("Calculation Tool");
     public static final String FONT_NAME = "Consolas";
-    public static final int WINDOW_WIDTH = 710;
+    public static final int WINDOW_WIDTH = 1000;
     public static final int WINDOW_HEIGHT = 900;
     public static final int MARGIN_X = 20;
     public static final int MARGIN_Y = 55;
 
     public static int MARGIN_X_RIGHT = WINDOW_WIDTH - MARGIN_X;
     public static int MARGIN_Y_DOWN = WINDOW_HEIGHT - MARGIN_Y;
-    public static final int BUTTON_PANEL_WIDTH = 500;
+    public static final int BUTTON_PANEL_WIDTH = 600;
     public static final int BUTTON_PANEL_HEIGHT = 400;
     public static final String POSITIVE_INFINITY = "+Infinity";
     public static final String NEGATIVE_INFINITY = "-Infinity";

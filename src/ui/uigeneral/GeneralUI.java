@@ -27,7 +27,7 @@ public class GeneralUI {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         generalButtonPanel = new GeneralButtonPanel();
-        generalButtonPanel.setBounds(MARGIN_X + 165, MARGIN_Y, GENERAL_PANEL_WIDTH, GENERAL_PANEL_HEIGHT);
+        generalButtonPanel.setBounds(MARGIN_X + 340, MARGIN_Y, GENERAL_PANEL_WIDTH, GENERAL_PANEL_HEIGHT);
         window.add(generalButtonPanel);
         window.setVisible(true);
     }

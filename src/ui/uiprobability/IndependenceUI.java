@@ -10,7 +10,6 @@ import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.jar.JarEntry;
 
 import static ui.UIValues.*;
 import static ui.UIValues.NUMBER_REGEX;
@@ -31,10 +30,10 @@ public class IndependenceUI {
     public ButtonPanel buttonPanel;
 
     public IndependenceUI(){
-        inputN = new JTextField("0");
+        inputN = new JTextField("3");
         inputPEvents = new JTextArea("0,0,0,...");
         paneN = new JScrollPane(inputN, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        panePEvents = new JScrollPane(inputPEvents, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        panePEvents = new JScrollPane(inputPEvents, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         outputPMul = new JTextField("0");
         outputPSum = new JTextField("0");
         outPutPSumNot = new JTextField("0");
@@ -44,11 +43,11 @@ public class IndependenceUI {
 
         initInput(inputN, paneN, MARGIN_X, MARGIN_Y + 55);
         initInput(inputPEvents, panePEvents, MARGIN_X, MARGIN_Y + 185);
-        panePEvents.setBounds(MARGIN_X, MARGIN_Y + 185, 200, 150);
+        panePEvents.setBounds(MARGIN_X, MARGIN_Y + 185, 300, 100);
         inputPEvents.setEditable(true);
-        initOutput(outputPMul, panePMul, MARGIN_X + 350, MARGIN_Y + 55);
-        initOutput(outputPSum, panePSum, MARGIN_X + 350, MARGIN_Y + 185);
-        initOutput(outPutPSumNot, panePSumNot, MARGIN_X + 350, MARGIN_Y + 315);
+        initOutput(outputPMul, panePMul, MARGIN_X + 500, MARGIN_Y + 55);
+        initOutput(outputPSum, panePSum, MARGIN_X + 500, MARGIN_Y + 185);
+        initOutput(outPutPSumNot, panePSumNot, MARGIN_X + 500, MARGIN_Y + 315);
         initLabel();
 
         btnSolve = createButton("solve", FONT_NAME);
@@ -56,10 +55,10 @@ public class IndependenceUI {
         btnSolve.addActionListener(event -> {
             solve();
         });
+
         window.add(btnSolve);
         btnSolve.setVisible(true);
         btnSolve.repaint();
-
         btnBack = createButton("<", FONT_NAME);
         initBtnBack(btnBack, event -> {
             if(buttonPanel != null){
@@ -88,10 +87,10 @@ public class IndependenceUI {
 
     /**
      * @Description  初始化输入栏
-     * @param text  输入栏的JTextField
+     * @param text  输入栏的JTextComponent
      * @param pane  输入栏的JScrollPane
-     * @param positionX 左上角坐标
-     * @param positionY 右上角坐标
+     * @param positionX 界面左上角X值
+     * @param positionY 界面左上角Y值
      * @author 罗孝俊
      * @date 2023/12/3 11:51
      **/
@@ -121,8 +120,11 @@ public class IndependenceUI {
                 }
             }
         });
-
-        pane.setBounds(positionX, positionY, 200, 60);
+        if(text instanceof JTextArea){
+            ((JTextArea) text).setLineWrap(true);
+            ((JTextArea) text).setWrapStyleWord(true);
+        }
+        pane.setBounds(positionX, positionY, 300, 60);
         pane.setBackground(Color.GRAY);
         window.add(pane);
         text.setVisible(true);
@@ -131,8 +133,8 @@ public class IndependenceUI {
 
     /**
      * @Description 初始化输出部分的界面
-     * @param text  文字载体JTextField
-     * @param pane  JTextField对应的滚动窗体
+     * @param text  文字载体JTextComponent
+     * @param pane  对应的滚动窗体
      * @param positionX 界面左上角X值
      * @param positionY 界面左上角Y值
      * @author 罗孝俊
@@ -156,22 +158,22 @@ public class IndependenceUI {
      **/
     private void initLabel(){
         labelN = new JLabel("事件总数N");
-        labelPEvents = new JLabel("各事件概率（以逗号分隔）");
+        labelPEvents = new JLabel("各事件概率(用半角逗号分隔)");
         labelPMul = new JLabel("P(A1A2...An)");
         labelPSum = new JLabel("P(A1+A2+...+An)");
         labelPSumNot = new JLabel("P(~A1+~A2+...+~An)");
 
         labelN.setBounds(MARGIN_X, MARGIN_Y, 200, 50);
-        labelPEvents.setBounds(MARGIN_X, MARGIN_Y + 130, 200, 50);
-        labelPMul.setBounds(MARGIN_X + 350, MARGIN_Y, 200, 50);
-        labelPSum.setBounds(MARGIN_X + 350, MARGIN_Y + 130, 200, 50);
-        labelPSumNot.setBounds(MARGIN_X + 350, MARGIN_Y + 260, 200, 50);
+        labelPEvents.setBounds(MARGIN_X, MARGIN_Y + 130, 500, 50);
+        labelPMul.setBounds(MARGIN_X + 500, MARGIN_Y, 300, 50);
+        labelPSum.setBounds(MARGIN_X + 500, MARGIN_Y + 130, 300, 50);
+        labelPSumNot.setBounds(MARGIN_X + 500, MARGIN_Y + 260, 300, 50);
 
-        labelN.setFont(new Font("宋体", Font.PLAIN, 30));
-        labelPEvents.setFont(new Font("宋体", Font.PLAIN, 30));
-        labelPMul.setFont(new Font(FONT_NAME, Font.PLAIN, 30));
-        labelPSum.setFont(new Font(FONT_NAME, Font.PLAIN, 30));
-        labelPSumNot.setFont(new Font(FONT_NAME, Font.PLAIN, 30));
+        labelN.setFont(new Font("宋体", Font.PLAIN, 24));
+        labelPEvents.setFont(new Font("宋体", Font.PLAIN, 24));
+        labelPMul.setFont(new Font(FONT_NAME, Font.PLAIN, 24));
+        labelPSum.setFont(new Font(FONT_NAME, Font.PLAIN, 24));
+        labelPSumNot.setFont(new Font(FONT_NAME, Font.PLAIN, 24));
 
         labelN.setVisible(true);
         labelPEvents.setVisible(true);
@@ -187,7 +189,7 @@ public class IndependenceUI {
     }
 
     /**
-     * @Description  求解条件概率，将结果输出在outputText上
+     * @Description  求解上述三个概率值
      * @author 罗孝俊
      * @date 2023/12/3 12:11
      **/
@@ -226,7 +228,6 @@ public class IndependenceUI {
             outPutPSumNot.setText(independence.calSumNotA());
         }catch (ArithmeticException e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
         }
     }
 }

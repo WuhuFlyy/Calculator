@@ -720,7 +720,7 @@ public class ButtonPanel extends JPanel{
             addToDisplay = false;
         });
 
-        btnLog = createButton("loga(b)");
+        btnLog = createButton("log");
         btnLog.addActionListener(event -> {
             if (!Pattern.matches(NUMBER_REGEX, inputScreen.getText()) && !Pattern.matches(FRACTION_REGEX, inputScreen.getText()))
                 return;

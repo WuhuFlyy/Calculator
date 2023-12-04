@@ -38,8 +38,8 @@ public class ConditionalUI {
 
         initInput(inputPAB, panePAB, MARGIN_X, MARGIN_Y + 55);
         initInput(inputPB, panePB, MARGIN_X, MARGIN_Y + 185);
-        initOutput(outputPAUnderB, panePAUnderB, MARGIN_X + 350, MARGIN_Y + 55);
-        initOutput(outputPNotAUnderB, panePNotAUnderB, MARGIN_X + 350, MARGIN_Y + 185);
+        initOutput(outputPAUnderB, panePAUnderB, MARGIN_X + 500, MARGIN_Y + 55);
+        initOutput(outputPNotAUnderB, panePNotAUnderB, MARGIN_X + 500, MARGIN_Y + 185);
         initLabel();
 
         btnSolve = createButton("solve", FONT_NAME);
@@ -143,7 +143,7 @@ public class ConditionalUI {
     private void initLabel(){
         labelPAB = new JLabel("PAB");
         labelPB = new JLabel("PB");
-        labelPAB.setBounds(MARGIN_X, MARGIN_Y, 200, 50);
+        labelPAB.setBounds(MARGIN_X, MARGIN_Y, 300, 50);
         labelPAB.setFont(new Font("宋体", Font.PLAIN, 30));
         labelPAB.setVisible(true);
         labelPB.setBounds(MARGIN_X, MARGIN_Y + 130, 200, 50);
@@ -186,8 +186,6 @@ public class ConditionalUI {
             outputPNotAUnderB.setText("~P(A|B) = " + conditional.calNotAunderB());
         }catch (ArithmeticException e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
         }
-
     }
 }

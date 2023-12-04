@@ -1,6 +1,7 @@
 package ui.uiprobability.panels;
 
 import ui.UIValues;
+import ui.uiprobability.BayesianUI;
 import ui.uiprobability.ClassicalUI;
 import ui.uiprobability.ConditionalUI;
 import ui.uiprobability.IndependenceUI;
@@ -18,11 +19,8 @@ public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
     public JButton btnBack;
     public JButton btnConditional;
     public JButton btnIndependence;
-    public JButton btnTotalProbability;
 
     public JButton btnBayesian;
-
-    public JButton btnBinomialDistribution;
 
     /**
      * @Description   概统主界面按钮板构造
@@ -31,12 +29,12 @@ public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
     **/
     public ProbabilityStatisticGeneralButtonPanel(JButton btnBack){
         this.btnBack = btnBack;
-        setLayout(new GridLayout(6, 1, 0, 40));
+        setLayout(new GridLayout(4, 1, 0, 60));
         initButton();
         add(btnClassical);
         add(btnConditional);
         add(btnIndependence);
-        add(btnTotalProbability);
+//        add(btnTotalProbability);
         add(btnBayesian);
         //add(btnBinomialDistribution);
     }
@@ -67,8 +65,13 @@ public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
             btnBack.setVisible(false);
             this.setVisible(false);
         });
-        btnTotalProbability = UIValues.createButton("全概率", "宋体");
-        btnBayesian = UIValues.createButton("贝叶斯公式", "宋体");
+//        btnTotalProbability = UIValues.createButton("全概率", "宋体");
+        btnBayesian = UIValues.createButton("贝叶斯\n&全概率", "宋体");
+        btnBayesian.addActionListener(event -> {
+            new BayesianUI();
+            btnBack.setVisible(false);
+            this.setVisible(false);
+        });
         //btnBinomialDistribution = UIValues.createButton("二项分布", "宋体");
     }
 }
