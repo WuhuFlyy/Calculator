@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class MatrixTest {
     public static Scanner in=new Scanner(System.in);
     public static void main(String[] args) {
+
         Fraction[][] m=new Fraction[4][4];
         for(int i=1;i<=3;i++){
             for(int j=1;j<=3;j++){
@@ -19,11 +20,20 @@ public class MatrixTest {
             }
         }
         Matrix M=new Matrix(m,3,3);
-        M.rowELT1(1,2);
-        M.rowELT3(2,3,new Fraction("2"));
+        System.out.println(M.getRank());
+        M.inverse();
         for(int i=1;i<=3;i++){
             for(int j=1;j<=3;j++){
-                System.out.printf("%s ",M.matrix[i][j].toString());
+                System.out.print(M.matrix[i][j]);
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+        Matrix M2=M.multiply(M.inverse());
+        for(int i=1;i<=3;i++){
+            for(int j=1;j<=3;j++){
+                System.out.print(M2.matrix[i][j]);
+                System.out.print(" ");
             }
             System.out.println();
         }

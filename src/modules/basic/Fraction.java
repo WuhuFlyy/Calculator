@@ -39,7 +39,7 @@ public class Fraction {
     public Fraction(String numerator,String denominator){
         super();
         if(Double.parseDouble(denominator)==0){
-            throw new ArithmeticException("分母不能为0");
+            throw new ArithmeticException("denominator can't be zero");
         }
         else if(Double.parseDouble(numerator)==0){
             this.numerator="0";
