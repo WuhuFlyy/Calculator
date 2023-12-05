@@ -24,7 +24,7 @@ public class Operation_2{
     /**
      * 
      * @Description 静态代码块，类加载的时候就会对log10进行赋值
-     、* @author 黄文杰
+     * @author 黄文杰
      * @date 2023/11/19 23:48
      */
     static{
@@ -61,7 +61,7 @@ public class Operation_2{
 
     /**
      *
-     * @Decription 计算arctan(xx),精度由最开始的ac+2确定，针对运行速度做了改进(有借鉴)
+     * @Description 计算arctan(xx),精度由最开始的ac+2确定，针对运行速度做了改进(有借鉴)
      * @param x 自变量，以String类型表示
      * @return java.lang.String 返回结果，精度由最开始的ac+2确定
      * @author 黄文杰
