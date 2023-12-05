@@ -21,7 +21,7 @@ public class MatrixTest {
             }
         }
         Matrix M=new Matrix(m,3,3);
-        Matrix p=M.transposition();
+        Matrix p=M.inverse();
         for(int i=1;i<=3;i++){
             for(int j=1;j<=3;j++){
                 System.out.printf("%s ",p.matrix[i][j]);

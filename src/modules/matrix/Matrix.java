@@ -226,7 +226,7 @@ public class Matrix {
      * @date 2023/11/25 13:36
     **/
     public Matrix inverse(){
-
+        Fraction zero=new Fraction("0","1");
         if(!this.invertible()){
             throw new ArithmeticException("Uninvertible");
         }
@@ -239,6 +239,13 @@ public class Matrix {
             Matrix thisMatrix=new Matrix(matrix,rank,rank);
             Matrix inversedMatrix=new Matrix(newMatrix,rank,rank);
             for(int i=1;i<=rank;i++){
+                for(int j=i;j<=row;j++){
+                    if(!thisMatrix.matrix[j][i].equals(zero)){
+                        thisMatrix.rowELT1(i,j);
+                        inversedMatrix.rowELT1(i,j);
+                        break;
+                    }
+                }
                 inversedMatrix.rowELT2(i,new Fraction(thisMatrix.matrix[i][i].denominator,thisMatrix.matrix[i][i].numerator));
                 thisMatrix.rowELT2(i,new Fraction(thisMatrix.matrix[i][i].denominator,thisMatrix.matrix[i][i].numerator));
                 for(int j=i+1;j<=rank;j++){
@@ -326,6 +333,8 @@ public class Matrix {
      * @date 2023/12/5 16:13
     **/
     public Fraction getDeterminant(){
+        int tag=0;
+        Fraction zero=new Fraction("0","1");
         if(row!=column){
             throw new ArithmeticException("must be square matrix");
         }
@@ -337,11 +346,23 @@ public class Matrix {
 
             Matrix thisMatrix = new Matrix(matrix, rank, rank);
             for (int i = 1; i <= rank; i++) {
+                for(int j=i;j<=row;j++){
+                    if(!thisMatrix.matrix[j][i].equals(zero)){
+                        thisMatrix.rowELT1(i,j);
+                        if(i!=j){
+                            tag++;
+                        }
+                        break;
+                    }
+                }
                 d=d.multiply(thisMatrix.matrix[i][i]);
                 thisMatrix.rowELT2(i, new Fraction(thisMatrix.matrix[i][i].denominator, thisMatrix.matrix[i][i].numerator));
                 for (int j = i + 1; j <= rank; j++) {
                     thisMatrix.rowELT4(i, thisMatrix.matrix[j][i], j);
                 }
+            }
+            if(tag%2==1){
+                d=d.multiply(new Fraction("-1"));
             }
             return d;
         }
