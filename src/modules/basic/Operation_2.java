@@ -24,7 +24,7 @@ public class Operation_2{
     /**
      * 
      * @Description 静态代码块，类加载的时候就会对log10进行赋值
-     * @author 黄文杰
+     、* @author 黄文杰
      * @date 2023/11/19 23:48
      */
     static{
