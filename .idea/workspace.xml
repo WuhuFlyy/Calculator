@@ -5,26 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="323752e7-2969-4245-ae02-507a5bb97420" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C.iml" beforeDir="false" afterPath="$PROJECT_DIR$/C.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/production/C/CaltulatorTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/CaltulatorTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/production/C/MatrixTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/MatrixTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/production/C/modules/basic/Fraction.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/modules/basic/Fraction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/production/C/modules/basic/Operation.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/modules/basic/Operation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/production/C/modules/basic/Operation_2.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/modules/basic/Operation_2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/production/C/modules/matrix/Matrix.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/modules/matrix/Matrix.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/production/C/modules/probabilitystatistics/Bayesian.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/production/C/modules/probabilitystatistics/BinomialDistribution.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/production/C/modules/probabilitystatistics/Classical.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/production/C/modules/probabilitystatistics/Conditional.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/production/C/modules/probabilitystatistics/Independence.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/production/C/modules/probabilitystatistics/TotalProbability.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/production/C/ui/ButtonPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/ui/ButtonPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/production/C/ui/CalculatorUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/ui/CalculatorUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/production/C/ui/UIValues.class" beforeDir="false" afterPath="$PROJECT_DIR$/production/C/ui/UIValues.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MatrixTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MatrixTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/basic/Fraction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/basic/Fraction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/matrix/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/matrix/Matrix.java" afterDir="false" />
     </list>
     <list id="e74306c9-d7f6-4d5d-868a-141b4ca2a862" name="新建更改列表" comment="" />

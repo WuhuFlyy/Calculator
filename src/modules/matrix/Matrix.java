@@ -3,6 +3,8 @@ package modules.matrix;
 import modules.basic.Fraction;
 import modules.basic.Operation;
 
+import java.util.Arrays;
+
 /**
  * @author 岳宗翰
  * @Description: 基本矩阵类
@@ -256,6 +258,13 @@ public class Matrix {
         }
     }
 
+    /**
+     * @Description 矩阵乘法
+     * @param multiplier 所乘矩阵
+     * @return modules.matrix.Matrix
+     * @author 岳宗翰
+     * @date 2023/12/5 14:14
+    **/
     public Matrix multiply(Matrix multiplier){
         if(!(this.column==multiplier.row)){
             throw new ArithmeticException("Can't be multiplied");
@@ -276,4 +285,81 @@ public class Matrix {
         return new Matrix(newMatrix, this.row, multiplier.column);
     }
 
+    /**
+     * @Description 矩阵幂函数
+     * @param n 指数
+     * @return modules.matrix.Matrix
+     * @author 岳宗翰
+     * @date 2023/12/5 14:16
+    **/
+    public Matrix pow(long n){
+        if(this.column!=this.row){
+            throw new ArithmeticException("must be square matrix");
+        }
+        Matrix newMatrix=new Matrix(this.matrix,this.row,this.column);
+        Fraction[][] m=new Fraction[row+1][row+1];
+        for(int i=1;i<=row;i++){
+            for(int j=1;j<=row;j++){
+                m[i][j]=new Fraction("0","1");
+            }
+        }
+        for(int i=1;i<=row;i++)m[i][i]=new Fraction("1","1");
+        Matrix thisMatrix=new Matrix(m,row,row);
+        if(n<0){
+            n=-n;
+            newMatrix=newMatrix.inverse();
+        }
+        while(n>0){
+            if(n%2==1){
+                thisMatrix=thisMatrix.multiply(newMatrix);
+            }
+            newMatrix=newMatrix.multiply(newMatrix);
+            n/=2;
+        }
+        return thisMatrix;
+    }
+
+    /**
+     * @Description 求矩阵行列式
+     * @return modules.basic.Fraction
+     * @author 岳宗翰
+     * @date 2023/12/5 16:13
+    **/
+    public Fraction getDeterminant(){
+        if(row!=column){
+            throw new ArithmeticException("must be square matrix");
+        }
+        else if(!this.invertible()){
+            return new Fraction("0","1");
+        }
+        else {
+            Fraction d = new Fraction("1");
+
+            Matrix thisMatrix = new Matrix(matrix, rank, rank);
+            for (int i = 1; i <= rank; i++) {
+                d=d.multiply(thisMatrix.matrix[i][i]);
+                thisMatrix.rowELT2(i, new Fraction(thisMatrix.matrix[i][i].denominator, thisMatrix.matrix[i][i].numerator));
+                for (int j = i + 1; j <= rank; j++) {
+                    thisMatrix.rowELT4(i, thisMatrix.matrix[j][i], j);
+                }
+            }
+            return d;
+        }
+    }
+
+    /**
+     * @Description 求矩阵转置
+     * @return modules.matrix.Matrix
+     * @author 岳宗翰
+     * @date 2023/12/5 16:14
+    **/
+    public Matrix transposition(){
+        Fraction[][] newMatrix=new Fraction[column+1][row+1];
+        for(int i=1;i<=row;i++){
+            for(int j=1;j<=column;j++){
+                newMatrix[j][i]=this.matrix[i][j];
+            }
+        }
+        return new Matrix(newMatrix,column,row);
+    }
 }
