@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
     <list default="true" id="323752e7-2969-4245-ae02-507a5bb97420" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MatrixTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MatrixTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/matrix/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/matrix/Matrix.java" afterDir="false" />
     </list>
-=======
-    <list default="true" id="323752e7-2969-4245-ae02-507a5bb97420" name="更改" comment="" />
->>>>>>> Stashed changes
     <list id="e74306c9-d7f6-4d5d-868a-141b4ca2a862" name="新建更改列表" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
