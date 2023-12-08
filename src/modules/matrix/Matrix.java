@@ -201,6 +201,7 @@ public class Matrix {
         if(this.row<this.column){
             newMatrix=newMatrix.transposition();
         }
+
         for(int i=1;i<=l;i++){
             int tag=0;
             for(int j=i;j<=l;j++){
@@ -215,7 +216,7 @@ public class Matrix {
                 continue;
             }
             newMatrix.rowELT2(i,new Fraction(newMatrix.matrix[i][i].denominator,newMatrix.matrix[i][i].numerator));
-            for(int j=i+1;j<=row;j++){
+            for(int j=i+1;j<=l;j++){
                 newMatrix.rowELT4(i,newMatrix.matrix[j][i],j);
             }
         }
