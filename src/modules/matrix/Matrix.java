@@ -183,12 +183,27 @@ public class Matrix {
      * @date 2023/11/12 13:55
      **/
     public int getRank(){
-        int r=row;
+        int l=Math.max(this.row,this.column);
+        int r=l;
         Fraction zero=new Fraction("0","1");
-        Matrix newMatrix=new Matrix(matrix,row,column);
-        for(int i=1;i<=row;i++){
+        Fraction[][] m=new Fraction[l+1][l+1];
+        for(int i=0;i<=l;i++){
+            for(int j=0;j<=l;j++){
+                m[i][j]=zero;
+            }
+        }
+        for(int i=1;i<=this.row;i++){
+            for(int j=1;j<=this.column;j++){
+                m[i][j]=this.matrix[i][j];
+            }
+        }
+        Matrix newMatrix=new Matrix(m,l,l);
+        if(this.row<this.column){
+            newMatrix=newMatrix.transposition();
+        }
+        for(int i=1;i<=l;i++){
             int tag=0;
-            for(int j=i;j<=row;j++){
+            for(int j=i;j<=l;j++){
                 if(!newMatrix.matrix[j][i].equals(zero)){
                     newMatrix.rowELT1(i,j);
                     tag=1;
