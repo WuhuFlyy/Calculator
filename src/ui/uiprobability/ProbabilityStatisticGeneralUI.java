@@ -10,12 +10,12 @@ import static ui.UIValues.*;
 
 /**
  * @author 罗孝俊
- * @Description: 概率统计界面UI
+ * @Description: 概率统计主界面UI
  * @date 2023/11/26 12:15
  */
 public class ProbabilityStatisticGeneralUI {
     private int PANEL_WIDTH = 300;
-    private int PANEL_HEIGHT = 580;
+    private int PANEL_HEIGHT = 780;
     public JButton btnBack;
     public ProbabilityStatisticGeneralButtonPanel probabilityStatisticGeneralButtonPanel;
     /**
@@ -24,7 +24,7 @@ public class ProbabilityStatisticGeneralUI {
      * @date 2023/11/27 8:58
     **/
     public ProbabilityStatisticGeneralUI(){
-        btnBack = UIValues.createButton("<", "Consolas");
+        btnBack = UIValues.createButton("<", FONT_NAME);
         UIValues.initBtnBack(btnBack, event -> {
             probabilityStatisticGeneralButtonPanel.setVisible(false);
             new GeneralUI();

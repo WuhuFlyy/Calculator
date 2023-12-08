@@ -2,6 +2,7 @@ package ui.uigeneral;
 
 import ui.CalculatorUI;
 import ui.uifunctiongraphic.FunctionGraphicUI;
+import ui.uimatrix.MatrixGeneralUI;
 import ui.uiprobability.ProbabilityStatisticGeneralUI;
 
 import javax.swing.*;
@@ -38,7 +39,11 @@ public class GeneralButtonPanel extends JPanel{
             this.setVisible(false);
         });
 
-        btnMatrix = createButton("矩阵运算(开发中)");
+        btnMatrix = createButton("矩阵运算");
+        btnMatrix.addActionListener(event -> {
+            new MatrixGeneralUI();
+            this.setVisible(false);
+        });
 
         btnGraphics = createButton("函数图像绘制");
         btnGraphics.addActionListener(event ->{

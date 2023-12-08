@@ -16,14 +16,14 @@ import java.awt.*;
  */
 public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
     public JButton btnClassical;
-    public JButton btnBack;
     public JButton btnConditional;
     public JButton btnIndependence;
-
     public JButton btnBayesian;
+    public JButton btnBack;
 
     /**
      * @Description   概统主界面按钮板构造
+     * @param btnBack UI界面传入的返回按钮
      * @author 罗孝俊
      * @date 2023/11/27 8:59
     **/
@@ -34,7 +34,6 @@ public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
         add(btnClassical);
         add(btnConditional);
         add(btnIndependence);
-//        add(btnTotalProbability);
         add(btnBayesian);
         //add(btnBinomialDistribution);
     }
@@ -65,7 +64,7 @@ public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
             btnBack.setVisible(false);
             this.setVisible(false);
         });
-//        btnTotalProbability = UIValues.createButton("全概率", "宋体");
+
         btnBayesian = UIValues.createButton("贝叶斯\n&全概率", "宋体");
         btnBayesian.addActionListener(event -> {
             new BayesianUI();

@@ -65,7 +65,6 @@ public class BayesianUI {
         btnSolve.addActionListener(event -> {
             solve();
         });
-
         window.add(btnSolve);
         btnSolve.setVisible(true);
         btnSolve.repaint();
@@ -80,16 +79,19 @@ public class BayesianUI {
             labelPBi.setVisible(false);
             labelPAUnderBi.setVisible(false);
             labelPBjUnderA.setVisible(false);
+            labelPA.setVisible(false);
             inputN.setVisible(false);
             inputJ.setVisible(false);
             inputPBi.setVisible(false);
             inputPAUnderBi.setVisible(false);
             outputPBjUnderA.setVisible(false);
+            outputPA.setVisible(false);
             paneN.setVisible(false);
             paneJ.setVisible(false);
             panePBi.setVisible(false);
             panePAUnderBi.setVisible(false);
             panePBjUnderA.setVisible(false);
+            panePA.setVisible(false);
             btnSolve.setVisible(false);
             new ProbabilityStatisticGeneralUI();
             btnBack.setVisible(false);
@@ -109,7 +111,7 @@ public class BayesianUI {
         text.setEditable(false);
         text.setFocusable(true);
         text.setBackground(Color.GRAY);
-        text.setFont(new Font("宋体", Font.PLAIN, 33));
+        text.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
         text.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
