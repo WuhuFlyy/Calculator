@@ -151,31 +151,12 @@ public class MatrixRelativeUI {
             return;
         }
 
-        String[] elementsString = inputMatrix.getText().split("(\\s)+");
-        if(row * column != elementsString.length){
-            JOptionPane.showMessageDialog(null, "元素总数：" + elementsString.length + "\n但是row*line：" + row*column, "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        Fraction[][] elements = new Fraction[row + 1][column + 1];
         try{
-            int k = 0;
-            for(int i = 1; i <= row; i++){
-                for(int j = 1; j <= column; j++){
-                    String str = elementsString[k++];
-                    if(str.matches(FRACTION_REGEX)){
-                        String[] tmp = str.split("/");
-                        elements[i][j] = new Fraction(tmp[0], tmp[1]);
-                    }else if(str.matches(NUMBER_REGEX)){
-                        elements[i][j] = Operation.toFraction(str);
-                    }else{
-                        JOptionPane.showMessageDialog(null, "M(" + i + j + ")输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
-                        return;
-                    }
-                }
+            Matrix matrix = getMatrix(row, column, inputMatrix);
+            if(matrix == null){
+                return;
             }
 
-            Matrix matrix = new Matrix(elements, row, column);
             int rank = matrix.getRank();
             if(row != column){
                 outputInverse.setFont(new Font("宋体", Font.PLAIN, 33));
@@ -210,7 +191,6 @@ public class MatrixRelativeUI {
             }
             outputTrans.setText(transString.toString());
             outputRank.setText(Integer.toString(rank));
-
         }catch (ArithmeticException e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
         }

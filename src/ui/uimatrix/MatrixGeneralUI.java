@@ -13,11 +13,14 @@ import static ui.UIValues.*;
  * @date 2023/12/8 13:21
  */
 public class MatrixGeneralUI {
-    private int PANEL_WIDTH = 300;
-    private int PANEL_HEIGHT = 780;
     public JButton btnBack;
     public MatrixGeneralPanel matrixGeneralPanel;
 
+    /**
+     * @Description 界面构造
+     * @author 罗孝俊
+     * @date 2023/12/8 13:22
+    **/
     public MatrixGeneralUI(){
         btnBack = UIValues.createButton("<", FONT_NAME);
         initBtnBack(btnBack, event -> {
@@ -28,7 +31,6 @@ public class MatrixGeneralUI {
 
         matrixGeneralPanel = new MatrixGeneralPanel(btnBack);
         matrixGeneralPanel.setBounds(MARGIN_X + 340, MARGIN_Y, PANEL_WIDTH, PANEL_HEIGHT);
-        matrixGeneralPanel.setVisible(true);
         window.add(matrixGeneralPanel);
     }
 

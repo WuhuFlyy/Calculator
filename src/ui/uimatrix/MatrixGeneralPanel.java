@@ -46,14 +46,14 @@ public class MatrixGeneralPanel extends JPanel {
 
         btnMultiply = createButton("矩阵乘法", "宋体");
         btnMultiply.addActionListener(event -> {
-
+            new MatrixMultiplyUI();
             btnBack.setVisible(false);
             this.setVisible(false);
         });
 
         btnPow = createButton("矩阵求幂", "宋体");
         btnPow.addActionListener(event -> {
-
+            new MatrixPowUI();
             btnBack.setVisible(false);
             this.setVisible(false);
         });

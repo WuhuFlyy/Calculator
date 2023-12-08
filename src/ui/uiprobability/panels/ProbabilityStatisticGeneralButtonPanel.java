@@ -29,7 +29,7 @@ public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
     **/
     public ProbabilityStatisticGeneralButtonPanel(JButton btnBack){
         this.btnBack = btnBack;
-        setLayout(new GridLayout(4, 1, 0, 60));
+        setLayout(new GridLayout(4, 1, 0, 40));
         initButton();
         add(btnClassical);
         add(btnConditional);

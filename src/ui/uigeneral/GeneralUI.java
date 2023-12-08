@@ -3,7 +3,6 @@ package ui.uigeneral;
 import javax.swing.*;
 
 import static ui.UIValues.*;
-import static ui.UIValues.window;
 
 /**
  * @author 罗孝俊
@@ -11,8 +10,6 @@ import static ui.UIValues.window;
  * @date 2023/11/26 9:52
  */
 public class GeneralUI {
-    private int GENERAL_PANEL_WIDTH = 300;
-    private int GENERAL_PANEL_HEIGHT = 580;
     public GeneralButtonPanel generalButtonPanel;
     /**
      * @Description 总界面构造方法
@@ -27,7 +24,7 @@ public class GeneralUI {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         generalButtonPanel = new GeneralButtonPanel();
-        generalButtonPanel.setBounds(MARGIN_X + 340, MARGIN_Y, GENERAL_PANEL_WIDTH, GENERAL_PANEL_HEIGHT);
+        generalButtonPanel.setBounds(MARGIN_X + 340, MARGIN_Y, PANEL_WIDTH, PANEL_HEIGHT);
         window.add(generalButtonPanel);
         window.setVisible(true);
     }

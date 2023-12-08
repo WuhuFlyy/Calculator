@@ -1,6 +1,11 @@
 package ui;
 
 
+import modules.basic.Fraction;
+import modules.basic.Operation;
+import modules.matrix.Matrix;
+import ui.uimatrix.MatrixPowUI;
+
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
@@ -10,7 +15,7 @@ import java.awt.event.FocusListener;
 
 /**
  * @author 罗孝俊
- * @Description: UI模块的全局变量
+ * @Description: UI模块的全局变量和工具类
  * @date 2023/11/17 21:34
  */
 public class UIValues {
@@ -20,7 +25,8 @@ public class UIValues {
     public static final int WINDOW_HEIGHT = 900;
     public static final int MARGIN_X = 20;
     public static final int MARGIN_Y = 55;
-
+    public static int PANEL_WIDTH = 300;
+    public static int PANEL_HEIGHT = 780;
     public static int MARGIN_X_RIGHT = WINDOW_WIDTH - MARGIN_X;
     public static int MARGIN_Y_DOWN = WINDOW_HEIGHT - MARGIN_Y;
     public static final int BUTTON_PANEL_WIDTH = 600;
@@ -117,5 +123,46 @@ public class UIValues {
         btnSolve.addActionListener(listener);
         window.add(btnSolve);
         btnSolve.repaint();
+    }
+
+    /**
+     * @Description 根据输入构造矩阵
+     * @param row 行数
+     * @param column 列数
+     * @param inputMatrix 输入矩阵的JTextArea
+     * @return modules.matrix.Matrix 矩阵实例
+     * @author 罗孝俊
+     * @date 2023/12/8 23:16
+    **/
+    public static Matrix getMatrix(int row, int column, JTextArea inputMatrix){
+        String[] elementsString = inputMatrix.getText().split("(\\s)+");
+        if(row * column != elementsString.length){
+            JOptionPane.showMessageDialog(null, "元素总数：" + elementsString.length + "\n但是row*line：" + row*column, "Warning", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+        Fraction[][] elements = new Fraction[row + 1][column + 1];
+        try{
+            int k = 0;
+            for(int i = 1; i <= row; i++){
+                for(int j = 1; j <= column; j++){
+                    String str = elementsString[k++];
+                    if(str.matches(FRACTION_REGEX)){
+                        String[] tmp = str.split("/");
+                        elements[i][j] = new Fraction(tmp[0], tmp[1]);
+                    }else if(str.matches(NUMBER_REGEX)){
+                        elements[i][j] = Operation.toFraction(str);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "M(" + i + j + ")输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
+                        return null;
+                    }
+                }
+            }
+
+
+            return new Matrix(elements, row, column);
+        }catch (ArithmeticException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
     }
 }

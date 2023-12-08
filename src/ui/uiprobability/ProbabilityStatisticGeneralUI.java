@@ -14,8 +14,6 @@ import static ui.UIValues.*;
  * @date 2023/11/26 12:15
  */
 public class ProbabilityStatisticGeneralUI {
-    private int PANEL_WIDTH = 300;
-    private int PANEL_HEIGHT = 780;
     public JButton btnBack;
     public ProbabilityStatisticGeneralButtonPanel probabilityStatisticGeneralButtonPanel;
     /**
