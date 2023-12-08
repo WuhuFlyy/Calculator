@@ -36,15 +36,15 @@ public class MatrixRelativeUI {
         outputDeterminant = new JTextArea();
         paneRow = new JScrollPane(inputRow, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         paneColumn = new JScrollPane(inputColumn, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        paneMatrix = new JScrollPane(inputMatrix, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        paneInverse = new JScrollPane(outputInverse, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        paneTrans = new JScrollPane(outputTrans, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        paneMatrix = new JScrollPane(inputMatrix, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        paneInverse = new JScrollPane(outputInverse, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        paneTrans = new JScrollPane(outputTrans, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         paneRank = new JScrollPane(outputRank, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         paneDeterminant = new JScrollPane(outputDeterminant, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         initInput(inputRow, paneRow, MARGIN_X, MARGIN_Y + 55);
         initInput(inputColumn, paneColumn, MARGIN_X, MARGIN_Y + 185);
-        initInput(inputMatrix, paneMatrix, MARGIN_X, MARGIN_Y + 365);
+        initInput(inputMatrix, paneMatrix, MARGIN_X, MARGIN_Y + 315);
         paneMatrix.setBounds(MARGIN_X, MARGIN_Y + 365, 300, 160);
         initOutput(outputInverse, paneInverse, MARGIN_X + 500, MARGIN_Y + 55);
         paneInverse.setBounds(MARGIN_X + 500, MARGIN_Y + 55, 300, 160);
@@ -176,7 +176,7 @@ public class MatrixRelativeUI {
             }
 
             Matrix matrix = new Matrix(elements, row, column);
-//            int rank = matrix.getRank();
+            int rank = matrix.getRank();
             if(row != column){
                 outputInverse.setFont(new Font("宋体", Font.PLAIN, 33));
                 outputInverse.setText("矩阵非方阵");
@@ -209,7 +209,7 @@ public class MatrixRelativeUI {
                 transString.append("\n");
             }
             outputTrans.setText(transString.toString());
-//            outputRank.setText(Integer.toString(rank));
+            outputRank.setText(Integer.toString(rank));
 
         }catch (ArithmeticException e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
