@@ -2,6 +2,7 @@ package ui.uigeneral;
 
 import ui.CalculatorUI;
 import ui.uifunctiongraphic.FunctionGraphicUI;
+import ui.uimatrix.MatrixGeneralUI;
 import ui.uiprobability.ProbabilityStatisticGeneralUI;
 
 import javax.swing.*;
@@ -17,12 +18,14 @@ public class GeneralButtonPanel extends JPanel{
     public JButton btnProbability;
     public JButton btnMatrix;
     public JButton btnGraphics;
+    public JButton btnEquation;
     public GeneralButtonPanel(){
-        setLayout(new GridLayout(4, 1, 0, 40));
+        setLayout(new GridLayout(5, 1, 0, 40));
         initButton();
         add(btnCalculator);
         add(btnProbability);
         add(btnMatrix);
+        add(btnEquation);
         add(btnGraphics);
     }
     private void initButton(){
@@ -38,8 +41,17 @@ public class GeneralButtonPanel extends JPanel{
             this.setVisible(false);
         });
 
-        btnMatrix = createButton("矩阵运算(开发中)");
+        btnMatrix = createButton("矩阵运算");
+        btnMatrix.addActionListener(event -> {
+            new MatrixGeneralUI();
+            this.setVisible(false);
+        });
 
+        btnEquation = createButton("解方程");
+        btnEquation.addActionListener(event -> {
+
+
+        });
         btnGraphics = createButton("函数图像绘制");
         btnGraphics.addActionListener(event ->{
             new FunctionGraphicUI();

@@ -85,7 +85,7 @@ public class ConditionalUI {
         text.setEditable(false);
         text.setFocusable(true);
         text.setBackground(Color.GRAY);
-        text.setFont(new Font("宋体", Font.PLAIN, 33));
+        text.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
         text.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {

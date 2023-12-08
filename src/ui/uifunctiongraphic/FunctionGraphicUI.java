@@ -174,12 +174,13 @@ public class FunctionGraphicUI implements ItemListener {
 
     /**
      * @author 罗孝俊
-     * @Description: 函数绘制模块类
+     * @Description: 函数绘制模块
      * @date 2023/12/3 18:15
      */
     class GraphicPanel extends JPanel {
         private double fa, fb, fc;
-        private int unitLength = 100;  //像素精度，越小越精细，显示范围也越小
+        //像素精度，越小越精细，显示范围也越小
+        private int unitLength = 100;
         int width, height, x, y;
 
         /**
@@ -247,12 +248,13 @@ public class FunctionGraphicUI implements ItemListener {
         private void drawAxes(Graphics g) {
             g.drawLine(0, y, width, y);
             g.drawLine(x, 0, x, height);
-            g.drawString("0",x + 2,y + 12); //画原点数字
+            g.drawString("0",x + 2,y + 12);
             for(int i = 1; i * unitLength < width; i++) {
-                g.drawLine(x + i * unitLength,y-1,x + i * unitLength,y-6);//画x轴正向的小竖线
-                g.drawLine(x - i * unitLength, y-1, x - i * unitLength, y-6);//画x轴负向的小竖线
-                g.drawString(String.valueOf(i), x + i * unitLength - 3, y + 12);  // x轴正向数字
-                g.drawString(String.valueOf(i * -1), x - i * unitLength - 3, y + 12);  // x轴负向数字
+                //画X轴
+                g.drawLine(x + i * unitLength,y-1,x + i * unitLength,y-6);
+                g.drawLine(x - i * unitLength, y-1, x - i * unitLength, y-6);
+                g.drawString(String.valueOf(i), x + i * unitLength - 3, y + 12);
+                g.drawString(String.valueOf(i * -1), x - i * unitLength - 3, y + 12);
                 //画Y轴
                 g.drawLine(x+1,y + i * unitLength,x+6,y + i * unitLength);
                 g.drawLine(x+1,y - i * unitLength,x+6,y - i * unitLength);
@@ -269,14 +271,15 @@ public class FunctionGraphicUI implements ItemListener {
         **/
         public void function(Graphics g) {
             Point2D temp1,temp2;
-            double nowX, nowY;//我们看到的坐标值
+            //用户看到的坐标值
+            double nowX, nowY;
             Graphics2D graphic2D = (Graphics2D)g;
             nowX = -1.0 * x / unitLength;
             //temp1返回面板的实际坐标值（以像素为单位）
             nowY = functionValue(nowX);
             temp1 = new Point2D.Double(this.alterX(nowX * unitLength), this.alterY(nowY * unitLength));
             for(int i = 0 ; i < width; i++){
-                nowX = nowX + 1.0 / unitLength;//前进一个像素
+                nowX = nowX + 1.0 / unitLength;
                 nowY = functionValue(nowX);
                 if (Math.abs(nowY) < y){
                     temp2 = new Point2D.Double(this.alterX(nowX * unitLength), this.alterY(nowY * unitLength));

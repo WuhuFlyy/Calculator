@@ -12,7 +12,6 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import static ui.UIValues.*;
-import static ui.UIValues.NUMBER_REGEX;
 
 /**
  * @author 罗孝俊
@@ -98,7 +97,7 @@ public class IndependenceUI {
         text.setEditable(false);
         text.setFocusable(true);
         text.setBackground(Color.GRAY);
-        text.setFont(new Font("宋体", Font.PLAIN, 33));
+        text.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
         text.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
