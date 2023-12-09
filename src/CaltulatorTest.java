@@ -1,3 +1,4 @@
+import modules.basic.Complex;
 import modules.basic.Fraction;
 
 import modules.equation.Equation;
@@ -18,10 +19,14 @@ public class CaltulatorTest {
 //        System.out.println(new BinomialDistribution(3, p, 3).calXk());
 //        new GeneralUI();
 
-        double[] co = {1, 2, 2};
-        System.out.println(new Equation(co).calBinaryEquation());
+//        double[] co = {1, 2, 2};
+//        System.out.println(new Equation(co).calBinaryEquation());
+//
+//        double[] cc = {8, 12, -(8*-5-2*2*-4), 5*(4+12)-16};
+//        System.out.println(new Equation(cc).calCubicEquation());
 
-        double[] cc = {1, 2, 3, 4};
-        System.out.println(new Equation(cc).calCubicEquation());
+
+        double[] cd = {-1,-2,-3,-4,5};
+        System.out.println(new Equation(cd).calQuarticEquation());
     }
 }
