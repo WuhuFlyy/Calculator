@@ -1,9 +1,4 @@
-import modules.basic.Complex;
-import modules.basic.Fraction;
-
-import modules.equation.Equation;
-import modules.probability.*;
-import ui.uigeneral.GeneralUI;
+import modules.equation.UnivariateEquation;
 
 /**
  * @author 岳宗翰
@@ -27,6 +22,6 @@ public class CaltulatorTest {
 
 
         double[] cd = {-1,-2,-3,-4,5};
-        System.out.println(new Equation(cd).calQuarticEquation());
+        System.out.println(new UnivariateEquation(cd).solveQuarticEquation());
     }
 }

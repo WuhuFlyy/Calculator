@@ -3,10 +3,10 @@ package modules.equation;
 import modules.basic.Complex;
 /**
  * @author 吕顺
- * @Description: 解一元方程，次数为2-4次
+ * @Description: 解一元多次方程，次数为2-4次
  * @date 2023/12/5 14:15
  */
-public class Equation {
+public class UnivariateEquation {
     private final double[] coefficient;
 
     /**
@@ -15,7 +15,7 @@ public class Equation {
      * @author 吕顺
      * @date 2023/12/5 14:39
      **/
-    public Equation(double[] coefficient) {
+    public UnivariateEquation(double[] coefficient) {
         if (coefficient[0] == 0.0) {
             throw new ArithmeticException("最高次项的系数不能为0");
         }
@@ -28,7 +28,7 @@ public class Equation {
      * @author 吕顺
      * @date 2023/12/5 14:43
      **/
-    public String calBinaryEquation() {
+    public String solveBinaryEquation() {
         double a = coefficient[0], b = coefficient[1], c = coefficient[2];
         double delta = Math.pow(b, 2) - 4 * a * c;
 
@@ -65,7 +65,7 @@ public class Equation {
      * @author 吕顺
      * @date 2023/12/5 21:38
      **/
-    public String calCubicEquation(){
+    public String solveCubicEquation(){
         double a = coefficient[0], b = coefficient[1], c = coefficient[2], d = coefficient[3];
         double B = b / a;
         double C = c / a;
@@ -116,7 +116,7 @@ public class Equation {
      * @author 吕顺
      * @date 2023/12/5 21:56
      **/
-    public String calQuarticEquation(){
+    public String solveQuarticEquation(){
         double a = coefficient[0], b = coefficient[1], c = coefficient[2], d = coefficient[3], e = coefficient[4];
         Complex A;
         Complex B = new Complex(b / a, 0.0);
