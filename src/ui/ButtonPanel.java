@@ -236,7 +236,7 @@ public class ButtonPanel extends JPanel{
                 typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
                 if(typedValue.matches(NUMBER_REGEX)){
                     inputScreen.setText(new BigDecimal(typedValue).toPlainString());
-                    outputScreen.setText(typedValue);
+                    outputScreen.setText(inputScreen.getText());
                 }else{
                     inputScreen.setText(typedValue);
                 }
@@ -264,7 +264,7 @@ public class ButtonPanel extends JPanel{
                     typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
                     if(typedValue.matches(NUMBER_REGEX)){
                         inputScreen.setText(new BigDecimal(typedValue).toPlainString());
-                        outputScreen.setText(typedValue);
+                        outputScreen.setText(inputScreen.getText());
                     }else{
                         inputScreen.setText(typedValue);
                     }
@@ -286,7 +286,7 @@ public class ButtonPanel extends JPanel{
                 typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
                 if(typedValue.matches(NUMBER_REGEX)){
                     inputScreen.setText(new BigDecimal(typedValue).toPlainString());
-                    outputScreen.setText(typedValue);
+                    outputScreen.setText(inputScreen.getText());
                 }else{
                     inputScreen.setText(typedValue);
                 }
@@ -307,7 +307,7 @@ public class ButtonPanel extends JPanel{
                 typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
                 if(typedValue.matches(NUMBER_REGEX)){
                     inputScreen.setText(new BigDecimal(typedValue).toPlainString());
-                    outputScreen.setText(typedValue);
+                    outputScreen.setText(inputScreen.getText());
                 }else{
                     inputScreen.setText(typedValue);
                 }
@@ -328,7 +328,7 @@ public class ButtonPanel extends JPanel{
                 typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
                 if(typedValue.matches(NUMBER_REGEX)){
                     inputScreen.setText(new BigDecimal(typedValue).toPlainString());
-                    outputScreen.setText(typedValue);
+                    outputScreen.setText(inputScreen.getText());
                 }else{
                     inputScreen.setText(typedValue);
                 }
@@ -362,7 +362,7 @@ public class ButtonPanel extends JPanel{
                 typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
                 if(typedValue.matches(NUMBER_REGEX)){
                     inputScreen.setText(new BigDecimal(typedValue).toPlainString());
-                    outputScreen.setText(typedValue);
+                    outputScreen.setText(inputScreen.getText());
                 }else{
                     inputScreen.setText(typedValue);
                 }
@@ -618,7 +618,7 @@ public class ButtonPanel extends JPanel{
                 typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
                 if(typedValue.matches(NUMBER_REGEX)){
                     inputScreen.setText(new BigDecimal(typedValue).toPlainString());
-                    outputScreen.setText(typedValue);
+                    outputScreen.setText(inputScreen.getText());
                 }else{
                     inputScreen.setText(typedValue);
                 }
@@ -635,7 +635,7 @@ public class ButtonPanel extends JPanel{
             typedValue = CalculatorUI.calculate(inputScreen.getText(), "atan");
             if(typedValue.matches(NUMBER_REGEX)){
                 inputScreen.setText(new BigDecimal(typedValue).toPlainString());
-                outputScreen.setText(typedValue);
+                outputScreen.setText(inputScreen.getText());
             }else{
                 inputScreen.setText(typedValue);
             }
@@ -664,7 +664,7 @@ public class ButtonPanel extends JPanel{
             typedValue = CalculatorUI.calculate(inputScreen.getText(), "tan");
             if(typedValue.matches(NUMBER_REGEX)){
                 inputScreen.setText(new BigDecimal(typedValue).toPlainString());
-                outputScreen.setText(typedValue);
+                outputScreen.setText(inputScreen.getText());
             }else{
                 inputScreen.setText(typedValue);
             }
@@ -680,7 +680,7 @@ public class ButtonPanel extends JPanel{
             typedValue = CalculatorUI.calculate(inputScreen.getText(), "cos");
             if(typedValue.matches(NUMBER_REGEX)){
                 inputScreen.setText(new BigDecimal(typedValue).toPlainString());
-                outputScreen.setText(typedValue);
+                outputScreen.setText(inputScreen.getText());
             }else{
                 inputScreen.setText(typedValue);
             }
@@ -696,7 +696,7 @@ public class ButtonPanel extends JPanel{
             typedValue = CalculatorUI.calculate(inputScreen.getText(), "sin");
             if(typedValue.matches(NUMBER_REGEX)){
                 inputScreen.setText(new BigDecimal(typedValue).toPlainString());
-                outputScreen.setText(typedValue);
+                outputScreen.setText(inputScreen.getText());
             }else{
                 inputScreen.setText(typedValue);
             }
@@ -712,7 +712,7 @@ public class ButtonPanel extends JPanel{
             typedValue = CalculatorUI.calculate(inputScreen.getText(), "!");
             if(typedValue.matches(NUMBER_REGEX)){
                 inputScreen.setText(new BigDecimal(typedValue).toPlainString());
-                outputScreen.setText(typedValue);
+                outputScreen.setText(inputScreen.getText());
             }else{
                 inputScreen.setText(typedValue);
             }
@@ -729,7 +729,7 @@ public class ButtonPanel extends JPanel{
                 typedValue = CalculatorUI.calculate(typedValue, inputScreen.getText(), selectedOperator);
                 if(typedValue.matches(NUMBER_REGEX)){
                     inputScreen.setText(new BigDecimal(typedValue).toPlainString());
-                    outputScreen.setText(typedValue);
+                    outputScreen.setText(inputScreen.getText());
                 }else{
                     inputScreen.setText(typedValue);
                 }
