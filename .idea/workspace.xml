@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="323752e7-2969-4245-ae02-507a5bb97420" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CaltulatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CaltulatorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/equation/MultivariateEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/equation/MultivariateEquation.java" afterDir="false" />
     </list>
     <list id="e74306c9-d7f6-4d5d-868a-141b4ca2a862" name="新建更改列表" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -135,7 +133,8 @@
       <workItem from="1702087998753" duration="1521000" />
       <workItem from="1702089871048" duration="1097000" />
       <workItem from="1702091096978" duration="773000" />
-      <workItem from="1702220096923" duration="3620000" />
+      <workItem from="1702220096923" duration="3880000" />
+      <workItem from="1702224481226" duration="571000" />
     </task>
     <servers />
   </component>
