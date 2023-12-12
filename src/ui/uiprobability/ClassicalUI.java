@@ -50,7 +50,6 @@ public class ClassicalUI {
             solve();
         });
         window.add(btnSolve);
-        btnSolve.setVisible(true);
         btnSolve.repaint();
 
         btnBack = createButton("<", FONT_NAME);
@@ -145,8 +144,8 @@ public class ClassicalUI {
      * @date 2023/12/3 11:22
     **/
     private void solve(){
-        if(!inputK.getText().matches(INTEGER_REGEX) || !inputN.getText().matches(INTEGER_REGEX)){
-            JOptionPane.showMessageDialog(null, "请输入一个整数", "Warning", JOptionPane.WARNING_MESSAGE);
+        if(!inputK.getText().matches(POSITIVE_INTEGER_REGEX) || !inputN.getText().matches(POSITIVE_INTEGER_REGEX)){
+            JOptionPane.showMessageDialog(null, "请输入一个正整数", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -171,10 +170,8 @@ public class ClassicalUI {
         labelN = new JLabel("样本空间事件总数N");
         labelK.setBounds(MARGIN_X, MARGIN_Y, 300, 50);
         labelK.setFont(new Font("宋体", Font.PLAIN, 30));
-        labelK.setVisible(true);
         labelN.setBounds(MARGIN_X, MARGIN_Y + 130, 300, 50);
         labelN.setFont(new Font("宋体", Font.PLAIN, 30));
-        labelN.setVisible(true);
         window.add(labelK);
         window.add(labelN);
     }

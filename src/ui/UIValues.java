@@ -39,6 +39,9 @@ public class UIValues {
     public static final String FRACTION_REGEX = "[-]?\\d+[/]\\d+";
     public static final String INTEGER_REGEX = "[-]?\\d+";
     public static final String POSITIVE_INTEGER_REGEX = "[1-9]\\d*";
+    public static final String POSITIVE_FRACTION_REGEX = "[1-9]\\d*[/]\\d+";
+    public static final String POSITIVE_NUMBER_REGEX = "(\\d+[.]\\d*)|([1-9]\\d*)|([1-9]\\d*[E][-]?\\d+)";
+
 
     /**
      * @Description  初始化一个JButton

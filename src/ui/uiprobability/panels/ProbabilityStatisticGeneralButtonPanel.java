@@ -1,10 +1,7 @@
 package ui.uiprobability.panels;
 
 import ui.UIValues;
-import ui.uiprobability.BayesianUI;
-import ui.uiprobability.ClassicalUI;
-import ui.uiprobability.ConditionalUI;
-import ui.uiprobability.IndependenceUI;
+import ui.uiprobability.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +16,7 @@ public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
     public JButton btnConditional;
     public JButton btnIndependence;
     public JButton btnBayesian;
+    public JButton btnBinomialDistribution;
     public JButton btnBack;
 
     /**
@@ -29,13 +27,13 @@ public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
     **/
     public ProbabilityStatisticGeneralButtonPanel(JButton btnBack){
         this.btnBack = btnBack;
-        setLayout(new GridLayout(4, 1, 0, 40));
+        setLayout(new GridLayout(5, 1, 0, 40));
         initButton();
         add(btnClassical);
         add(btnConditional);
         add(btnIndependence);
         add(btnBayesian);
-        //add(btnBinomialDistribution);
+        add(btnBinomialDistribution);
     }
 
     /**
@@ -71,6 +69,11 @@ public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
             btnBack.setVisible(false);
             this.setVisible(false);
         });
-        //btnBinomialDistribution = UIValues.createButton("二项分布", "宋体");
+        btnBinomialDistribution = UIValues.createButton("二项分布", "宋体");
+        btnBinomialDistribution.addActionListener(event -> {
+            new BinomialUI();
+            btnBack.setVisible(false);
+            this.setVisible(false);
+        });
     }
 }
