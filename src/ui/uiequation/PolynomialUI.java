@@ -2,7 +2,6 @@ package ui.uiequation;
 
 import modules.basic.Fraction;
 import modules.equation.UnivariateEquation;
-import ui.uimatrix.MatrixGeneralUI;
 
 import static ui.UIValues.*;
 
@@ -97,39 +96,39 @@ public class PolynomialUI {
      * @author 罗孝俊
      * @date 2023/12/9 21:32
     **/
-    public void solve(){
+    public void solve() {
         int num;
-        if(inputTimes.getText().matches(POSITIVE_INTEGER_REGEX)){
+        if (inputTimes.getText().matches(POSITIVE_INTEGER_REGEX)) {
             num = Integer.parseInt(inputTimes.getText());
-            if(num < 2 || num > 4){
+            if (num < 2 || num > 4) {
                 JOptionPane.showMessageDialog(null, "方程次数应为2~4", "Warning", JOptionPane.WARNING_MESSAGE);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "方程次数输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         String[] coefficientStr = inputCoefficient.getText().split("(\\s)*,(\\s)*");
-        if(coefficientStr.length != num + 1){
+        if (coefficientStr.length != num + 1) {
             JOptionPane.showMessageDialog(null, "方程系数数量与次数不匹配", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         double[] coefficient = new double[num + 1];
-        try{
-            for(int i = 0; i <= num; i++){
+        try {
+            for (int i = 0; i <= num; i++) {
                 String str = coefficientStr[i];
-                if(str.matches(FRACTION_REGEX)){
+                if (str.matches(FRACTION_REGEX)) {
                     String[] tmp = str.split("/");
                     coefficient[i] = Double.parseDouble(new Fraction(tmp[0], tmp[1]).toDecimal());
-                }else if(str.matches(NUMBER_REGEX)){
+                } else if (str.matches(NUMBER_REGEX)) {
                     coefficient[i] = Double.parseDouble(str);
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, num - i + "次项输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
             }
             UnivariateEquation univariateEquation = new UnivariateEquation(coefficient);
-            switch (num){
+            switch (num) {
                 case 2:
                     outputAns.setText(univariateEquation.solveBinaryEquation());
                     break;
@@ -142,7 +141,7 @@ public class PolynomialUI {
                 default:
                     JOptionPane.showMessageDialog(null, "Unexpected Error", "Warning", JOptionPane.WARNING_MESSAGE);
             }
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
