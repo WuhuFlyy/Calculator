@@ -4,14 +4,11 @@ package ui;
 import modules.basic.Fraction;
 import modules.basic.Operation;
 import modules.matrix.Matrix;
-import ui.uimatrix.MatrixPowUI;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 /**
  * @author 罗孝俊
@@ -39,6 +36,9 @@ public class UIValues {
     public static final String FRACTION_REGEX = "[-]?\\d+[/]\\d+";
     public static final String INTEGER_REGEX = "[-]?\\d+";
     public static final String POSITIVE_INTEGER_REGEX = "[1-9]\\d*";
+    public static final String POSITIVE_FRACTION_REGEX = "[1-9]\\d*[/]\\d+";
+    public static final String POSITIVE_NUMBER_REGEX = "(\\d+[.]\\d*)|([1-9]\\d*)|([1-9]\\d*[E][-]?\\d+)";
+
 
     /**
      * @Description  初始化一个JButton
@@ -164,5 +164,32 @@ public class UIValues {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
             return null;
         }
+    }
+
+    /**
+     * @Description 用于解方程模块将String输入转换为double时
+     * @param indexDouble double数组对应位置元素的下标
+     * @param dstArray  double数组
+     * @param string    待转换字符串
+     * @return boolean  如果成功则返回true，反之返回false
+     * @author 罗孝俊
+     * @date 2023/12/14 0:33
+    **/
+    public static boolean transform(int indexDouble, double[] dstArray, String string ){
+        try{
+            if(string.matches(NUMBER_REGEX)){
+                dstArray[indexDouble] = Double.parseDouble(string);
+                return true;
+            }else if(string.matches(FRACTION_REGEX)){
+                String[] tmp = string.split("/");
+                dstArray[indexDouble] = Double.parseDouble(new Fraction(tmp[0], tmp[1]).toDecimal());
+                return true;
+            }else{
+                return false;
+            }
+        }catch (ArithmeticException e){
+            return false;
+        }
+
     }
 }

@@ -36,12 +36,16 @@ public class EquationGeneralPanel extends JPanel {
     private void initButton(){
         btnPolynomial = createButton("一元多项式方程", "宋体");
         btnPolynomial.addActionListener(event -> {
-
+            new PolynomialUI();
+            this.setVisible(false);
+            btnBack.setVisible(false);
         });
 
         btnSimulEquation = createButton("联立线性方程组", "宋体");
         btnSimulEquation.addActionListener(event -> {
-
+            new MultivariateEquationUI();
+            this.setVisible(false);
+            btnBack.setVisible(false);
         });
     }
 }

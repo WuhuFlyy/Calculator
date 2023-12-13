@@ -22,11 +22,14 @@ public class CaltulatorTest {
 //        System.out.println(new Equation(cc).calCubicEquation());
 
 
+        double[] cd = {-1,-2,-3,-4,5};
+        System.out.println(new UnivariateEquation(cd).solveQuarticEquation());
+
+
 //        double[] cd = {-1,-2,-3,-4,5};
 //        System.out.println(new UnivariateEquation(cd).solveQuarticEquation());
 
         double co1[] = {1,1,1}, co2[] = {2,2,2}, co3[] = {-3,-3,-3} , cons[] = {8, -2, 6};
         System.out.println(new MultivariateEquation(co1, co2, co3, cons).solveCubicEquation());
-
     }
 }

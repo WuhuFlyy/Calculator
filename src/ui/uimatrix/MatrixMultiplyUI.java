@@ -1,7 +1,5 @@
 package ui.uimatrix;
 
-import modules.basic.Fraction;
-import modules.basic.Operation;
 import modules.matrix.Matrix;
 
 import static ui.UIValues.*;

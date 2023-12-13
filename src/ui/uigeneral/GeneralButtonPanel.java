@@ -1,6 +1,7 @@
 package ui.uigeneral;
 
 import ui.CalculatorUI;
+import ui.uiequation.EquationGeneralUI;
 import ui.uifunctiongraphic.FunctionGraphicUI;
 import ui.uimatrix.MatrixGeneralUI;
 import ui.uiprobability.ProbabilityStatisticGeneralUI;
@@ -49,8 +50,8 @@ public class GeneralButtonPanel extends JPanel{
 
         btnEquation = createButton("解方程");
         btnEquation.addActionListener(event -> {
-
-
+            new EquationGeneralUI();
+            this.setVisible(false);
         });
         btnGraphics = createButton("函数图像绘制");
         btnGraphics.addActionListener(event ->{
