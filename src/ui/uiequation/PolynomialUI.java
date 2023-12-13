@@ -1,6 +1,5 @@
 package ui.uiequation;
 
-import modules.basic.Fraction;
 import modules.equation.UnivariateEquation;
 
 import static ui.UIValues.*;
@@ -27,7 +26,7 @@ public class PolynomialUI {
     **/
     public PolynomialUI(){
         inputTimes = new JTextField("3");
-        inputCoefficient = new JTextArea("1, 2, 3");
+        inputCoefficient = new JTextArea("1, 2, 3, 4");
         outputAns = new JTextArea();
         paneTimes = new JScrollPane(inputTimes, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         paneCoefficient = new JScrollPane(inputCoefficient, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -39,7 +38,6 @@ public class PolynomialUI {
         initOutput(outputAns, paneAns, MARGIN_X + 500, MARGIN_Y + 55);
         paneAns.setBounds(MARGIN_X + 500, MARGIN_Y + 55, 300, 600);
         outputAns.setLineWrap(true);
-//        outputAns.setWrapStyleWord(true);
         initLabel();
 
         btnSolve = createButton("solve", FONT_NAME);
@@ -116,13 +114,7 @@ public class PolynomialUI {
         double[] coefficient = new double[num + 1];
         try {
             for (int i = 0; i <= num; i++) {
-                String str = coefficientStr[i];
-                if (str.matches(FRACTION_REGEX)) {
-                    String[] tmp = str.split("/");
-                    coefficient[i] = Double.parseDouble(new Fraction(tmp[0], tmp[1]).toDecimal());
-                } else if (str.matches(NUMBER_REGEX)) {
-                    coefficient[i] = Double.parseDouble(str);
-                } else {
+                if(!transform(i, coefficient, coefficientStr[i])){
                     JOptionPane.showMessageDialog(null, num - i + "次项输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
@@ -143,7 +135,6 @@ public class PolynomialUI {
             }
         } catch (ArithmeticException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
         }
     }
 }

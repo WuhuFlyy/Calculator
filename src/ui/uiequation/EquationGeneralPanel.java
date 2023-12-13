@@ -43,7 +43,9 @@ public class EquationGeneralPanel extends JPanel {
 
         btnSimulEquation = createButton("联立线性方程组", "宋体");
         btnSimulEquation.addActionListener(event -> {
-
+            new MultivariateEquationUI();
+            this.setVisible(false);
+            btnBack.setVisible(false);
         });
     }
 }
