@@ -1,5 +1,5 @@
 package modules.basic;
-
+import java.util.ArrayList;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -13,7 +13,7 @@ import modules.GlobalVariable;
  * */
 public class Operation_2{
 
-    private static final int accuracy=GlobalVariable.decimalScale + 2;;
+    private static final int accuracy=GlobalVariable.decimalScale + 2;
     private static final BigDecimal accuracyNum=BigDecimal.ONE.divide(BigDecimal.TEN.pow(accuracy));
     private static final BigDecimal atan05=atan(new BigDecimal("0.5"));
     private final static BigDecimal PI = new BigDecimal("3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679");
@@ -22,7 +22,6 @@ public class Operation_2{
     private static final BigDecimal _105_095=new BigDecimal("1.05").divide(new BigDecimal("0.95"),accuracy,RoundingMode.HALF_EVEN);
     private static final BigDecimal log_105_095=log_095_105(_105_095);
     /**
-     * 
      * @Description 静态代码块，类加载的时候就会对log10进行赋值
      * @author 黄文杰
      * @date 2023/11/19 23:48
@@ -295,7 +294,7 @@ public class Operation_2{
      * @author 黄文杰
      * @date 2023/11/27 13:13
     **/
-    public static BigDecimal sin(BigDecimal x){
+    private static BigDecimal sin(BigDecimal x){
         //计算过程参考cos(x)，只是泰勒展开式不一样
 
         boolean isMinus = false;
@@ -334,7 +333,7 @@ public class Operation_2{
      * @author 黄文杰
      * @date 2023/11/27 13:20
     **/
-    public static BigDecimal tan(BigDecimal x){
+    private static BigDecimal tan(BigDecimal x){
 
         if(cos(x).compareTo(BigDecimal.ZERO)==0)
         {
@@ -343,6 +342,528 @@ public class Operation_2{
 
         return sin(x).divide(cos(x),accuracy,RoundingMode.HALF_EVEN);
     }
+    /**
+     * @Description 反正弦函数计算，参数范围是[-1,1]
+     * @param x
+     * @return java.math.BigDecimal
+     * @author 黄文杰
+     * @date 2023/11/28 19:06
+    **/
+    private static BigDecimal asin(BigDecimal x){
+        //反正弦函数使用反正切函数计算
+        //arcsin(x) = arctan(x/sqrt(1-x^2))
+
+        boolean isMinus = false;
+
+        if(x.signum() == -1){ //参数为负，根据arcsin(x)=-arcsin(-x)，对参数和结果取反
+            x = x.negate();
+            isMinus = true;
+        }
+
+        if(x.compareTo(BigDecimal.ONE) > 0){ //限制区间为[-1, 1]
+            throw new ArithmeticException("该值无意义,定义域为[-1,1]");
+        }
+        else if(x.compareTo(BigDecimal.ONE) == 0){ //arcsin(1)，直接返回PI/2，1为参数无法计算
+            return PI2;
+        }
+
+        //利用上面公式计算arcsin(x)
+        BigDecimal res = pow(x,new BigDecimal("2"));
+        res = BigDecimal.ONE.subtract(res);
+        res = pow(res,new BigDecimal("0.5"));
+        res = x.divide(res,accuracy,RoundingMode.HALF_EVEN);
+        res = atan(res);
+
+        return (isMinus ? res.negate() : res).setScale(accuracy,RoundingMode.HALF_EVEN);
+    }
+
+    /**
+     * @Description 反余弦函数，参数范围仍然是[-1,1]
+     * @param x
+     * @return java.math.BigDecimal
+     * @author 黄文杰
+     * @date 2023/11/28 19:31
+    **/
+    private static BigDecimal acos(BigDecimal x){
+        //限制区间为[-1, 1]
+        //arcsin(x)+arccos(x)=PI/2;
+        return PI2.subtract(asin(x)).setScale(accuracy,RoundingMode.HALF_EVEN); //返回PI2-arcsin(x)
+    }
+
+    /**
+     * @Description 用于把一个字符串变成一组数据，如果格式错误会返回异常
+     * @param x
+     * @return java.util.ArrayList<java.math.BigDecimal>
+     * @author 黄文杰
+     * @date 2023/12/13 17:08
+    **/
+    private static ArrayList<BigDecimal> deshu(String x) throws Exception {
+        StringBuilder sb=new StringBuilder();
+        String[] rawkeys=new String[20];
+        String[] rawkeys2=new String[18];
+        String str= x;
+        String str1=str.trim();
+        rawkeys2=str1.split(" ");//将原输入按空格划分为几个字符串
+        for(int i=0;i<rawkeys2.length;i++)
+        {
+            if(i==rawkeys2.length-1)
+            {
+                sb.append(rawkeys2[i]);
+                break;
+            }
+            if(rawkeys2[i].length()!=0)
+            {
+                sb.append(rawkeys2[i]);
+                sb.append(" ");
+            }
+        }
+        String result=sb.toString();
+        rawkeys=result.split(" ");
+        ArrayList<BigDecimal> arrayList=new ArrayList<>();
+        for(int i=0;i<rawkeys.length;i++)
+        {
+            BigDecimal as;
+            try
+            {
+                if(rawkeys[i].toCharArray()[rawkeys[i].length()-1]=='.')
+                {
+                    throw(new Exception("输入中含非法字符！"));
+                }
+                as=new BigDecimal(rawkeys[i]);
+            }
+            catch(NumberFormatException xa)
+            {
+
+                throw(new Exception("输入中含非法字符！"));
+            }
+            arrayList.add(as);
+
+        }
+        return arrayList;
+    }
+    /**
+     * @Description 返回一元线性回归的斜率
+     * @param x 自变量数据
+     * @param y 因变量数据
+     * @return java.math.BigDecimal
+     * @author 黄文杰
+     * @date 2023/12/13 17:12
+    **/
+    private static BigDecimal xielv(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y) throws Exception {
+        if(x.size()!=y.size())
+        {
+            throw (new Exception("x与y数据个数不一致!"));
+        }
+        BigDecimal ave_x=BigDecimal.ZERO;
+        BigDecimal ave_y=BigDecimal.ZERO;
+        BigDecimal ave_xy=BigDecimal.ZERO;
+        BigDecimal ave_x2=BigDecimal.ZERO;
+        for(int i=0;i<x.size();i++)
+        {
+            ave_x=ave_x.add(x.get(i));
+        }
+        ave_x=ave_x.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
+        for(int i=0;i<y.size();i++)
+        {
+            ave_y=ave_y.add(y.get(i));
+        }
+        ave_y=ave_y.divide(new BigDecimal(y.size()),accuracy,RoundingMode.HALF_EVEN);
+        for(int i=0;i<x.size();i++)
+        {
+            ave_xy=ave_xy.add(x.get(i).multiply(y.get(i)));
+        }
+        ave_xy=ave_xy.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
+        for(int i=0;i<x.size();i++)
+        {
+            ave_x2=ave_x2.add(x.get(i).multiply(x.get(i)));
+        }
+        ave_x2=ave_x2.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
+        BigDecimal xie=ave_x.multiply(ave_y).subtract(ave_xy).divide(ave_x.multiply(ave_x).subtract(ave_x2),accuracy,RoundingMode.HALF_EVEN);
+        return xie.setScale(accuracy,RoundingMode.HALF_EVEN);
+    }
+    /**
+     * @Description 返回一元线性回归的截距
+     * @param x
+     * @param y
+     * @return java.math.BigDecimal
+     * @author 黄文杰
+     * @date 2023/12/13 17:12
+    **/
+    private static BigDecimal jieju(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y) throws Exception {
+        if(x.size()!=y.size())
+        {
+            throw (new Exception("x与y数据个数不一致!"));
+        }
+        BigDecimal ave_x=BigDecimal.ZERO;
+        BigDecimal ave_y=BigDecimal.ZERO;
+        for(int i=0;i<x.size();i++)
+        {
+            ave_x=ave_x.add(x.get(i));
+        }
+        ave_x=ave_x.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
+        for(int i=0;i<y.size();i++)
+        {
+            ave_y=ave_y.add(y.get(i));
+        }
+        ave_y=ave_y.divide(new BigDecimal(y.size()),accuracy,RoundingMode.HALF_EVEN);
+        BigDecimal xie=xielv(x,y);
+        BigDecimal jie=ave_y.subtract(xie.multiply(ave_x));
+        if(jie.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
+        return jie.setScale(accuracy,RoundingMode.HALF_EVEN);
+    }
+    /**
+     * @Description 返回一元线性回归的相关系数
+     * @param x
+     * @param y
+     * @return java.math.BigDecimal
+     * @author 黄文杰
+     * @date 2023/12/13 17:12
+    **/
+    private static BigDecimal xiangguanxishu(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y) throws Exception {
+        if(x.size()!=y.size())
+        {
+            throw (new Exception("x与y数据个数不一致!"));
+        }
+        BigDecimal ave_x=BigDecimal.ZERO;
+        BigDecimal ave_y=BigDecimal.ZERO;
+        BigDecimal ave_xy=BigDecimal.ZERO;
+        BigDecimal ave_x2=BigDecimal.ZERO;
+        BigDecimal ave_y2=BigDecimal.ZERO;
+        for(int i=0;i<x.size();i++)
+        {
+            ave_x=ave_x.add(x.get(i));
+            ave_y=ave_y.add(y.get(i));
+            ave_xy=ave_xy.add(x.get(i).multiply(y.get(i)));
+            ave_x2=ave_x2.add(x.get(i).multiply(x.get(i)));
+            ave_y2=ave_y2.add(y.get(i).multiply(y.get(i)));
+        }
+        BigDecimal sq=pow(new BigDecimal(x.size()).multiply(ave_x2).subtract(ave_x.multiply(ave_x)).multiply(new BigDecimal(y.size()).multiply(ave_y2).subtract(ave_y.multiply(ave_y))),new BigDecimal("0.5"));
+
+        BigDecimal rr=new BigDecimal(x.size()).multiply(ave_xy).subtract(ave_x.multiply(ave_y)).divide(sq,accuracy,RoundingMode.HALF_EVEN);
+        return rr.setScale(accuracy,RoundingMode.HALF_EVEN);
+    }
+    /**
+     * @Description 返回一元线性回归的标准差
+     * @param x
+     * @param y
+     * @return java.math.BigDecimal
+     * @author 黄文杰
+     * @date 2023/12/13 17:13
+    **/
+    private static BigDecimal biaoozhuncha(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y) throws Exception{
+        if(x.size()!=y.size())
+        {
+            throw (new Exception("x与y数据个数不一致!"));
+        }
+        if(x.size()<=2)
+        {
+            throw (new Exception("数据个数不得小于3!"));
+        }
+        BigDecimal rns= BigDecimal.ZERO;
+        BigDecimal a=xielv(x,y);
+        BigDecimal b=jieju(x,y);
+        for(int i=0;i<x.size();i++)
+        {
+            rns = rns.add(y.get(i).subtract(b.add(a.multiply(x.get(i)))).pow(2));
+        }
+        rns = pow(rns.divide(new BigDecimal(x.size()-2),accuracy,RoundingMode.HALF_EVEN),new BigDecimal("0.5"));
+        return rns.setScale(accuracy,RoundingMode.HALF_EVEN);
+    }
+    /**
+     * @Description 返回斜率的a类不确定度
+     * @param x
+     * @param y
+     * @return java.math.BigDecimal
+     * @author 黄文杰
+     * @date 2023/12/13 17:13
+    **/
+    private static BigDecimal Ua_xielv(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y)throws Exception{
+
+        if(x.size()!=y.size())
+        {
+            throw (new Exception("x与y数据个数不一致!"));
+        }
+        if(x.size()<=2)
+        {
+            throw (new Exception("数据个数不得小于3!"));
+        }
+        BigDecimal xie=xielv(x,y);
+        BigDecimal r=xiangguanxishu(x,y);
+        BigDecimal rns= xie.multiply(pow(BigDecimal.ONE.divide(r.multiply(r),accuracy,RoundingMode.HALF_EVEN).subtract(BigDecimal.ONE).divide(new BigDecimal(x.size()-2),accuracy,RoundingMode.HALF_EVEN),new BigDecimal("0.5")));
+        return rns.setScale(accuracy,RoundingMode.HALF_EVEN);
+    }
+    /**
+     * @Description 返回截距的a类不确定度
+     * @param x
+     * @param y
+     * @return java.math.BigDecimal
+     * @author 黄文杰
+     * @date 2023/12/13 17:14
+    **/
+    private static BigDecimal Ua_jieju(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y) throws Exception {
+        BigDecimal ave_x2=BigDecimal.ZERO;
+        for(int i=0;i<x.size();i++)
+        {
+            ave_x2=ave_x2.add(x.get(i).multiply(x.get(i)));
+        }
+        ave_x2=ave_x2.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
+
+
+        BigDecimal Ua_xie=Ua_xielv(x,y);
+        BigDecimal rns = pow(ave_x2,new BigDecimal("0.5")).multiply(Ua_xie);
+        return rns.setScale(accuracy,RoundingMode.HALF_EVEN);
+    }
+    /**
+     * @Description 返回斜率的b类不确定度
+     * @param x
+     * @param y
+     * @param fenduzhi 分度值，也就是仪器误差限
+     * @return java.math.BigDecimal
+     * @author 黄文杰
+     * @date 2023/12/13 17:14
+    **/
+    private static BigDecimal Ub_xielv(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y,BigDecimal fenduzhi) {
+
+        BigDecimal ave_x2=BigDecimal.ZERO;
+        BigDecimal ave_x=BigDecimal.ZERO;
+        for(int i=0;i<x.size();i++)
+        {
+            ave_x2=ave_x2.add(x.get(i).multiply(x.get(i)));
+        }
+        ave_x2=ave_x2.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
+        for(int i=0;i<x.size();i++)
+        {
+            ave_x=ave_x.add(x.get(i));
+        }
+        ave_x=ave_x.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
+        BigDecimal Ub_y=fenduzhi.divide(pow(new BigDecimal(3),new BigDecimal("0.5")),accuracy,RoundingMode.HALF_EVEN);
+        BigDecimal rns=pow(BigDecimal.ONE.divide(new BigDecimal(x.size()).multiply(ave_x2.subtract(ave_x.multiply(ave_x))),accuracy,RoundingMode.HALF_EVEN),new BigDecimal("0.5"));
+        rns =rns.multiply(Ub_y);
+        return rns.setScale(accuracy,RoundingMode.HALF_EVEN);
+    }
+    /**
+     * @Description  返回截距的b类不确定度
+     * @param x
+     * @param y
+     * @param fenduzhi
+     * @return java.math.BigDecimal
+     * @author 黄文杰
+     * @date 2023/12/13 17:14
+    **/
+    private static BigDecimal Ub_jieju(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y,BigDecimal fenduzhi){
+        BigDecimal ub_xie=Ub_xielv(x,y,fenduzhi);
+        BigDecimal ave_x2=BigDecimal.ZERO;
+        for(int i=0;i<x.size();i++)
+        {
+            ave_x2=ave_x2.add(x.get(i).multiply(x.get(i)));
+        }
+        ave_x2=ave_x2.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
+        BigDecimal rns=ub_xie.multiply(pow(ave_x2,new BigDecimal("0.5")));
+        return rns.setScale(accuracy,RoundingMode.HALF_EVEN);
+    }
+    /**
+     * @Description 返回斜率的合成不确定度
+     * @param x
+     * @param y
+     * @param fenduzhi
+     * @return java.math.BigDecimal
+     * @author 黄文杰
+     * @date 2023/12/13 17:15
+    **/
+    private static BigDecimal U_xielv(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y,BigDecimal fenduzhi) throws Exception {
+        BigDecimal rns=pow(Ub_xielv(x,y,fenduzhi).pow(2).add(Ua_xielv(x,y).pow(2)),new BigDecimal("0.5"));
+        return rns.setScale(accuracy,RoundingMode.HALF_EVEN);
+    }
+    /**
+     * @Description  返回截距的合成不确定度
+     * @param x
+     * @param y
+     * @param fenduzhi
+     * @return java.math.BigDecimal
+     * @author 黄文杰
+     * @date 2023/12/13 17:15
+    **/
+    private static BigDecimal U_jieju(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y,BigDecimal fenduzhi) throws Exception {
+        BigDecimal rns=pow(Ua_jieju(x,y).pow(2).add(Ub_xielv(x,y,fenduzhi).pow(2)),new BigDecimal("0.5"));
+        return rns.setScale(accuracy,RoundingMode.HALF_EVEN);
+    }
+    /**
+     * @Description 通过字符串返回分度值，会对异常情况进行处理
+     * @param fenduzhi
+     * @return java.math.BigDecimal
+     * @author 黄文杰
+     * @date 2023/12/14 0:24
+    **/
+    private  static BigDecimal fendu(String fenduzhi) throws Exception {
+        BigDecimal s;
+        try
+        {
+            if(fenduzhi.toCharArray()[fenduzhi.length()-1]=='.')
+            {
+                throw(new Exception("分度值输入格式错误！"));
+            }
+            s=new BigDecimal(fenduzhi);
+        }
+        catch(Exception a)
+        {
+            throw(new Exception("分度值输入格式错误！"));
+        }
+        return s;
+    }
+    /**
+     * @Description 返回斜率
+     * @param xx
+     * @param yy
+     * @param fenduzhi
+     * @return java.lang.String
+     * @author 黄文杰
+     * @date 2023/12/14 0:25
+    **/
+    public static String get_xielv(String xx,String yy,String fenduzhi) throws Exception {
+        BigDecimal fendua=fendu(fenduzhi);
+        ArrayList<BigDecimal> x=deshu(xx);
+        ArrayList<BigDecimal> y=deshu(yy);
+        return xielv(x,y).toString();
+    }
+    /**
+     * @Description 返回截距
+     * @param xx
+     * @param yy
+     * @param fenduzhi
+     * @return java.lang.String
+     * @author 黄文杰
+     * @date 2023/12/14 0:25
+    **/
+    public static String get_jieju(String xx,String yy,String fenduzhi) throws Exception {
+        BigDecimal fendua=fendu(fenduzhi);
+        ArrayList<BigDecimal> x=deshu(xx);
+        ArrayList<BigDecimal> y=deshu(yy);
+        return jieju(x,y).toString();
+    }
+    /**
+     * @Description 返回相关系数r
+     * @param xx
+     * @param yy
+     * @param fenduzhi
+     * @return java.lang.String
+     * @author 黄文杰
+     * @date 2023/12/14 0:26
+    **/
+    public static String get_xiangguanxishu(String xx,String yy,String fenduzhi) throws Exception {
+        BigDecimal fendua=fendu(fenduzhi);
+        ArrayList<BigDecimal> x=deshu(xx);
+        ArrayList<BigDecimal> y=deshu(yy);
+        return xiangguanxishu(x,y).toString();
+    }
+    /**
+     * @Description 返回标准差
+     * @param xx
+     * @param yy
+     * @param fenduzhi
+     * @return java.lang.String
+     * @author 黄文杰
+     * @date 2023/12/14 0:26
+    **/
+    public static String get_biaozhuncha(String xx,String yy,String fenduzhi) throws Exception {
+        BigDecimal fendua=fendu(fenduzhi);
+        ArrayList<BigDecimal> x=deshu(xx);
+        ArrayList<BigDecimal> y=deshu(yy);
+        return biaoozhuncha(x,y).toString();
+    }
+    /**
+     * @Description 返回斜率的a类不确定度
+     * @param xx
+     * @param yy
+     * @param fenduzhi
+     * @return java.lang.String
+     * @author 黄文杰
+     * @date 2023/12/14 0:27
+    **/
+    public static String get_Ua_xielv(String xx,String yy,String fenduzhi) throws Exception {
+        BigDecimal fendua=fendu(fenduzhi);
+        ArrayList<BigDecimal> x=deshu(xx);
+        ArrayList<BigDecimal> y=deshu(yy);
+        return Ua_xielv(x,y).toString();
+    }
+    /**
+     * @Description 返回截距的a类不确定度
+     * @param xx
+     * @param yy
+     * @param fenduzhi
+     * @return java.lang.String
+     * @author 黄文杰
+     * @date 2023/12/14 0:27
+    **/
+    public static String get_Ua_jieju(String xx,String yy,String fenduzhi) throws Exception {
+        BigDecimal fendua=fendu(fenduzhi);
+        ArrayList<BigDecimal> x=deshu(xx);
+        ArrayList<BigDecimal> y=deshu(yy);
+        return Ua_jieju(x,y).toString();
+    }
+    /**
+     * @Description 返回斜率的b类不确定度
+     * @param xx
+     * @param yy
+     * @param fenduzhi
+     * @return java.lang.String
+     * @author 黄文杰
+     * @date 2023/12/14 0:27
+    **/
+    public static String get_Ub_xielv(String xx,String yy,String fenduzhi) throws Exception {
+        BigDecimal fendua=fendu(fenduzhi);
+        ArrayList<BigDecimal> x=deshu(xx);
+        ArrayList<BigDecimal> y=deshu(yy);
+        return Ub_xielv(x,y,fendua).toString();
+    }
+    /**
+     * @Description 返回截距的b类不确定度
+     * @param xx
+     * @param yy
+     * @param fenduzhi
+     * @return java.lang.String
+     * @author 黄文杰
+     * @date 2023/12/14 0:28
+    **/
+    public static String get_Ub_jieju(String xx,String yy,String fenduzhi) throws Exception {
+        BigDecimal fendua=fendu(fenduzhi);
+        ArrayList<BigDecimal> x=deshu(xx);
+        ArrayList<BigDecimal> y=deshu(yy);
+        return Ub_jieju(x,y,fendua).toString();
+    }
+    /**
+     * @Description 返回斜率的合成不确定度
+     * @param xx
+     * @param yy
+     * @param fenduzhi
+     * @return java.lang.String
+     * @author 黄文杰
+     * @date 2023/12/14 0:28
+    **/
+    public static String get_U_xielv(String xx,String yy,String fenduzhi) throws Exception {
+        BigDecimal fendua=fendu(fenduzhi);
+        ArrayList<BigDecimal> x=deshu(xx);
+        ArrayList<BigDecimal> y=deshu(yy);
+        return U_xielv(x,y,fendua).toString();
+    }
+    /**
+     * @Description 返回截距的合成不确定度
+     * @param xx
+     * @param yy
+     * @param fenduzhi
+     * @return java.lang.String
+     * @author 黄文杰
+     * @date 2023/12/14 0:28
+    **/
+    public static String get_U_jieju(String xx,String yy,String fenduzhi) throws Exception {
+        BigDecimal fendua=fendu(fenduzhi);
+        ArrayList<BigDecimal> x=deshu(xx);
+        ArrayList<BigDecimal> y=deshu(yy);
+        return U_jieju(x,y,fendua).toString();
+    }
+
+
+
+
 
     /**
      * @Description 计算arctan(x)
@@ -412,4 +933,29 @@ public class Operation_2{
     public static String getTan(String x) {
         return tan(new BigDecimal(x)).toString();
     }
+
+    /**
+     * @Description 计算arcsin(x)
+     * @param x
+     * @return java.lang.String
+     * @author 黄文杰
+     * @date 2023/11/28 19:08
+    **/
+    public static String getArcsin(String x)
+    {
+        return asin(new BigDecimal(x)).toString();
+    }
+
+    /**
+     * @Description 计算arccos(x)
+     * @param x
+     * @return java.lang.String
+     * @author 黄文杰
+     * @date 2023/11/28 19:33
+    **/
+    public static String getArccos(String x)
+    {
+        return acos(new BigDecimal(x)).toString();
+    }
+
 }
