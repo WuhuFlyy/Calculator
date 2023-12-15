@@ -62,5 +62,7 @@ public class GeneralUI {
         window.add(inputAccuracy);
         window.add(labelAccuracy);
         window.setVisible(true);
+        inputAccuracy.setVisible(true);
+        labelAccuracy.setVisible(true);
     }
 }

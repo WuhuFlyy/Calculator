@@ -31,6 +31,8 @@ public class FunctionGraphicUI implements ItemListener {
      * @date 2023/12/3 18:54
     **/
     public FunctionGraphicUI() {
+        inputAccuracy.setVisible(false);
+        labelAccuracy.setVisible(false);
         initLabel();
         initText();
         initButton();
