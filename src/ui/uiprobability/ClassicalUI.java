@@ -2,12 +2,11 @@ package ui.uiprobability;
 
 import modules.probability.Classical;
 import ui.ButtonPanel;
+import static ui.UIValues.*;
 
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 import static ui.UIValues.*;
 
@@ -17,11 +16,10 @@ import static ui.UIValues.*;
  * @date 2023/11/26 12:13
  */
 public class ClassicalUI {
-    public JTextField inputK, inputN, outputPA, outputPNotA, inputNow;
+    public JTextField inputK, inputN, outputPA, outputPNotA;
     public JScrollPane paneK, paneN, panePA, panePNotA;
     public JLabel labelK, labelN;
     public JButton btnSolve, btnBack;
-    public ButtonPanel buttonPanel;
 
     /**
      * @Description 古典概率UI设置
@@ -45,18 +43,12 @@ public class ClassicalUI {
         initLabel();
 
         btnSolve = createButton("solve", FONT_NAME);
-        btnSolve.setBounds(MARGIN_X_RIGHT - 120, MARGIN_Y_DOWN - 40, 120, 40);
-        btnSolve.addActionListener(event -> {
+        initButtonSolve(btnSolve, event -> {
             solve();
         });
-        window.add(btnSolve);
-        btnSolve.repaint();
 
         btnBack = createButton("<", FONT_NAME);
         initBtnBack(btnBack, event -> {
-            if(buttonPanel != null){
-                buttonPanel.setVisible(false);
-            }
             labelK.setVisible(false);
             labelN.setVisible(false);
             inputK.setVisible(false);
@@ -71,71 +63,6 @@ public class ClassicalUI {
             new ProbabilityStatisticGeneralUI();
             btnBack.setVisible(false);
         });
-    }
-
-    /**
-     * @Description  初始化输入栏
-     * @param text  输入栏的JTextField
-     * @param pane  输入栏的JScrollPane
-     * @param positionX 左上角坐标
-     * @param positionY 右上角坐标
-     * @author 罗孝俊
-     * @date 2023/11/27 10:32
-    **/
-
-    private void initInput(JTextField text, JScrollPane pane, int positionX, int positionY){
-        text.setBounds(positionX, positionY, 200, 60);
-        text.setEditable(false);
-        text.setFocusable(true);
-        text.setBackground(Color.GRAY);
-        text.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
-        text.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if(!text.getText().matches(INTEGER_REGEX)){
-                    text.setText("0");
-                }
-                inputNow = text;
-                buttonPanel = ButtonPanel.getButtonPanel(inputNow, inputNow, 1);
-                if(buttonPanel != null){
-                    buttonPanel.setBounds(MARGIN_X, MARGIN_Y_DOWN - 400, BUTTON_PANEL_WIDTH, BUTTON_PANEL_HEIGHT);
-                    window.add(buttonPanel);
-                    buttonPanel.setVisible(true);
-                }
-            }
-            @Override
-            public void focusLost(FocusEvent e) {
-                if(buttonPanel != null){
-                    buttonPanel.setVisible(false);
-                }
-            }
-        });
-
-        pane.setBounds(positionX, positionY, 200, 60);
-        pane.setBackground(Color.GRAY);
-        window.add(pane);
-        text.setVisible(true);
-        pane.setVisible(true);
-    }
-
-    /**
-     * @Description 初始化输出部分的界面
-     * @param text  文字载体JTextField
-     * @param pane  JTextField对应的滚动窗体
-     * @param positionX 界面左上角X值
-     * @param positionY 界面左上角Y值
-     * @author 罗孝俊
-     * @date 2023/12/3 11:23
-    **/
-    private void initOutput(JTextField text, JScrollPane pane, int positionX, int positionY){
-        text.setBounds(positionX, positionY, 300, 60);
-        text.setEditable(false);
-        text.setFocusable(true);
-        text.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
-        pane.setBounds(positionX, positionY, 300, 60);
-        window.add(pane);
-        text.setVisible(true);
-        pane.setVisible(true);
     }
 
     /**

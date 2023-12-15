@@ -28,6 +28,7 @@ public class CalculatorUI {
      * @date 2023/11/17 23:54
     **/
     public CalculatorUI(){
+        window.setSize(MARGIN_X + BUTTON_PANEL_WIDTH + MARGIN_X, WINDOW_HEIGHT);
         initInputScreen();
         initOutScreen();
         buttonPanel = ButtonPanel.getButtonPanel(inputScreen, outputScreen, 0);
@@ -47,10 +48,7 @@ public class CalculatorUI {
             btnBack.setVisible(false);
         });
         window.add(btnBack);
-        btnBack.setVisible(true);
         btnBack.repaint();
-
-        window.setVisible(true);
     }
 
     /**
@@ -60,17 +58,15 @@ public class CalculatorUI {
     **/
     private void initInputScreen() {
         inputScreen = new JTextField("0");
-        inputScreen.setBounds(MARGIN_X, MARGIN_Y, 500, 70);
+        inputScreen.setBounds(MARGIN_X, MARGIN_Y, BUTTON_PANEL_WIDTH, 70);
         inputScreen.setEditable(false);
         inputScreen.setFocusable(true);
         inputScreen.setBackground(Color.GRAY);
         inputScreen.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
         inputPane = new JScrollPane(inputScreen, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        inputPane.setBounds(MARGIN_X, MARGIN_Y, 500, 70);
+        inputPane.setBounds(MARGIN_X, MARGIN_Y, BUTTON_PANEL_WIDTH, 70);
         inputPane.setBackground(Color.GRAY);
         window.add(inputPane);
-        inputScreen.setVisible(true);
-        inputPane.setVisible(true);
     }
 
     /**
@@ -80,16 +76,13 @@ public class CalculatorUI {
     **/
     private void initOutScreen() {
         outputScreen = new JTextField("0");
-        outputScreen.setBounds(MARGIN_X, MARGIN_Y + 70, 500, 70);
+        outputScreen.setBounds(MARGIN_X, MARGIN_Y + 70, BUTTON_PANEL_WIDTH, 70);
         outputScreen.setEditable(false);
         outputScreen.setFocusable(true);
-        //outputScreen.setBackground(Color.WHITE);
         outputScreen.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
         outputPane = new JScrollPane(outputScreen, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        outputPane.setBounds(MARGIN_X, MARGIN_Y + 70, 500, 70);
+        outputPane.setBounds(MARGIN_X, MARGIN_Y + 70, BUTTON_PANEL_WIDTH, 70);
         window.add(outputPane);
-        outputScreen.setVisible(true);
-        outputPane.setVisible(true);
     }
 
     /**

@@ -19,14 +19,11 @@ import static ui.UIValues.*;
  * @date 2023/12/3 12:47
  */
 public class IndependenceUI {
-//    public final static String EVENTS_REGEX = "(\\d+[/]\\d+)|(\\d+[.]\\d*)|(\\d+)";
-    JTextComponent inputNow;
     public JTextField inputN, outputPMul, outputPSum, outPutPSumNot;
     public JTextArea inputPEvents;
     public JScrollPane paneN, panePEvents, panePMul, panePSum, panePSumNot;
     public JLabel labelN, labelPEvents, labelPMul, labelPSum, labelPSumNot;
     public JButton btnSolve, btnBack;
-    public ButtonPanel buttonPanel;
 
     public IndependenceUI(){
         inputN = new JTextField("3");
@@ -43,26 +40,20 @@ public class IndependenceUI {
         initInput(inputN, paneN, MARGIN_X, MARGIN_Y + 55);
         initInput(inputPEvents, panePEvents, MARGIN_X, MARGIN_Y + 185);
         panePEvents.setBounds(MARGIN_X, MARGIN_Y + 185, 300, 100);
-        inputPEvents.setEditable(true);
+        inputPEvents.setLineWrap(true);
         initOutput(outputPMul, panePMul, MARGIN_X + 500, MARGIN_Y + 55);
         initOutput(outputPSum, panePSum, MARGIN_X + 500, MARGIN_Y + 185);
         initOutput(outPutPSumNot, panePSumNot, MARGIN_X + 500, MARGIN_Y + 315);
         initLabel();
 
         btnSolve = createButton("solve", FONT_NAME);
-        btnSolve.setBounds(MARGIN_X_RIGHT - 120, MARGIN_Y_DOWN - 40, 120, 40);
-        btnSolve.addActionListener(event -> {
+        initButtonSolve(btnSolve, event -> {
             solve();
         });
 
-        window.add(btnSolve);
-        btnSolve.setVisible(true);
-        btnSolve.repaint();
+
         btnBack = createButton("<", FONT_NAME);
         initBtnBack(btnBack, event -> {
-            if(buttonPanel != null){
-                buttonPanel.setVisible(false);
-            }
             labelN.setVisible(false);
             labelPEvents.setVisible(false);
             labelPMul.setVisible(false);
@@ -82,72 +73,6 @@ public class IndependenceUI {
             new ProbabilityStatisticGeneralUI();
             btnBack.setVisible(false);
         });
-    }
-
-    /**
-     * @Description  初始化输入栏
-     * @param text  输入栏的JTextComponent
-     * @param pane  输入栏的JScrollPane
-     * @param positionX 界面左上角X值
-     * @param positionY 界面左上角Y值
-     * @author 罗孝俊
-     * @date 2023/12/3 11:51
-     **/
-    private void initInput(JTextComponent text, JScrollPane pane, int positionX, int positionY){
-        text.setEditable(false);
-        text.setFocusable(true);
-        text.setBackground(Color.GRAY);
-        text.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
-        text.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                inputNow = text;
-                buttonPanel = ButtonPanel.getButtonPanel(inputNow, inputNow, 2);
-                if(buttonPanel != null){
-                    buttonPanel.setBounds(MARGIN_X, MARGIN_Y_DOWN - 400, BUTTON_PANEL_WIDTH, BUTTON_PANEL_HEIGHT);
-                    window.add(buttonPanel);
-                    buttonPanel.setVisible(true);
-                }
-            }
-            @Override
-            public void focusLost(FocusEvent e) {
-                if(buttonPanel != null){
-                    buttonPanel.setVisible(false);
-                }
-                if(inputNow.getText().isBlank()){
-                    inputNow.setText("0");
-                }
-            }
-        });
-        if(text instanceof JTextArea){
-            ((JTextArea) text).setLineWrap(true);
-            ((JTextArea) text).setWrapStyleWord(true);
-        }
-        pane.setBounds(positionX, positionY, 300, 60);
-        pane.setBackground(Color.GRAY);
-        window.add(pane);
-        text.setVisible(true);
-        pane.setVisible(true);
-    }
-
-    /**
-     * @Description 初始化输出部分的界面
-     * @param text  文字载体JTextComponent
-     * @param pane  对应的滚动窗体
-     * @param positionX 界面左上角X值
-     * @param positionY 界面左上角Y值
-     * @author 罗孝俊
-     * @date 2023/12/3 11:51
-     **/
-    private void initOutput(JTextField text, JScrollPane pane, int positionX, int positionY){
-        text.setBounds(positionX, positionY, 300, 60);
-        text.setEditable(false);
-        text.setFocusable(true);
-        text.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
-        pane.setBounds(positionX, positionY, 300, 60);
-        window.add(pane);
-        text.setVisible(true);
-        pane.setVisible(true);
     }
 
     /**

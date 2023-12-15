@@ -21,13 +21,11 @@ import static ui.UIValues.window;
  * @date 2023/12/4 19:39
  */
 public class BayesianUI {
-    JTextComponent inputNow;
     public JTextField inputN, inputJ, outputPBjUnderA, outputPA;
     public JTextArea inputPBi, inputPAUnderBi;
     public JScrollPane paneN, paneJ, panePBi, panePAUnderBi, panePBjUnderA, panePA;
     public JLabel labelN, labelJ, labelPBi, labelPAUnderBi, labelPBjUnderA, labelPA;
     public JButton btnSolve, btnBack;
-    public ButtonPanel buttonPanel;
 
     /**
      * @Description UI界面的构造方法
@@ -36,9 +34,9 @@ public class BayesianUI {
     **/
     public BayesianUI() {
         inputN = new JTextField("3");
-        inputJ = new JTextField("0");
-        inputPBi = new JTextArea("0,0,0...");
-        inputPAUnderBi = new JTextArea("0,0,0...");
+        inputJ = new JTextField("1");
+        inputPBi = new JTextArea("0,0,0");
+        inputPAUnderBi = new JTextArea("0,0,0");
         paneN = new JScrollPane(inputN, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         paneJ = new JScrollPane(inputJ, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         panePBi = new JScrollPane(inputPBi, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -52,28 +50,21 @@ public class BayesianUI {
         initInput(inputJ, paneJ, MARGIN_X, MARGIN_Y + 185);
         initInput(inputPBi, panePBi, MARGIN_X + 500, MARGIN_Y + 55);
         panePBi.setBounds(MARGIN_X + 500, MARGIN_Y + 55, 300, 120);
-        inputPBi.setEditable(true);
+        inputPBi.setLineWrap(true);
         initInput(inputPAUnderBi, panePAUnderBi, MARGIN_X + 500, MARGIN_Y + 235);
         panePAUnderBi.setBounds(MARGIN_X + 500, MARGIN_Y + 235, 300, 120);
-        inputPAUnderBi.setEditable(true);
+        inputPAUnderBi.setLineWrap(true);
         initOutput(outputPBjUnderA, panePBjUnderA, MARGIN_X + 500, MARGIN_Y + 410);
         initOutput(outputPA, panePA, MARGIN_X + 500, MARGIN_Y + 525);
         initLabel();
 
         btnSolve = createButton("solve", FONT_NAME);
-        btnSolve.setBounds(MARGIN_X_RIGHT - 120, MARGIN_Y_DOWN - 40, 120, 40);
-        btnSolve.addActionListener(event -> {
+        initButtonSolve(btnSolve, event -> {
             solve();
         });
-        window.add(btnSolve);
-        btnSolve.setVisible(true);
-        btnSolve.repaint();
 
         btnBack = createButton("<", FONT_NAME);
         initBtnBack(btnBack, event -> {
-            if(buttonPanel != null){
-                buttonPanel.setVisible(false);
-            }
             labelN.setVisible(false);
             labelJ.setVisible(false);
             labelPBi.setVisible(false);
@@ -96,73 +87,6 @@ public class BayesianUI {
             new ProbabilityStatisticGeneralUI();
             btnBack.setVisible(false);
         });
-    }
-
-    /**
-     * @Description  初始化输入栏
-     * @param text  输入栏的JTextComponent
-     * @param pane  输入栏的JScrollPane
-     * @param positionX 界面左上角X值
-     * @param positionY 界面左上角Y值
-     * @author 罗孝俊
-     * @date 2023/12/4 20:49
-     **/
-    private void initInput(JTextComponent text, JScrollPane pane, int positionX, int positionY) {
-        text.setEditable(false);
-        text.setFocusable(true);
-        text.setBackground(Color.GRAY);
-        text.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
-        text.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                inputNow = text;
-                buttonPanel = ButtonPanel.getButtonPanel(inputNow, inputNow, 2);
-                if (buttonPanel != null) {
-                    buttonPanel.setBounds(MARGIN_X, MARGIN_Y_DOWN - 400, BUTTON_PANEL_WIDTH, BUTTON_PANEL_HEIGHT);
-                    window.add(buttonPanel);
-                    buttonPanel.setVisible(true);
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (buttonPanel != null) {
-                    buttonPanel.setVisible(false);
-                }
-                if (inputNow.getText().isBlank()) {
-                    inputNow.setText("0");
-                }
-            }
-        });
-        if (text instanceof JTextArea) {
-            ((JTextArea) text).setLineWrap(true);
-            ((JTextArea) text).setWrapStyleWord(true);
-        }
-        pane.setBounds(positionX, positionY, 200, 60);
-        pane.setBackground(Color.GRAY);
-        window.add(pane);
-        text.setVisible(true);
-        pane.setVisible(true);
-    }
-
-    /**
-     * @Description 初始化输出部分的界面
-     * @param text  文字载体JTextComponent
-     * @param pane  对应的滚动窗体
-     * @param positionX 界面左上角X值
-     * @param positionY 界面左上角Y值
-     * @author 罗孝俊
-     * @date 2023/12/4 20:51
-     **/
-    private void initOutput(JTextField text, JScrollPane pane, int positionX, int positionY) {
-        text.setBounds(positionX, positionY, 300, 60);
-        text.setEditable(false);
-        text.setFocusable(true);
-        text.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
-        pane.setBounds(positionX, positionY, 300, 60);
-        window.add(pane);
-        text.setVisible(true);
-        pane.setVisible(true);
     }
 
     /**
