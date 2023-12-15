@@ -105,7 +105,7 @@ public class Operation_2{
         if(isMinus){
             res = res.negate();
         }
-        return res.setScale(accuracy,RoundingMode.HALF_EVEN);
+        return res.setScale(accuracy-2,RoundingMode.HALF_EVEN);
     }
     /**
      * @Description 快速计算，需要用到的函数，计算“当x∈[0.95,1.05]之间时”，lnx的值
@@ -192,7 +192,7 @@ public class Operation_2{
     private static BigDecimal log(BigDecimal a,BigDecimal x){
         //以a为底x的对数=log(x)/log(a)
         BigDecimal res = log(x).divide(log(a),accuracy,RoundingMode.HALF_EVEN);
-        return res.setScale(accuracy,RoundingMode.HALF_EVEN);
+        return res.setScale(accuracy-2,RoundingMode.HALF_EVEN);
     }
     /**
      * @Description 计算a^x
@@ -209,7 +209,7 @@ public class Operation_2{
         }
         else if(x.compareTo(BigDecimal.ZERO)==0)
         {
-            return BigDecimal.ONE.setScale(accuracy,RoundingMode.HALF_EVEN);
+            return BigDecimal.ONE.setScale(accuracy-2,RoundingMode.HALF_EVEN);
         }
 
         boolean isMinus = false;
@@ -228,7 +228,7 @@ public class Operation_2{
             }
             if(a.compareTo(BigDecimal.ZERO)==0)
             {
-                return BigDecimal.ZERO.setScale(accuracy,RoundingMode.HALF_EVEN);
+                return BigDecimal.ZERO.setScale(accuracy-2,RoundingMode.HALF_EVEN);
             }
 
             BigDecimal xlna = x.multiply(log(a)).setScale(accuracy,RoundingMode.HALF_EVEN); //计算x*ln(a)
@@ -242,11 +242,11 @@ public class Operation_2{
                 i++;
             }while(term.abs().compareTo(accuracyNum) > 0); //此处必须用绝对值比较，因为xlna可能为负数
 
-            return isMinus ? BigDecimal.ONE.divide(res,accuracy,RoundingMode.HALF_EVEN) : res.setScale(accuracy,RoundingMode.HALF_EVEN);
+            return isMinus ? BigDecimal.ONE.divide(res,accuracy-2,RoundingMode.HALF_EVEN) : res.setScale(accuracy-2,RoundingMode.HALF_EVEN);
         }
 
         BigDecimal res = a.pow(x.intValue()).setScale(accuracy,RoundingMode.HALF_EVEN); //x为整数，直接调用BigDecimal的pow函数
-        return isMinus ? BigDecimal.ONE.divide(res,accuracy,RoundingMode.HALF_EVEN) : res.setScale(accuracy,RoundingMode.HALF_EVEN);
+        return isMinus ? BigDecimal.ONE.divide(res,accuracy-2,RoundingMode.HALF_EVEN) : res.setScale(accuracy-2,RoundingMode.HALF_EVEN);
     }
 
 
@@ -284,7 +284,7 @@ public class Operation_2{
             i++;
         }while(term.compareTo(accuracyNum) > 0);
 
-        return (isMinus ? res.negate() : res).setScale(accuracy,RoundingMode.HALF_EVEN);
+        return (isMinus ? res.negate() : res).setScale(accuracy-2,RoundingMode.HALF_EVEN);
     }
 
     /**
@@ -323,7 +323,7 @@ public class Operation_2{
             i++;
         }while(term.compareTo(accuracyNum) > 0);
 
-        return (isMinus ? res.negate() : res).setScale(accuracy,RoundingMode.HALF_EVEN);
+        return (isMinus ? res.negate() : res).setScale(accuracy-2,RoundingMode.HALF_EVEN);
     }
 
     /**
@@ -340,7 +340,7 @@ public class Operation_2{
             throw new ArithmeticException("自变量不在定义域范围内!");
         }
 
-        return sin(x).divide(cos(x),accuracy,RoundingMode.HALF_EVEN);
+        return sin(x).divide(cos(x),accuracy-2,RoundingMode.HALF_EVEN);
     }
     /**
      * @Description 反正弦函数计算，参数范围是[-1,1]
@@ -374,7 +374,7 @@ public class Operation_2{
         res = x.divide(res,accuracy,RoundingMode.HALF_EVEN);
         res = atan(res);
 
-        return (isMinus ? res.negate() : res).setScale(accuracy,RoundingMode.HALF_EVEN);
+        return (isMinus ? res.negate() : res).setScale(accuracy-2,RoundingMode.HALF_EVEN);
     }
 
     /**
@@ -387,7 +387,7 @@ public class Operation_2{
     private static BigDecimal acos(BigDecimal x){
         //限制区间为[-1, 1]
         //arcsin(x)+arccos(x)=PI/2;
-        return PI2.subtract(asin(x)).setScale(accuracy,RoundingMode.HALF_EVEN); //返回PI2-arcsin(x)
+        return PI2.subtract(asin(x)).setScale(accuracy-2,RoundingMode.HALF_EVEN); //返回PI2-arcsin(x)
     }
 
     /**
@@ -478,8 +478,16 @@ public class Operation_2{
             ave_x2=ave_x2.add(x.get(i).multiply(x.get(i)));
         }
         ave_x2=ave_x2.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
+        if(ave_x2.compareTo(ave_x.multiply(ave_x))==0)
+        {
+            throw (new Exception("除数为0，无法计算！"));
+
+        }
         BigDecimal xie=ave_x.multiply(ave_y).subtract(ave_xy).divide(ave_x.multiply(ave_x).subtract(ave_x2),accuracy,RoundingMode.HALF_EVEN);
-        return xie.setScale(accuracy,RoundingMode.HALF_EVEN);
+
+        xie=xie.setScale(accuracy-2,RoundingMode.HALF_EVEN);
+        if(xie.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
+        return xie;
     }
     /**
      * @Description 返回一元线性回归的截距
@@ -508,8 +516,9 @@ public class Operation_2{
         ave_y=ave_y.divide(new BigDecimal(y.size()),accuracy,RoundingMode.HALF_EVEN);
         BigDecimal xie=slope(x,y);
         BigDecimal jie=ave_y.subtract(xie.multiply(ave_x));
+        jie=jie.setScale(accuracy-2,RoundingMode.HALF_EVEN);
         if(jie.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
-        return jie.setScale(accuracy,RoundingMode.HALF_EVEN);
+        return jie;
     }
     /**
      * @Description 返回一元线性回归的相关系数
@@ -537,10 +546,27 @@ public class Operation_2{
             ave_x2=ave_x2.add(x.get(i).multiply(x.get(i)));
             ave_y2=ave_y2.add(y.get(i).multiply(y.get(i)));
         }
+        ave_x=ave_x.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
+        ave_y=ave_y.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
+        ave_xy=ave_xy.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
+        ave_x2=ave_x2.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
+        ave_y2=ave_y2.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
+        if(ave_x2.compareTo(ave_x.multiply(ave_x))==0)
+        {
+            throw (new Exception("除数为0，无法计算！"));
+
+        }
+        if(ave_y2.compareTo(ave_y.multiply(ave_y))==0)
+        {
+            throw (new Exception("除数为0，无法计算！"));
+
+        }
         BigDecimal sq=pow(new BigDecimal(x.size()).multiply(ave_x2).subtract(ave_x.multiply(ave_x)).multiply(new BigDecimal(y.size()).multiply(ave_y2).subtract(ave_y.multiply(ave_y))),new BigDecimal("0.5"));
 
         BigDecimal rr=new BigDecimal(x.size()).multiply(ave_xy).subtract(ave_x.multiply(ave_y)).divide(sq,accuracy,RoundingMode.HALF_EVEN);
-        return rr.setScale(accuracy,RoundingMode.HALF_EVEN);
+        rr=rr.setScale(accuracy-2,RoundingMode.HALF_EVEN);
+        if(rr.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
+        return rr;
     }
     /**
      * @Description 返回一元线性回归的标准差
@@ -567,7 +593,9 @@ public class Operation_2{
             rns = rns.add(y.get(i).subtract(b.add(a.multiply(x.get(i)))).pow(2));
         }
         rns = pow(rns.divide(new BigDecimal(x.size()-2),accuracy,RoundingMode.HALF_EVEN),new BigDecimal("0.5"));
-        return rns.setScale(accuracy,RoundingMode.HALF_EVEN);
+        rns=rns.setScale(accuracy-2,RoundingMode.HALF_EVEN);
+        if(rns.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
+        return rns;
     }
     /**
      * @Description 返回斜率的a类不确定度
@@ -590,7 +618,9 @@ public class Operation_2{
         BigDecimal xie=slope(x,y);
         BigDecimal r=correlationCoefficient(x,y);
         BigDecimal rns= xie.multiply(pow(BigDecimal.ONE.divide(r.multiply(r),accuracy,RoundingMode.HALF_EVEN).subtract(BigDecimal.ONE).divide(new BigDecimal(x.size()-2),accuracy,RoundingMode.HALF_EVEN),new BigDecimal("0.5")));
-        return rns.setScale(accuracy,RoundingMode.HALF_EVEN);
+        rns=rns.setScale(accuracy-2,RoundingMode.HALF_EVEN);
+        if(rns.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
+        return rns;
     }
     /**
      * @Description 返回截距的a类不确定度
@@ -611,7 +641,11 @@ public class Operation_2{
 
         BigDecimal Ua_xie=uaSlope(x,y);
         BigDecimal rns = pow(ave_x2,new BigDecimal("0.5")).multiply(Ua_xie);
-        return rns.setScale(accuracy,RoundingMode.HALF_EVEN);
+
+        rns=rns.setScale(accuracy-2,RoundingMode.HALF_EVEN);
+        if(rns.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
+        return rns;
+
     }
     /**
      * @Description 返回斜率的b类不确定度
@@ -622,7 +656,7 @@ public class Operation_2{
      * @author 黄文杰
      * @date 2023/12/13 17:14
     **/
-    private static BigDecimal ubSlope(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y,BigDecimal fenduzhi) {
+    private static BigDecimal ubSlope(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y,BigDecimal fenduzhi) throws Exception {
 
         BigDecimal ave_x2=BigDecimal.ZERO;
         BigDecimal ave_x=BigDecimal.ZERO;
@@ -636,10 +670,17 @@ public class Operation_2{
             ave_x=ave_x.add(x.get(i));
         }
         ave_x=ave_x.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
+        if(ave_x2.compareTo(ave_x.multiply(ave_x))==0)
+        {
+            throw (new Exception("除数为0，无法计算！"));
+        }
         BigDecimal Ub_y=fenduzhi.divide(pow(new BigDecimal(3),new BigDecimal("0.5")),accuracy,RoundingMode.HALF_EVEN);
         BigDecimal rns=pow(BigDecimal.ONE.divide(new BigDecimal(x.size()).multiply(ave_x2.subtract(ave_x.multiply(ave_x))),accuracy,RoundingMode.HALF_EVEN),new BigDecimal("0.5"));
         rns =rns.multiply(Ub_y);
-        return rns.setScale(accuracy,RoundingMode.HALF_EVEN);
+
+        rns=rns.setScale(accuracy-2,RoundingMode.HALF_EVEN);
+        if(rns.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
+        return rns;
     }
     /**
      * @Description  返回截距的b类不确定度
@@ -650,7 +691,7 @@ public class Operation_2{
      * @author 黄文杰
      * @date 2023/12/13 17:14
     **/
-    private static BigDecimal ubIntercept(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y,BigDecimal fenduzhi){
+    private static BigDecimal ubIntercept(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y,BigDecimal fenduzhi) throws Exception {
         BigDecimal ub_xie=ubSlope(x,y,fenduzhi);
         BigDecimal ave_x2=BigDecimal.ZERO;
         for(int i=0;i<x.size();i++)
@@ -659,7 +700,10 @@ public class Operation_2{
         }
         ave_x2=ave_x2.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
         BigDecimal rns=ub_xie.multiply(pow(ave_x2,new BigDecimal("0.5")));
-        return rns.setScale(accuracy,RoundingMode.HALF_EVEN);
+        rns=rns.setScale(accuracy-2,RoundingMode.HALF_EVEN);
+        if(rns.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
+        return rns;
+
     }
     /**
      * @Description 返回斜率的合成不确定度
@@ -672,7 +716,10 @@ public class Operation_2{
     **/
     private static BigDecimal uSlope(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y,BigDecimal fenduzhi) throws Exception {
         BigDecimal rns=pow(ubSlope(x,y,fenduzhi).pow(2).add(uaSlope(x,y).pow(2)),new BigDecimal("0.5"));
-        return rns.setScale(accuracy,RoundingMode.HALF_EVEN);
+        rns=rns.setScale(accuracy-2,RoundingMode.HALF_EVEN);
+        if(rns.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
+        return rns;
+
     }
     /**
      * @Description  返回截距的合成不确定度
@@ -684,8 +731,10 @@ public class Operation_2{
      * @date 2023/12/13 17:15
     **/
     private static BigDecimal uIntercept(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y,BigDecimal fenduzhi) throws Exception {
-        BigDecimal rns=pow(uaIntercept(x,y).pow(2).add(ubIntercept(x,y,fenduzhi).pow(2)),new BigDecimal("0.5"));
-        return rns.setScale(accuracy,RoundingMode.HALF_EVEN);
+        BigDecimal rns = pow(uaIntercept(x, y).pow(2).add(ubIntercept(x, y, fenduzhi).pow(2)), new BigDecimal("0.5"));
+        rns = rns.setScale(accuracy - 2, RoundingMode.HALF_EVEN);
+        if (rns.compareTo(BigDecimal.ZERO) == 0) return BigDecimal.ZERO;
+        return rns;
     }
     /**
      * @Description 通过字符串返回分度值，会对异常情况进行处理
@@ -860,6 +909,10 @@ public class Operation_2{
         ArrayList<BigDecimal> y=changeToBigdecimal(yy);
         return uIntercept(x,y,fendua).toString();
     }
+
+
+
+
 
     /**
      * @Description 计算arctan(x)

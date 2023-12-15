@@ -70,6 +70,7 @@ public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
             btnBack.setVisible(false);
             this.setVisible(false);
         });
+
         btnLinearRegression = UIValues.createButton("一元线性回归", "宋体");
         btnLinearRegression.addActionListener(event -> {
             new LinearRegressionUI();
