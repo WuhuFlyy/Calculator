@@ -15,55 +15,31 @@ import static ui.UIValues.*;
 public class ButtonPanel extends JPanel{
     private static ButtonPanel buttonPanel;
     public JTextComponent inputScreen, outputScreen;
-    public JButton btnC;
-    public JButton btnBack;
-    public JButton btnMod;
-    public JButton btnDiv;
-    public JButton btnMul;
-    public JButton btnSub;
-    public JButton btnAdd;
-    public JButton btnSquare;
-    public JButton btn0;
-    public JButton btn1;
-    public JButton btn2;
-    public JButton btn3;
-    public JButton btn4;
-    public JButton btn5;
-    public JButton btn6;
-    public JButton btn7;
-    public JButton btn8;
-    public JButton btn9;
-    public JButton btnPoint;
-    public JButton btnEqual;
-    public JButton btnAtan;
-    public JButton btnReverse;
-    public JButton btnSin;
-    public JButton btnCos;
-    public JButton btnTan;
-    public JButton btnLog;
-    public JButton btnFac;
+    public JButton btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnPoint;
+    public JButton btnC, btnBack, btnMod, btnDiv, btnMul,  btnSub, btnAdd, btnSquare,  btnEqual;
+    public JButton btnAtan,  btnReverse, btnSin, btnCos, btnTan, btnLog, btnFac;
     public JButton[] btnEmpty;
     public String typedValue;
     private char selectedOperator = ' ';
-    private boolean go = true; // For calculate with Opt != (=)
-    private boolean addToDisplay = true; // Connect numbers in display
-    public int nowMode; //Denote which mode of panel is it now
+    // For calculate with Opt != (=)
+    private boolean go = true;
+    // Connect numbers in display
+    private boolean addToDisplay = true;
+    //Denote which mode of panel is it now
+    public int nowMode;
 
     /**
      * @Description  构造ButtonPanel类
      * @param inputScreen 用户输入栏的JTextField
      * @param outputScreen 输出栏JTextField
-     * @param mode 模式选择，即选择是否需要使用计算功能（0为需要，1为不需要）
      * @author 罗孝俊
      * @date 2023/11/17 23:00
     **/
-    private ButtonPanel(JTextComponent inputScreen, JTextComponent outputScreen, int mode){
-        //setBounds(UIValues.MARGIN_X, UIValues.MARGIN_Y, BUTTON_PANEL_WIDTH, BUTTON_PANEL_HEIGHT);
+    private ButtonPanel(JTextComponent inputScreen, JTextComponent outputScreen){
         setLayout(new GridLayout(5, 6, 10, 30));
         typedValue = "0";
         this.inputScreen = inputScreen;
         this.outputScreen = outputScreen;
-        nowMode = mode;
         initButton();
         add(btnC);
         add(btnBack);
@@ -95,72 +71,22 @@ public class ButtonPanel extends JPanel{
         add(btnSquare);
         add(btnTan);
         add(btnEmpty[2]);
-        switch (mode){
-            case 1: //only integer
-                btnMod.setEnabled(false);
-                btnMul.setEnabled(false);
-                btnDiv.setEnabled(false);
-                btnSub.setEnabled(false);
-                btnEqual.setEnabled(false);
-                btnAdd.setEnabled(false);
-                btnSquare.setEnabled(false);
-                btnReverse.setVisible(false);
-                btnAtan.setVisible(false);
-                btnLog.setVisible(false);
-                btnCos.setVisible(false);
-                btnSin.setVisible(false);
-                btnTan.setVisible(false);
-                btnFac.setVisible(false);
-                break;
-            case 0: //calculator
-                btnMod.setEnabled(true);
-                btnMul.setEnabled(true);
-                btnSub.setEnabled(true);
-                btnEqual.setEnabled(true);
-                btnAdd.setEnabled(true);
-                btnSquare.setEnabled(true);
-                btnReverse.setVisible(true);
-                btnAtan.setVisible(true);
-                btnLog.setVisible(true);
-                btnCos.setVisible(true);
-                btnSin.setVisible(true);
-                btnTan.setVisible(true);
-                btnFac.setVisible(true);
-                break;
-            case 2: //fraction available
-                btnMod.setEnabled(false);
-                btnMul.setEnabled(false);
-                btnSub.setEnabled(false);
-                btnEqual.setEnabled(false);
-                btnAdd.setEnabled(false);
-                btnSquare.setEnabled(false);
-                btnReverse.setVisible(false);
-                btnAtan.setVisible(false);
-                btnLog.setVisible(false);
-                btnCos.setVisible(false);
-                btnSin.setVisible(false);
-                btnTan.setVisible(false);
-                btnFac.setVisible(false);
-                break;
-        }
     }
 
     /**
      * @Description
      * @param inputScreen 输入栏的JTextComponent
      * @param outputScreen  输出栏的JTextComponent
-     * @param mode  模式选择，即选择是否需要使用计算功能（0为需要，1为不需要）
      * @return ui.ButtonPanel
      * @author 罗孝俊
      * @date 2023/11/26 9:54
     **/
-    public static ButtonPanel getButtonPanel(JTextComponent inputScreen, JTextComponent outputScreen, int mode){
+    public static ButtonPanel getButtonPanel(JTextComponent inputScreen, JTextComponent outputScreen){
         if(inputScreen == null || outputScreen == null){
             return null;
         }
-        if(buttonPanel == null || buttonPanel.nowMode != mode){
-            buttonPanel = new ButtonPanel(inputScreen, outputScreen, mode);
-            buttonPanel.nowMode = mode;
+        if(buttonPanel == null){
+            buttonPanel = new ButtonPanel(inputScreen, outputScreen);
         }else{
             buttonPanel.initParameter();
             buttonPanel.setTextComponent(inputScreen, outputScreen);
