@@ -12,13 +12,7 @@ import java.awt.*;
  * @date 2023/11/26 21:02
  */
 public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
-    public JButton btnClassical;
-    public JButton btnConditional;
-    public JButton btnIndependence;
-    public JButton btnBayesian;
-    public JButton btnBinomialDistribution;
-    public JButton btnBack;
-
+    public JButton btnClassical, btnConditional, btnIndependence, btnBayesian, btnBinomialDistribution, btnLinearRegression, btnBack;
     /**
      * @Description   概统主界面按钮板构造
      * @param btnBack UI界面传入的返回按钮
@@ -27,13 +21,14 @@ public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
     **/
     public ProbabilityStatisticGeneralButtonPanel(JButton btnBack){
         this.btnBack = btnBack;
-        setLayout(new GridLayout(5, 1, 0, 40));
+        setLayout(new GridLayout(6, 1, 0, 40));
         initButton();
         add(btnClassical);
         add(btnConditional);
         add(btnIndependence);
         add(btnBayesian);
         add(btnBinomialDistribution);
+        add(btnLinearRegression);
     }
 
     /**
@@ -72,6 +67,13 @@ public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
         btnBinomialDistribution = UIValues.createButton("二项分布", "宋体");
         btnBinomialDistribution.addActionListener(event -> {
             new BinomialUI();
+            btnBack.setVisible(false);
+            this.setVisible(false);
+        });
+
+        btnLinearRegression = UIValues.createButton("一元线性回归", "宋体");
+        btnLinearRegression.addActionListener(event -> {
+            new LinearRegressionUI();
             btnBack.setVisible(false);
             this.setVisible(false);
         });

@@ -1,6 +1,5 @@
 package ui;
 
-
 import modules.basic.Fraction;
 import modules.basic.Operation;
 import modules.matrix.Matrix;
@@ -17,6 +16,8 @@ import java.awt.event.ActionListener;
  */
 public class UIValues {
     public static final JFrame window = new JFrame("Calculation Tool");
+    public static JLabel labelAccuracy = new JLabel("精度");
+    public static JTextField inputAccuracy = new JTextField("10");
     public static final String FONT_NAME = "Consolas";
     public static final int WINDOW_WIDTH = 1000;
     public static final int WINDOW_HEIGHT = 900;
@@ -107,6 +108,9 @@ public class UIValues {
         text.setBounds(positionX, positionY, 300, 50);
         text.setEditable(false);
         text.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
+        if(text instanceof JTextArea){
+            ((JTextArea) text).setWrapStyleWord(true);
+        }
         pane.setBounds(positionX, positionY, 300, 50);
         window.add(pane);
     }
@@ -157,8 +161,6 @@ public class UIValues {
                     }
                 }
             }
-
-
             return new Matrix(elements, row, column);
         }catch (ArithmeticException e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
@@ -190,6 +192,5 @@ public class UIValues {
         }catch (ArithmeticException e){
             return false;
         }
-
     }
 }
