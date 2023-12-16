@@ -31,5 +31,7 @@ public class EquationGeneralUI {
         equationGeneralPanel = new EquationGeneralPanel(btnBack);
         equationGeneralPanel.setBounds(MARGIN_X + 340, MARGIN_Y, PANEL_WIDTH, PANEL_HEIGHT);
         window.add(equationGeneralPanel);
+        inputAccuracy.setVisible(false);
+        labelAccuracy.setVisible(false);
     }
 }

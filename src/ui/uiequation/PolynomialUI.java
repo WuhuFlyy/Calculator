@@ -26,7 +26,7 @@ public class PolynomialUI {
     **/
     public PolynomialUI(){
         inputTimes = new JTextField("3");
-        inputCoefficient = new JTextArea("1, 2, 3, 4");
+        inputCoefficient = new JTextArea("1 2 3 4");
         outputAns = new JTextArea();
         paneTimes = new JScrollPane(inputTimes, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         paneCoefficient = new JScrollPane(inputCoefficient, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -105,7 +105,7 @@ public class PolynomialUI {
             JOptionPane.showMessageDialog(null, "方程次数输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        String[] coefficientStr = inputCoefficient.getText().split("(\\s)*,(\\s)*");
+        String[] coefficientStr = inputCoefficient.getText().split("(\\s)+");
         if (coefficientStr.length != num + 1) {
             JOptionPane.showMessageDialog(null, "方程系数数量与次数不匹配", "Warning", JOptionPane.WARNING_MESSAGE);
             return;

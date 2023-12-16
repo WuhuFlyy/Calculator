@@ -24,7 +24,7 @@ public class MatrixPowUI {
     public MatrixPowUI(){
         inputRow = new JTextField("3");
         inputExponential = new JTextField("3");
-        inputMatrix = new JTextArea("1 1\n1 1\n1 1");
+        inputMatrix = new JTextArea("0 7 2\n1 5 0\n7 2 1");
         outputAns = new JTextArea();
         paneRow = new JScrollPane(inputRow, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         paneExponential = new JScrollPane(inputExponential, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);

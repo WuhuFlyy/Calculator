@@ -35,8 +35,8 @@ public class BayesianUI {
     public BayesianUI() {
         inputN = new JTextField("3");
         inputJ = new JTextField("1");
-        inputPBi = new JTextArea("0,0,0");
-        inputPAUnderBi = new JTextArea("0,0,0");
+        inputPBi = new JTextArea("0.1 0.2 0.3");
+        inputPAUnderBi = new JTextArea("1/2 1/3 1/7");
         paneN = new JScrollPane(inputN, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         paneJ = new JScrollPane(inputJ, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         panePBi = new JScrollPane(inputPBi, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -97,8 +97,8 @@ public class BayesianUI {
     private void initLabel() {
         labelN = new JLabel("事件总数N");
         labelJ = new JLabel("待计算的P(Bj|A)中的j(1 <= j <= n)");
-        labelPBi = new JLabel("P(Bi)(用半角逗号隔开)");
-        labelPAUnderBi = new JLabel("P(A|Bi)(用半角逗号隔开)");
+        labelPBi = new JLabel("P(Bi)(用空格隔开)");
+        labelPAUnderBi = new JLabel("P(A|Bi)(用空格隔开)");
         labelPBjUnderA = new JLabel("P(Bj|A)");
         labelPA = new JLabel("P(A)");
 
@@ -156,13 +156,13 @@ public class BayesianUI {
             JOptionPane.showMessageDialog(null, "j的输入不合法(1 <= j <= n且j为正整数)", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        String[] probabilityBiString = inputPBi.getText().split("(\\s)*,(\\s)*");
+        String[] probabilityBiString = inputPBi.getText().split("(\\s)+");
         if(num != probabilityBiString.length){
             JOptionPane.showMessageDialog(null, "Bi的总数：" + probabilityBiString.length + "\n但是事件总数：" + num, "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        String[] probabilityAUnderBiString = inputPAUnderBi.getText().split("(\\s)*,(\\s)*");
+        String[] probabilityAUnderBiString = inputPAUnderBi.getText().split("(\\s)+");
         if(num != probabilityAUnderBiString.length){
             JOptionPane.showMessageDialog(null, "P(A|Bi)的总数：" + probabilityAUnderBiString.length + "\n但是事件总数：" + num, "Warning", JOptionPane.WARNING_MESSAGE);
             return;

@@ -27,7 +27,7 @@ public class IndependenceUI {
 
     public IndependenceUI(){
         inputN = new JTextField("3");
-        inputPEvents = new JTextArea("0,0,0,...");
+        inputPEvents = new JTextArea("0.1 0.3 1/7");
         paneN = new JScrollPane(inputN, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         panePEvents = new JScrollPane(inputPEvents, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         outputPMul = new JTextField("0");
@@ -118,7 +118,7 @@ public class IndependenceUI {
      * @date 2023/12/3 12:11
      **/
     public void solve(){
-        String[] probabilityEventsString = inputPEvents.getText().split("(\\s)*,(\\s)*");
+        String[] probabilityEventsString = inputPEvents.getText().split("(\\s)+");
         int num;
         if(inputN.getText().matches(INTEGER_REGEX)){
             num = Integer.parseInt(inputN.getText());

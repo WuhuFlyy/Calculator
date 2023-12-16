@@ -27,9 +27,9 @@ public class MultivariateEquationUI {
      * @date 2023/12/13 0:01
     **/
     public MultivariateEquationUI(){
-        inputCoefficient1 = new JTextField("1, 2, 0");
-        inputCoefficient2 = new JTextField("2, 3, 3");
-        inputCoefficient3 = new JTextField("3, 4, 2, 5");
+        inputCoefficient1 = new JTextField("1 2 0");
+        inputCoefficient2 = new JTextField("2 3 3");
+        inputCoefficient3 = new JTextField("3 4 2 5");
         outputAns = new JTextArea();
         paneCoefficient1 = new JScrollPane(inputCoefficient1, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         paneCoefficient2 = new JScrollPane(inputCoefficient2, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -132,8 +132,8 @@ public class MultivariateEquationUI {
     private void solve(){
         //总的构造
         try{
-            String[] coefficientString1 = inputCoefficient1.getText().split("(\\s)*,(\\s)*");
-            String[] coefficientString2 = inputCoefficient2.getText().split("(\\s)*,(\\s)*");
+            String[] coefficientString1 = inputCoefficient1.getText().split("(\\s)+");
+            String[] coefficientString2 = inputCoefficient2.getText().split("(\\s)+");
             double[] coefficient1 = new double[3];
             double[] coefficient2 = new double[3];
             double[] constant = new double[3];
@@ -166,7 +166,7 @@ public class MultivariateEquationUI {
                 outputAns.setText(multivariateEquation.solveBinaryEquation());
             }else{
                 //三元
-                String[] coefficientString3 = inputCoefficient3.getText().split("(\\s)*,(\\s)*");
+                String[] coefficientString3 = inputCoefficient3.getText().split("(\\s)+");
                 double[] coefficient3 = new double[3];
 
                 if(!transform(0, constant, coefficientString1[3])){

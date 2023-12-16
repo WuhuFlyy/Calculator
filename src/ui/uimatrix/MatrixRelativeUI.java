@@ -29,7 +29,7 @@ public class MatrixRelativeUI {
     public MatrixRelativeUI(){
         inputRow = new JTextField("3");
         inputColumn = new JTextField("2");
-        inputMatrix = new JTextArea("1 1\n1 1\n1 1");
+        inputMatrix = new JTextArea("1 1\n2 1\n1 3");
         outputInverse = new JTextArea();
         outputTrans = new JTextArea();
         outputRank = new JTextArea();

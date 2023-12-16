@@ -5,7 +5,7 @@ import ui.uiequation.EquationGeneralUI;
 import ui.uifunctiongraphic.FunctionGraphicUI;
 import ui.uimatrix.MatrixGeneralUI;
 import ui.uiprobability.ProbabilityStatisticGeneralUI;
-
+import static ui.UIValues.*;
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,14 +15,15 @@ import java.awt.*;
  * @date 2023/11/26 10:05
  */
 public class GeneralButtonPanel extends JPanel{
-    public JButton btnCalculator;
-    public JButton btnProbability;
-    public JButton btnMatrix;
-    public JButton btnGraphics;
-    public JButton btnEquation;
+    public JButton btnCalculator, btnProbability, btnMatrix, btnGraphics, btnEquation;
+    public JLabel labelNotice;
     public GeneralButtonPanel(){
-        setLayout(new GridLayout(5, 1, 0, 40));
+        setLayout(new GridLayout(6, 1, 0, 40));
         initButton();
+        labelNotice = new JLabel("<html><body><p align=\\\"center\\\">输入多个数据时<br/>请用空白符分隔</p></body></html>");
+//        labelNotice.setBounds(MARGIN_X, MARGIN_Y + 100, 500, 50);
+        labelNotice.setFont(new Font("黑体", Font.BOLD, 33));
+        add(labelNotice);
         add(btnCalculator);
         add(btnProbability);
         add(btnMatrix);

@@ -32,6 +32,9 @@ public class MatrixGeneralUI {
         matrixGeneralPanel = new MatrixGeneralPanel(btnBack);
         matrixGeneralPanel.setBounds(MARGIN_X + 340, MARGIN_Y, PANEL_WIDTH, PANEL_HEIGHT);
         window.add(matrixGeneralPanel);
+
+        inputAccuracy.setVisible(false);
+        labelAccuracy.setVisible(false);
     }
 
 }

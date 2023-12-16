@@ -29,6 +29,7 @@ public class CalculatorUI {
     **/
     public CalculatorUI(){
         window.setSize(MARGIN_X + BUTTON_PANEL_WIDTH + MARGIN_X, WINDOW_HEIGHT);
+        window.setLocationRelativeTo(null);
         initInputScreen();
         initOutScreen();
         buttonPanel = ButtonPanel.getButtonPanel(inputScreen, outputScreen);

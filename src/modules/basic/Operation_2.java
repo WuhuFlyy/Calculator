@@ -13,8 +13,8 @@ import modules.GlobalVariable;
  * */
 public class Operation_2{
 
-    private static final int accuracy=GlobalVariable.decimalScale + 2;
-    private static final BigDecimal accuracyNum=BigDecimal.ONE.divide(BigDecimal.TEN.pow(accuracy));
+    public static int accuracy=GlobalVariable.decimalScale + 2;
+    public static BigDecimal accuracyNum=BigDecimal.ONE.divide(BigDecimal.TEN.pow(accuracy));
     private static final BigDecimal atan05=atan(new BigDecimal("0.5"));
     private final static BigDecimal PI = new BigDecimal("3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679");
     private static final BigDecimal PI2=PI.divide(new BigDecimal("2"),accuracy,RoundingMode.HALF_EVEN);

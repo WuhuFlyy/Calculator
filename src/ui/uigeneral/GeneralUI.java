@@ -1,7 +1,6 @@
 package ui.uigeneral;
 
 import modules.GlobalVariable;
-import modules.GlobalVariable.*;
 import modules.basic.Operation_2;
 
 import javax.swing.*;
@@ -49,8 +48,8 @@ public class GeneralUI {
                     JOptionPane.showMessageDialog(null, "请输入一个正整数精度", "Warning", JOptionPane.WARNING_MESSAGE);
                 }else{
                     GlobalVariable.decimalScale = Integer.parseInt(inputAccuracy.getText());
-//                    Operation_2.accuracy = GlobalVariable.decimalScale;
-//                    Operation_2.accuracyNum = BigDecimal.ONE.divide(BigDecimal.TEN.pow(Operation_2.accuracy));
+                    Operation_2.accuracy = GlobalVariable.decimalScale + 2;
+                    Operation_2.accuracyNum = BigDecimal.ONE.divide(BigDecimal.TEN.pow(Operation_2.accuracy));
                     if(GlobalVariable.decimalScale >= 50){
                         JOptionPane.showMessageDialog(null, "注意：精度太高可能会导致输出难以显示", "Warning", JOptionPane.INFORMATION_MESSAGE);
                     }
