@@ -12,9 +12,8 @@ public class MultivariateEquation {
     private double[] constant;
 
     /**
-     * @Description 二元一次方程组计算，形如：
-     *                  ax + by = e
-     *                  cx + dy = f
+     * @Description 二元一次方程组构造方法
+     * 形如：ax + by = e   cx + dy = f
      * @param coefficient1 第一个方程的系数 a and b
      * @param coefficient2 第二个方程的系数 c and d
      * @param constant 常量 e and f
@@ -28,11 +27,12 @@ public class MultivariateEquation {
     }
 
     /**
-     * @Description 三元一次方程构造方法
-     * @param coefficient1 第一个方程的系数
-     * @param coefficient2 第二个方程的系数
-     * @param coefficient3 第三个方程的系数
-     * @param constant 常量
+     * @Description 三元一次方程组构造方法
+     * 形如：ax + by + cz = u   dx + ey + fz = v   gx + hy + iz = w
+     * @param coefficient1 第一个方程的系数 a, b and c
+     * @param coefficient2 第二个方程的系数 d, e and f
+     * @param coefficient3 第三个方程的系数 g, h and i
+     * @param constant 常量 u, v and w
      * @author 吕顺
      * @date 2023/12/10 23:21
     **/
@@ -67,7 +67,12 @@ public class MultivariateEquation {
                 "y = " + y;
     }
 
-
+    /**
+     * @Description 求解三元一次方程组
+     * @return 方程组的解，如果无解则返回 "方程组无解"
+     * @author 吕顺
+     * @date 2023/12/11 0:25
+    **/
     public String solveCubicEquation(){
         double p1 = coefficient1[0] * coefficient2[1] * coefficient3[2];
         double p2 = coefficient1[1] * coefficient2[2] * coefficient3[0];
