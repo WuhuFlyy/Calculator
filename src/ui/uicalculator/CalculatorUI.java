@@ -1,4 +1,4 @@
-package ui;
+package ui.uicalculator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -125,7 +125,7 @@ public class CalculatorUI {
                 return Operation.pow(firstNumber, secondNumber);
             case 'l':
                 try{
-                    ans = Operation_2.getLog(firstNumber, secondNumber);
+                    ans = OperationExtra.getLog(firstNumber, secondNumber);
                 }catch (ArithmeticException e){
                     ans = ERROR_MATH;
                 }
@@ -144,16 +144,16 @@ public class CalculatorUI {
     **/
     public static String calculate(String number, String operator){
         switch (operator) {
-            case "atan" -> ans = Operation_2.getArctan(number);
+            case "atan" -> ans = OperationExtra.getArctan(number);
             case "tan" -> {
                 try {
-                    ans = Operation_2.getTan(number);
+                    ans = OperationExtra.getTan(number);
                 } catch (ArithmeticException e) {
                     ans = ERROR_MATH;
                 }
             }
-            case "cos" -> ans = Operation_2.getCos(number);
-            case "sin" -> ans = Operation_2.getSin(number);
+            case "cos" -> ans = OperationExtra.getCos(number);
+            case "sin" -> ans = OperationExtra.getSin(number);
             case "!" -> {
                 if (!number.matches(INTEGER_REGEX) || number.charAt(0) == '-') {
                     ans = ERROR_MATH;

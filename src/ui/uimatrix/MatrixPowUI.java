@@ -36,7 +36,7 @@ public class MatrixPowUI {
         initInput(inputMatrix, paneMatrix, MARGIN_X + 500, MARGIN_Y + 55);
         paneMatrix.setBounds(MARGIN_X + 500, MARGIN_Y + 55, 300, 160);
         initOutput(outputAns, paneAns, MARGIN_X + 500, MARGIN_Y + 270);
-        paneAns.setBounds(MARGIN_X + 500, MARGIN_Y + 270, 300, 160);
+        paneAns.setBounds(MARGIN_X + 500, MARGIN_Y + 270, 400, 320);
         initLabel();
         btnSolve = createButton("solve", FONT_NAME);
         initButtonSolve(btnSolve, event -> {

@@ -1,14 +1,12 @@
 package ui.uiprobability;
 
 import modules.probability.Classical;
-import ui.ButtonPanel;
+
 import static ui.UIValues.*;
 
 import javax.swing.*;
 
 import java.awt.*;
-
-import static ui.UIValues.*;
 
 /**
  * @author 罗孝俊

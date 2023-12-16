@@ -163,7 +163,12 @@ public class FunctionGraphicUI implements ItemListener {
         }
     }
 
-
+    /**
+     * @Description 绘图调用
+     * @param e  事件e，调用时直接传的是lambda表达式的event
+     * @author 罗孝俊
+     * @date 2023/12/16 22:42
+    **/
     public void paintFn(ActionEvent e){
         if(!textUnitLength.getText().matches(POSITIVE_INTEGER_REGEX)){
             JOptionPane.showMessageDialog(null, "请输入一个正整数的像素精度", "Warning", JOptionPane.WARNING_MESSAGE);

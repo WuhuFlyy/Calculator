@@ -3,13 +3,9 @@ package ui.uiprobability;
 import modules.basic.Fraction;
 import modules.basic.Operation;
 import modules.probability.Independence;
-import ui.ButtonPanel;
 
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 import static ui.UIValues.*;
 
@@ -82,7 +78,7 @@ public class IndependenceUI {
      **/
     private void initLabel(){
         labelN = new JLabel("事件总数N");
-        labelPEvents = new JLabel("各事件概率(用半角逗号分隔)");
+        labelPEvents = new JLabel("各事件概率PAi");
         labelPMul = new JLabel("P(A1A2...An)");
         labelPSum = new JLabel("P(A1+A2+...+An)");
         labelPSumNot = new JLabel("P(~A1+~A2+...+~An)");

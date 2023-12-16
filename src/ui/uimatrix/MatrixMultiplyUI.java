@@ -50,7 +50,7 @@ public class MatrixMultiplyUI {
         initInput(inputMatrix2, paneMatrix2, MARGIN_X + 500, MARGIN_Y + 315);
         paneMatrix2.setBounds(MARGIN_X + 500, MARGIN_Y + 315, 300, 160);
         initOutput(outputAns, paneAns, MARGIN_X + 250, MARGIN_Y + 585);
-        paneAns.setBounds(MARGIN_X + 250, MARGIN_Y + 535, 300, 160);
+        paneAns.setBounds(MARGIN_X + 150, MARGIN_Y + 535, 500, 180);
         initLabel();
 
         btnSolve = createButton("solve", FONT_NAME);

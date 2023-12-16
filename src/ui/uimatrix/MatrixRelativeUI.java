@@ -45,13 +45,13 @@ public class MatrixRelativeUI {
         initInput(inputRow, paneRow, MARGIN_X, MARGIN_Y + 55);
         initInput(inputColumn, paneColumn, MARGIN_X, MARGIN_Y + 185);
         initInput(inputMatrix, paneMatrix, MARGIN_X, MARGIN_Y + 315);
-        paneMatrix.setBounds(MARGIN_X, MARGIN_Y + 365, 300, 160);
+        paneMatrix.setBounds(MARGIN_X, MARGIN_Y + 365, 300, 250);
         initOutput(outputInverse, paneInverse, MARGIN_X + 500, MARGIN_Y + 55);
-        paneInverse.setBounds(MARGIN_X + 500, MARGIN_Y + 55, 300, 160);
+        paneInverse.setBounds(MARGIN_X + 500, MARGIN_Y + 55, 400, 200);
         initOutput(outputTrans, paneTrans, MARGIN_X + 500, MARGIN_Y + 270);
-        paneTrans.setBounds(MARGIN_X + 500, MARGIN_Y + 270, 300, 160);
-        initOutput(outputRank, paneRank, MARGIN_X + 500, MARGIN_Y + 485);
-        initOutput(outputDeterminant, paneDeterminant, MARGIN_X + 500, MARGIN_Y + 590);
+        paneTrans.setBounds(MARGIN_X + 500, MARGIN_Y + 310, 400, 200);
+        initOutput(outputRank, paneRank, MARGIN_X + 500, MARGIN_Y + 565);
+        initOutput(outputDeterminant, paneDeterminant, MARGIN_X + 500, MARGIN_Y + 670);
         initLabel();
 
         btnSolve = createButton("solve", FONT_NAME);
@@ -109,9 +109,9 @@ public class MatrixRelativeUI {
         labelColumn.setBounds(MARGIN_X, MARGIN_Y + 130, 400, 50);
         labelMatrix.setBounds(MARGIN_X, MARGIN_Y + 260, 500, 50);
         labelInverse.setBounds(MARGIN_X + 500, MARGIN_Y, 400, 50);
-        labelTrans.setBounds(MARGIN_X + 500, MARGIN_Y + 215, 400, 50);
-        labelRank.setBounds(MARGIN_X + 500, MARGIN_Y + 430, 400, 50);
-        labelDeterminant.setBounds(MARGIN_X + 500, MARGIN_Y + 535, 400, 50);
+        labelTrans.setBounds(MARGIN_X + 500, MARGIN_Y + 255, 400, 50);
+        labelRank.setBounds(MARGIN_X + 500, MARGIN_Y + 520, 400, 50);
+        labelDeterminant.setBounds(MARGIN_X + 500, MARGIN_Y + 615, 400, 50);
 
         labelRow.setFont(new Font("宋体", Font.PLAIN, 24));
         labelColumn.setFont(new Font("宋体", Font.PLAIN, 24));

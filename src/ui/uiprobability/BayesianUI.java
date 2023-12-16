@@ -4,13 +4,9 @@ import modules.basic.Fraction;
 import modules.basic.Operation;
 import modules.probability.Bayesian;
 import modules.probability.TotalProbability;
-import ui.ButtonPanel;
 
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 import static ui.UIValues.*;
 import static ui.UIValues.window;

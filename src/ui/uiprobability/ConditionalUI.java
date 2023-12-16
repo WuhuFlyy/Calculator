@@ -6,12 +6,9 @@ import modules.probability.Conditional;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.util.regex.Pattern;
 
 import static ui.UIValues.*;
-import ui.ButtonPanel;
 import static ui.UIValues.window;
 
 /**

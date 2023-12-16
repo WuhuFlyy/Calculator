@@ -1,4 +1,4 @@
-package ui;
+package ui.uicalculator;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
@@ -77,7 +77,7 @@ public class ButtonPanel extends JPanel{
      * @Description
      * @param inputScreen 输入栏的JTextComponent
      * @param outputScreen  输出栏的JTextComponent
-     * @return ui.ButtonPanel
+     * @return ui.uiCalculator.ButtonPanel
      * @author 罗孝俊
      * @date 2023/11/26 9:54
     **/

@@ -18,13 +18,14 @@ public class UIValues {
     public static final JFrame window = new JFrame("Calculation Tool");
     public static JLabel labelAccuracy = new JLabel("精度");
     public static JTextField inputAccuracy = new JTextField("10");
+    public static JLabel labelNotice = new JLabel("<html><body><p>允许使用小数和分数形式输入<br/>(一元线性回归、函数绘制、计算器除外)<br/>多数据输入请用空白符分隔</p></body></html>");
     public static final String FONT_NAME = "Consolas";
     public static final int WINDOW_WIDTH = 1000;
-    public static final int WINDOW_HEIGHT = 900;
+    public static final int WINDOW_HEIGHT = 850;
     public static final int MARGIN_X = 20;
     public static final int MARGIN_Y = 55;
     public static int PANEL_WIDTH = 300;
-    public static int PANEL_HEIGHT = 780;
+    public static int PANEL_HEIGHT = 730;
     public static int MARGIN_X_RIGHT = WINDOW_WIDTH - MARGIN_X;
     public static int MARGIN_Y_DOWN = WINDOW_HEIGHT - MARGIN_Y;
     public static final int BUTTON_PANEL_WIDTH = 600;

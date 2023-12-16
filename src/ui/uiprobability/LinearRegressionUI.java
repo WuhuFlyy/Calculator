@@ -1,6 +1,6 @@
 package ui.uiprobability;
 
-import modules.basic.Operation_2;
+import modules.basic.OperationExtra;
 
 import javax.swing.*;
 
@@ -209,16 +209,16 @@ public class LinearRegressionUI {
             String dataX = inputX.getText();
             String dataY = inputY.getText();
             String dataDivisionValue = inputDivisionValue.getText();
-            outputSlope.setText(Operation_2.getSlope(dataX, dataY, dataDivisionValue));
-            outputIntercept.setText(Operation_2.getIntercept(dataX, dataY, dataDivisionValue));
-            outputCorrelationCoefficient.setText(Operation_2.getCorrelationCoefficient(dataX, dataY, dataDivisionValue));
-            outputStandardDeviation.setText(Operation_2.getStandardDeviation(dataX, dataY, dataDivisionValue));
-            outputUaSlope.setText(Operation_2.getUaSlope(dataX, dataY, dataDivisionValue));
-            outputUbSlope.setText(Operation_2.getUbSlope(dataX, dataY, dataDivisionValue));
-            outputUSlope.setText(Operation_2.getUSlope(dataX, dataY, dataDivisionValue));
-            outputUaIntercept.setText(Operation_2.getUaIntercept(dataX, dataY, dataDivisionValue));
-            outputUbIntercept.setText(Operation_2.getUbIntercept(dataX, dataY, dataDivisionValue));
-            outputUIntercept.setText(Operation_2.getUIntercept(dataX, dataY, dataDivisionValue));
+            outputSlope.setText(OperationExtra.getSlope(dataX, dataY, dataDivisionValue));
+            outputIntercept.setText(OperationExtra.getIntercept(dataX, dataY, dataDivisionValue));
+            outputCorrelationCoefficient.setText(OperationExtra.getCorrelationCoefficient(dataX, dataY, dataDivisionValue));
+            outputStandardDeviation.setText(OperationExtra.getStandardDeviation(dataX, dataY, dataDivisionValue));
+            outputUaSlope.setText(OperationExtra.getUaSlope(dataX, dataY, dataDivisionValue));
+            outputUbSlope.setText(OperationExtra.getUbSlope(dataX, dataY, dataDivisionValue));
+            outputUSlope.setText(OperationExtra.getUSlope(dataX, dataY, dataDivisionValue));
+            outputUaIntercept.setText(OperationExtra.getUaIntercept(dataX, dataY, dataDivisionValue));
+            outputUbIntercept.setText(OperationExtra.getUbIntercept(dataX, dataY, dataDivisionValue));
+            outputUIntercept.setText(OperationExtra.getUIntercept(dataX, dataY, dataDivisionValue));
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
         }
