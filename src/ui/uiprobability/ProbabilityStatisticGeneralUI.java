@@ -16,6 +16,7 @@ import static ui.UIValues.*;
 public class ProbabilityStatisticGeneralUI {
     public JButton btnBack;
     public ProbabilityStatisticGeneralButtonPanel probabilityStatisticGeneralButtonPanel;
+
     /**
      * @Description   界面构造方法
      * @author 罗孝俊

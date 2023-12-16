@@ -17,7 +17,6 @@ public class CalculatorUI {
     private static String ans;
     public JTextField inputScreen, outputScreen;
     public JScrollPane inputPane, outputPane;
-
     public ButtonPanel buttonPanel;
 
     public JButton btnBack;
@@ -96,7 +95,6 @@ public class CalculatorUI {
      * @date 2023/11/22 16:34
     **/
     public static String calculate(String firstNumber, String secondNumber, char operator){
-
         switch (operator){
             case '+':
                 return Operation.add(firstNumber, secondNumber);

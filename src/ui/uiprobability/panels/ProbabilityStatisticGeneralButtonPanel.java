@@ -13,6 +13,7 @@ import java.awt.*;
  */
 public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
     public JButton btnClassical, btnConditional, btnIndependence, btnBayesian, btnBinomialDistribution, btnLinearRegression, btnBack;
+
     /**
      * @Description   概统主界面按钮板构造
      * @param btnBack UI界面传入的返回按钮

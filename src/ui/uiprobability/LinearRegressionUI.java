@@ -23,6 +23,7 @@ public class LinearRegressionUI {
     public JScrollPane paneUaSlope, paneUaIntercept, paneUbSlope, paneUbIntercept, paneUSlope, paneUIntercept;
     public JLabel labelX, labelY, labelDivisionValue, labelSlope, labelIntercept, labelCorrelationCoefficient, labelStandardDeviation, labelUaSlope, labelUaIntercept, labelUbSlope, labelUbIntercept, labelUSlope, labelUIntercept;
     public JButton btnSolve, btnBack;
+
     /**
      * @Description 构造界面UI
      * @author 罗孝俊

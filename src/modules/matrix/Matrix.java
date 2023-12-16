@@ -89,7 +89,8 @@ public class Matrix {
      * @param row2 行2
      * @author 岳宗翰
      * @date 2023/12/4 13:04
-    **/private void rowELT4(int row1,Fraction mul,int row2){
+    **/
+    private void rowELT4(int row1,Fraction mul,int row2){
         for(int i=1;i<=this.column;i++){
             this.matrix[row2][i]=this.matrix[row2][i].subtract(this.matrix[row1][i].multiply(mul));
         }
@@ -123,6 +124,7 @@ public class Matrix {
             this.matrix[i][col]=this.matrix[i][col].multiply(mul);
         }
     }
+
     /**
      * @Description
      * @param col1 列1
@@ -156,6 +158,7 @@ public class Matrix {
         }
         return true;
     }
+
     /**
      * @Description 判断两列是否等价
      * @param col1 列1

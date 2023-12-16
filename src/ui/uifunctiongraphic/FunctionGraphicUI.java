@@ -25,6 +25,7 @@ public class FunctionGraphicUI implements ItemListener {
     public static String[] functions = {"ax^2+bx+c", "ae^bx+c", "a*sin(PIx+b)+c","a*b^x+c","a*x^b+c"};
     public int functionIndex;
     public GraphicPanel graphicPanel = new GraphicPanel();
+
     /**
      * @Description 初始化函数绘制UI
      * @author 罗孝俊
@@ -306,6 +307,7 @@ public class FunctionGraphicUI implements ItemListener {
         private double alterX(double nowX){
             return x + nowX;
         }
+
         /**
          * @Description 新旧坐标转换(Y)
          * @param nowY 虚拟坐标Y

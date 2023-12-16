@@ -14,6 +14,7 @@ public class EquationGeneralPanel extends JPanel {
     public JButton btnPolynomial;
     public JButton btnSimulEquation;
     public JButton btnBack;
+
     /**
      * @Description 按钮板构造
      * @param btnBack UI界面传入的返回按钮

@@ -11,8 +11,7 @@ import modules.GlobalVariable;
  * @date 2023/11/19 23:22
  *
  * */
-public class OperationExtra {
-
+public class OperationExtra{
     public static int accuracy=GlobalVariable.decimalScale + 2;
     public static BigDecimal accuracyNum=BigDecimal.ONE.divide(BigDecimal.TEN.pow(accuracy));
     private static final BigDecimal atan05=atan(new BigDecimal("0.5"));
@@ -21,11 +20,12 @@ public class OperationExtra {
     private static final BigDecimal log10;
     private static final BigDecimal _105_095=new BigDecimal("1.05").divide(new BigDecimal("0.95"),accuracy,RoundingMode.HALF_EVEN);
     private static final BigDecimal log_105_095=log_095_105(_105_095);
+
     /**
      * @Description 静态代码块，类加载的时候就会对log10进行赋值
      * @author 黄文杰
      * @date 2023/11/19 23:48
-     */
+     **/
     static{
         BigDecimal log1;
         log1 = new BigDecimal("0");
@@ -42,7 +42,7 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/11/27 10:03
-    **/
+     **/
     private static BigDecimal fac(int n){
         if(n < 0){//负数没有阶乘
             throw new ArithmeticException("负数无阶乘");
@@ -65,7 +65,7 @@ public class OperationExtra {
      * @return java.lang.String 返回结果，精度由最开始的ac+2确定
      * @author 黄文杰
      * @date 2023/11/19 23:54
-     */
+     **/
     private static BigDecimal atan(BigDecimal x){
         boolean isMinus = false;
         boolean isGt1 = false;
@@ -107,13 +107,14 @@ public class OperationExtra {
         }
         return res.setScale(accuracy-2,RoundingMode.HALF_EVEN);
     }
+
     /**
      * @Description 快速计算，需要用到的函数，计算“当x∈[0.95,1.05]之间时”，lnx的值
      * @param x 自变量，x∈[0.95,1.05]
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/11/27 10:10
-    **/
+     **/
     private static BigDecimal log_095_105(BigDecimal x){
         if(x.compareTo(BigDecimal.ZERO) <= 0){ //ln(x)中参数x必须大于0
             throw new ArithmeticException("参数必须大于0");
@@ -137,6 +138,7 @@ public class OperationExtra {
 
         return res.setScale(accuracy,RoundingMode.HALF_EVEN); //将结果精度设为accuracy
     }
+
     /**
      * @Description 该函数调用log_095_105函数实现对(0,+无穷)范围的参数求ln(x)
      * @Description 思路：先缩放到(0.5,5]，这里会用到ln10,然后再缩放到(0.95,1.05],这里会用到ln(1.05/0.95)
@@ -144,7 +146,7 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/11/27 10:25
-    **/
+     **/
     private static BigDecimal log(BigDecimal x){
         if(x.compareTo(BigDecimal.ZERO) <= 0){
             throw new ArithmeticException("参数必须大于0");
@@ -188,12 +190,13 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/11/27 10:43
-    **/
+     **/
     private static BigDecimal log(BigDecimal a,BigDecimal x){
         //以a为底x的对数=log(x)/log(a)
         BigDecimal res = log(x).divide(log(a),accuracy,RoundingMode.HALF_EVEN);
         return res.setScale(accuracy-2,RoundingMode.HALF_EVEN);
     }
+
     /**
      * @Description 计算a^x
      * @param a 底数a
@@ -201,14 +204,12 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/11/27 11:05
-    **/
+     **/
     private static BigDecimal pow(BigDecimal a,BigDecimal x){
-        if(a.compareTo(BigDecimal.ZERO)==0 && x.compareTo(BigDecimal.ZERO)==0)
-        {
+        if(a.compareTo(BigDecimal.ZERO)==0 && x.compareTo(BigDecimal.ZERO)==0){
             throw new ArithmeticException("无意义的0^0!");
         }
-        else if(x.compareTo(BigDecimal.ZERO)==0)
-        {
+        else if(x.compareTo(BigDecimal.ZERO)==0){
             return BigDecimal.ONE.setScale(accuracy-2,RoundingMode.HALF_EVEN);
         }
 
@@ -222,12 +223,10 @@ public class OperationExtra {
         try{ //判断x是否为整数，为整数的话直接使用BigDecimal的pow函数
             x.intValueExact();
         }catch(Exception e){ //x不为整数，使用a^x的泰勒展开式计算，以下计算过程参考a^x的泰勒展开式
-            if(a.compareTo(BigDecimal.ZERO)<0)
-            {
+            if(a.compareTo(BigDecimal.ZERO)<0){
                 throw new ArithmeticException("无意义的负数的小数幂次!");
             }
-            if(a.compareTo(BigDecimal.ZERO)==0)
-            {
+            if(a.compareTo(BigDecimal.ZERO)==0){
                 return BigDecimal.ZERO.setScale(accuracy-2,RoundingMode.HALF_EVEN);
             }
 
@@ -249,14 +248,13 @@ public class OperationExtra {
         return isMinus ? BigDecimal.ONE.divide(res,accuracy-2,RoundingMode.HALF_EVEN) : res.setScale(accuracy-2,RoundingMode.HALF_EVEN);
     }
 
-
     /**
      * @Description 计算cos(x) ，利用泰勒公式
      * @param x 自变量
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/11/27 13:05
-    **/
+     **/
     private static BigDecimal cos(BigDecimal x){
         //先将参数转换到[0,2PI]区间
         //再将参数转换到[0,PI/2]区间
@@ -293,7 +291,7 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/11/27 13:13
-    **/
+     **/
     private static BigDecimal sin(BigDecimal x){
         //计算过程参考cos(x)，只是泰勒展开式不一样
 
@@ -332,23 +330,22 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/11/27 13:20
-    **/
+     **/
     private static BigDecimal tan(BigDecimal x){
-
-        if(cos(x).compareTo(BigDecimal.ZERO)==0)
-        {
+        if(cos(x).compareTo(BigDecimal.ZERO)==0){
             throw new ArithmeticException("自变量不在定义域范围内!");
         }
 
         return sin(x).divide(cos(x),accuracy-2,RoundingMode.HALF_EVEN);
     }
+
     /**
      * @Description 反正弦函数计算，参数范围是[-1,1]
      * @param x
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/11/28 19:06
-    **/
+     **/
     private static BigDecimal asin(BigDecimal x){
         //反正弦函数使用反正切函数计算
         //arcsin(x) = arctan(x/sqrt(1-x^2))
@@ -383,7 +380,7 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/11/28 19:31
-    **/
+     **/
     private static BigDecimal acos(BigDecimal x){
         //限制区间为[-1, 1]
         //arcsin(x)+arccos(x)=PI/2;
@@ -396,7 +393,7 @@ public class OperationExtra {
      * @return java.util.ArrayList<java.math.BigDecimal>
      * @author 黄文杰
      * @date 2023/12/13 17:08
-    **/
+     **/
     private static ArrayList<BigDecimal> changeToBigdecimal(String x) throws Exception {
         StringBuilder sb=new StringBuilder();
         String[] rawkeys=new String[20];
@@ -404,15 +401,12 @@ public class OperationExtra {
         String str= x;
         String str1=str.trim();
         rawkeys2=str1.split(" ");//将原输入按空格划分为几个字符串
-        for(int i=0;i<rawkeys2.length;i++)
-        {
-            if(i==rawkeys2.length-1)
-            {
+        for(int i=0;i<rawkeys2.length;i++) {
+            if(i==rawkeys2.length-1){
                 sb.append(rawkeys2[i]);
                 break;
             }
-            if(rawkeys2[i].length()!=0)
-            {
+            if(rawkeys2[i].length()!=0){
                 sb.append(rawkeys2[i]);
                 sb.append(" ");
             }
@@ -420,27 +414,21 @@ public class OperationExtra {
         String result=sb.toString();
         rawkeys=result.split(" ");
         ArrayList<BigDecimal> arrayList=new ArrayList<>();
-        for(int i=0;i<rawkeys.length;i++)
-        {
+        for(int i=0;i<rawkeys.length;i++){
             BigDecimal as;
-            try
-            {
-                if(rawkeys[i].toCharArray()[rawkeys[i].length()-1]=='.')
-                {
+            try{
+                if(rawkeys[i].toCharArray()[rawkeys[i].length()-1]=='.'){
                     throw(new Exception("输入中含非法字符！"));
                 }
                 as=new BigDecimal(rawkeys[i]);
-            }
-            catch(NumberFormatException xa)
-            {
-
+            }catch(NumberFormatException xa){
                 throw(new Exception("输入中含非法字符！"));
             }
             arrayList.add(as);
-
         }
         return arrayList;
     }
+
     /**
      * @Description 返回一元线性回归的斜率
      * @param x 自变量数据
@@ -448,40 +436,33 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/12/13 17:12
-    **/
+     **/
     private static BigDecimal slope(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y) throws Exception {
-        if(x.size()!=y.size())
-        {
+        if(x.size()!=y.size()){
             throw (new Exception("x与y数据个数不一致!"));
         }
         BigDecimal ave_x=BigDecimal.ZERO;
         BigDecimal ave_y=BigDecimal.ZERO;
         BigDecimal ave_xy=BigDecimal.ZERO;
         BigDecimal ave_x2=BigDecimal.ZERO;
-        for(int i=0;i<x.size();i++)
-        {
+        for(int i=0;i<x.size();i++){
             ave_x=ave_x.add(x.get(i));
         }
         ave_x=ave_x.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
-        for(int i=0;i<y.size();i++)
-        {
+        for(int i=0;i<y.size();i++){
             ave_y=ave_y.add(y.get(i));
         }
         ave_y=ave_y.divide(new BigDecimal(y.size()),accuracy,RoundingMode.HALF_EVEN);
-        for(int i=0;i<x.size();i++)
-        {
+        for(int i=0;i<x.size();i++){
             ave_xy=ave_xy.add(x.get(i).multiply(y.get(i)));
         }
         ave_xy=ave_xy.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
-        for(int i=0;i<x.size();i++)
-        {
+        for(int i=0;i<x.size();i++){
             ave_x2=ave_x2.add(x.get(i).multiply(x.get(i)));
         }
         ave_x2=ave_x2.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
-        if(ave_x2.compareTo(ave_x.multiply(ave_x))==0)
-        {
+        if(ave_x2.compareTo(ave_x.multiply(ave_x))==0){
             throw (new Exception("除数为0，无法计算！"));
-
         }
         BigDecimal xie=ave_x.multiply(ave_y).subtract(ave_xy).divide(ave_x.multiply(ave_x).subtract(ave_x2),accuracy,RoundingMode.HALF_EVEN);
 
@@ -489,6 +470,7 @@ public class OperationExtra {
         if(xie.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
         return xie;
     }
+
     /**
      * @Description 返回一元线性回归的截距
      * @param x
@@ -496,21 +478,18 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/12/13 17:12
-    **/
+     **/
     private static BigDecimal intercept(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y) throws Exception {
-        if(x.size()!=y.size())
-        {
+        if(x.size()!=y.size()){
             throw (new Exception("x与y数据个数不一致!"));
         }
         BigDecimal ave_x=BigDecimal.ZERO;
         BigDecimal ave_y=BigDecimal.ZERO;
-        for(int i=0;i<x.size();i++)
-        {
+        for(int i=0;i<x.size();i++){
             ave_x=ave_x.add(x.get(i));
         }
         ave_x=ave_x.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
-        for(int i=0;i<y.size();i++)
-        {
+        for(int i=0;i<y.size();i++){
             ave_y=ave_y.add(y.get(i));
         }
         ave_y=ave_y.divide(new BigDecimal(y.size()),accuracy,RoundingMode.HALF_EVEN);
@@ -520,6 +499,7 @@ public class OperationExtra {
         if(jie.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
         return jie;
     }
+
     /**
      * @Description 返回一元线性回归的相关系数
      * @param x
@@ -527,10 +507,9 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/12/13 17:12
-    **/
+     **/
     private static BigDecimal correlationCoefficient(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y) throws Exception {
-        if(x.size()!=y.size())
-        {
+        if(x.size()!=y.size()){
             throw (new Exception("x与y数据个数不一致!"));
         }
         BigDecimal ave_x=BigDecimal.ZERO;
@@ -538,8 +517,7 @@ public class OperationExtra {
         BigDecimal ave_xy=BigDecimal.ZERO;
         BigDecimal ave_x2=BigDecimal.ZERO;
         BigDecimal ave_y2=BigDecimal.ZERO;
-        for(int i=0;i<x.size();i++)
-        {
+        for(int i=0;i<x.size();i++){
             ave_x=ave_x.add(x.get(i));
             ave_y=ave_y.add(y.get(i));
             ave_xy=ave_xy.add(x.get(i).multiply(y.get(i)));
@@ -551,15 +529,11 @@ public class OperationExtra {
         ave_xy=ave_xy.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
         ave_x2=ave_x2.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
         ave_y2=ave_y2.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
-        if(ave_x2.compareTo(ave_x.multiply(ave_x))==0)
-        {
+        if(ave_x2.compareTo(ave_x.multiply(ave_x))==0){
             throw (new Exception("除数为0，无法计算！"));
-
         }
-        if(ave_y2.compareTo(ave_y.multiply(ave_y))==0)
-        {
+        if(ave_y2.compareTo(ave_y.multiply(ave_y))==0){
             throw (new Exception("除数为0，无法计算！"));
-
         }
         BigDecimal sq=pow(new BigDecimal(x.size()).multiply(ave_x2).subtract(ave_x.multiply(ave_x)).multiply(new BigDecimal(y.size()).multiply(ave_y2).subtract(ave_y.multiply(ave_y))),new BigDecimal("0.5"));
 
@@ -568,6 +542,7 @@ public class OperationExtra {
         if(rr.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
         return rr;
     }
+
     /**
      * @Description 返回一元线性回归的标准差
      * @param x
@@ -575,21 +550,18 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/12/13 17:13
-    **/
+     **/
     private static BigDecimal standardDeviation(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y) throws Exception{
-        if(x.size()!=y.size())
-        {
+        if(x.size()!=y.size()){
             throw (new Exception("x与y数据个数不一致!"));
         }
-        if(x.size()<=2)
-        {
+        if(x.size()<=2){
             throw (new Exception("数据个数不得小于3!"));
         }
         BigDecimal rns= BigDecimal.ZERO;
         BigDecimal a=slope(x,y);
         BigDecimal b=intercept(x,y);
-        for(int i=0;i<x.size();i++)
-        {
+        for(int i=0;i<x.size();i++){
             rns = rns.add(y.get(i).subtract(b.add(a.multiply(x.get(i)))).pow(2));
         }
         rns = pow(rns.divide(new BigDecimal(x.size()-2),accuracy,RoundingMode.HALF_EVEN),new BigDecimal("0.5"));
@@ -597,6 +569,7 @@ public class OperationExtra {
         if(rns.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
         return rns;
     }
+
     /**
      * @Description 返回斜率的a类不确定度
      * @param x
@@ -604,15 +577,12 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/12/13 17:13
-    **/
+     **/
     private static BigDecimal uaSlope(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y)throws Exception{
-
-        if(x.size()!=y.size())
-        {
+        if(x.size()!=y.size()){
             throw (new Exception("x与y数据个数不一致!"));
         }
-        if(x.size()<=2)
-        {
+        if(x.size()<=2){
             throw (new Exception("数据个数不得小于3!"));
         }
         BigDecimal xie=slope(x,y);
@@ -622,6 +592,7 @@ public class OperationExtra {
         if(rns.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
         return rns;
     }
+
     /**
      * @Description 返回截距的a类不确定度
      * @param x
@@ -629,11 +600,10 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/12/13 17:14
-    **/
+     **/
     private static BigDecimal uaIntercept(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y) throws Exception {
         BigDecimal ave_x2=BigDecimal.ZERO;
-        for(int i=0;i<x.size();i++)
-        {
+        for(int i=0;i<x.size();i++){
             ave_x2=ave_x2.add(x.get(i).multiply(x.get(i)));
         }
         ave_x2=ave_x2.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
@@ -647,6 +617,7 @@ public class OperationExtra {
         return rns;
 
     }
+
     /**
      * @Description 返回斜率的b类不确定度
      * @param x
@@ -655,23 +626,19 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/12/13 17:14
-    **/
+     **/
     private static BigDecimal ubSlope(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y,BigDecimal fenduzhi) throws Exception {
-
         BigDecimal ave_x2=BigDecimal.ZERO;
         BigDecimal ave_x=BigDecimal.ZERO;
-        for(int i=0;i<x.size();i++)
-        {
+        for(int i=0;i<x.size();i++){
             ave_x2=ave_x2.add(x.get(i).multiply(x.get(i)));
         }
         ave_x2=ave_x2.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
-        for(int i=0;i<x.size();i++)
-        {
+        for(int i=0;i<x.size();i++){
             ave_x=ave_x.add(x.get(i));
         }
         ave_x=ave_x.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
-        if(ave_x2.compareTo(ave_x.multiply(ave_x))==0)
-        {
+        if(ave_x2.compareTo(ave_x.multiply(ave_x))==0){
             throw (new Exception("除数为0，无法计算！"));
         }
         BigDecimal Ub_y=fenduzhi.divide(pow(new BigDecimal(3),new BigDecimal("0.5")),accuracy,RoundingMode.HALF_EVEN);
@@ -682,6 +649,7 @@ public class OperationExtra {
         if(rns.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
         return rns;
     }
+
     /**
      * @Description  返回截距的b类不确定度
      * @param x
@@ -690,12 +658,11 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/12/13 17:14
-    **/
+     **/
     private static BigDecimal ubIntercept(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y,BigDecimal fenduzhi) throws Exception {
         BigDecimal ub_xie=ubSlope(x,y,fenduzhi);
         BigDecimal ave_x2=BigDecimal.ZERO;
-        for(int i=0;i<x.size();i++)
-        {
+        for(int i=0;i<x.size();i++){
             ave_x2=ave_x2.add(x.get(i).multiply(x.get(i)));
         }
         ave_x2=ave_x2.divide(new BigDecimal(x.size()),accuracy,RoundingMode.HALF_EVEN);
@@ -705,6 +672,7 @@ public class OperationExtra {
         return rns;
 
     }
+
     /**
      * @Description 返回斜率的合成不确定度
      * @param x
@@ -713,14 +681,14 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/12/13 17:15
-    **/
+     **/
     private static BigDecimal uSlope(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y,BigDecimal fenduzhi) throws Exception {
         BigDecimal rns=pow(ubSlope(x,y,fenduzhi).pow(2).add(uaSlope(x,y).pow(2)),new BigDecimal("0.5"));
         rns=rns.setScale(accuracy-2,RoundingMode.HALF_EVEN);
         if(rns.compareTo(BigDecimal.ZERO)==0)return BigDecimal.ZERO;
         return rns;
-
     }
+
     /**
      * @Description  返回截距的合成不确定度
      * @param x
@@ -729,36 +697,34 @@ public class OperationExtra {
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/12/13 17:15
-    **/
+     **/
     private static BigDecimal uIntercept(ArrayList<BigDecimal> x,ArrayList<BigDecimal> y,BigDecimal fenduzhi) throws Exception {
         BigDecimal rns = pow(uaIntercept(x, y).pow(2).add(ubIntercept(x, y, fenduzhi).pow(2)), new BigDecimal("0.5"));
         rns = rns.setScale(accuracy - 2, RoundingMode.HALF_EVEN);
         if (rns.compareTo(BigDecimal.ZERO) == 0) return BigDecimal.ZERO;
         return rns;
     }
+
     /**
      * @Description 通过字符串返回分度值，会对异常情况进行处理
      * @param fenduzhi
      * @return java.math.BigDecimal
      * @author 黄文杰
      * @date 2023/12/14 0:24
-    **/
+     **/
     private  static BigDecimal division(String fenduzhi) throws Exception {
         BigDecimal s;
-        try
-        {
-            if(fenduzhi.toCharArray()[fenduzhi.length()-1]=='.')
-            {
+        try{
+            if(fenduzhi.toCharArray()[fenduzhi.length()-1]=='.') {
                 throw(new Exception("分度值输入格式错误！"));
             }
             s=new BigDecimal(fenduzhi);
-        }
-        catch(Exception a)
-        {
+        }catch(Exception a){
             throw(new Exception("分度值输入格式错误！"));
         }
         return s;
     }
+
     /**
      * @Description 返回斜率
      * @param xx
@@ -767,13 +733,14 @@ public class OperationExtra {
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/12/14 0:25
-    **/
+     **/
     public static String getSlope(String xx,String yy,String fenduzhi) throws Exception {
         BigDecimal fendua=division(fenduzhi);
         ArrayList<BigDecimal> x=changeToBigdecimal(xx);
         ArrayList<BigDecimal> y=changeToBigdecimal(yy);
         return slope(x,y).toString();
     }
+
     /**
      * @Description 返回截距
      * @param xx
@@ -782,13 +749,14 @@ public class OperationExtra {
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/12/14 0:25
-    **/
+     **/
     public static String getIntercept(String xx,String yy,String fenduzhi) throws Exception {
         BigDecimal fendua=division(fenduzhi);
         ArrayList<BigDecimal> x=changeToBigdecimal(xx);
         ArrayList<BigDecimal> y=changeToBigdecimal(yy);
         return intercept(x,y).toString();
     }
+
     /**
      * @Description 返回相关系数r
      * @param xx
@@ -797,13 +765,14 @@ public class OperationExtra {
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/12/14 0:26
-    **/
+     **/
     public static String getCorrelationCoefficient(String xx,String yy,String fenduzhi) throws Exception {
         BigDecimal fendua=division(fenduzhi);
         ArrayList<BigDecimal> x=changeToBigdecimal(xx);
         ArrayList<BigDecimal> y=changeToBigdecimal(yy);
         return correlationCoefficient(x,y).toString();
     }
+
     /**
      * @Description 返回标准差
      * @param xx
@@ -812,13 +781,14 @@ public class OperationExtra {
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/12/14 0:26
-    **/
+     **/
     public static String getStandardDeviation(String xx,String yy,String fenduzhi) throws Exception {
         BigDecimal fendua=division(fenduzhi);
         ArrayList<BigDecimal> x=changeToBigdecimal(xx);
         ArrayList<BigDecimal> y=changeToBigdecimal(yy);
         return standardDeviation(x,y).toString();
     }
+
     /**
      * @Description 返回斜率的a类不确定度
      * @param xx
@@ -827,13 +797,14 @@ public class OperationExtra {
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/12/14 0:27
-    **/
+     **/
     public static String getUaSlope(String xx,String yy,String fenduzhi) throws Exception {
         BigDecimal fendua=division(fenduzhi);
         ArrayList<BigDecimal> x=changeToBigdecimal(xx);
         ArrayList<BigDecimal> y=changeToBigdecimal(yy);
         return uaSlope(x,y).toString();
     }
+
     /**
      * @Description 返回截距的a类不确定度
      * @param xx
@@ -842,13 +813,14 @@ public class OperationExtra {
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/12/14 0:27
-    **/
+     **/
     public static String getUaIntercept(String xx,String yy,String fenduzhi) throws Exception {
         BigDecimal fendua=division(fenduzhi);
         ArrayList<BigDecimal> x=changeToBigdecimal(xx);
         ArrayList<BigDecimal> y=changeToBigdecimal(yy);
         return uaIntercept(x,y).toString();
     }
+
     /**
      * @Description 返回斜率的b类不确定度
      * @param xx
@@ -857,13 +829,14 @@ public class OperationExtra {
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/12/14 0:27
-    **/
+     **/
     public static String getUbSlope(String xx,String yy,String fenduzhi) throws Exception {
         BigDecimal fendua=division(fenduzhi);
         ArrayList<BigDecimal> x=changeToBigdecimal(xx);
         ArrayList<BigDecimal> y=changeToBigdecimal(yy);
         return ubIntercept(x,y,fendua).toString();
     }
+
     /**
      * @Description 返回截距的b类不确定度
      * @param xx
@@ -872,13 +845,14 @@ public class OperationExtra {
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/12/14 0:28
-    **/
+     **/
     public static String getUbIntercept(String xx,String yy,String fenduzhi) throws Exception {
         BigDecimal fendua=division(fenduzhi);
         ArrayList<BigDecimal> x=changeToBigdecimal(xx);
         ArrayList<BigDecimal> y=changeToBigdecimal(yy);
         return ubIntercept(x,y,fendua).toString();
     }
+
     /**
      * @Description 返回斜率的合成不确定度
      * @param xx
@@ -887,13 +861,14 @@ public class OperationExtra {
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/12/14 0:28
-    **/
+     **/
     public static String getUSlope(String xx,String yy,String fenduzhi) throws Exception {
         BigDecimal fendua=division(fenduzhi);
         ArrayList<BigDecimal> x=changeToBigdecimal(xx);
         ArrayList<BigDecimal> y=changeToBigdecimal(yy);
         return uSlope(x,y,fendua).toString();
     }
+
     /**
      * @Description 返回截距的合成不确定度
      * @param xx
@@ -902,17 +877,13 @@ public class OperationExtra {
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/12/14 0:28
-    **/
+     **/
     public static String getUIntercept(String xx,String yy,String fenduzhi) throws Exception {
         BigDecimal fendua=division(fenduzhi);
         ArrayList<BigDecimal> x=changeToBigdecimal(xx);
         ArrayList<BigDecimal> y=changeToBigdecimal(yy);
         return uIntercept(x,y,fendua).toString();
     }
-
-
-
-
 
     /**
      * @Description 计算arctan(x)
@@ -921,11 +892,12 @@ public class OperationExtra {
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/11/27 10:17
-    **/
+     **/
     public static String getArctan(String x) {
         BigDecimal a=new BigDecimal(x);
         return atan(a).toString();
     }
+
     /**
      * @Description 计算loga(x)
      * @Description 设置接口，接收string类型，返回string类型
@@ -933,7 +905,7 @@ public class OperationExtra {
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/11/27 10:30
-    **/
+     **/
     public static String getLog(String a,String x) {
         BigDecimal b=new BigDecimal(x);
         BigDecimal c=new BigDecimal(a);
@@ -951,13 +923,14 @@ public class OperationExtra {
         BigDecimal X =new BigDecimal(x);
         return pow(A,X).toString();
     }
+
     /**
      * @Description 计算cos(x)
      * @param x
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/11/27 13:08
-    **/
+     **/
     public static String getCos(String x) {
         return cos(new BigDecimal(x)).toString();
     }
@@ -968,17 +941,18 @@ public class OperationExtra {
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/11/27 13:15
-    **/
+     **/
     public static String getSin(String x) {
         return sin(new BigDecimal(x)).toString();
     }
+
     /**
      * @Description 计算tan(x)
      * @param x
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/11/27 13:22
-    **/
+     **/
     public static String getTan(String x) {
         return tan(new BigDecimal(x)).toString();
     }
@@ -989,7 +963,7 @@ public class OperationExtra {
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/11/28 19:08
-    **/
+     **/
     public static String getArcsin(String x)
     {
         return asin(new BigDecimal(x)).toString();
@@ -1001,7 +975,7 @@ public class OperationExtra {
      * @return java.lang.String
      * @author 黄文杰
      * @date 2023/11/28 19:33
-    **/
+     **/
     public static String getArccos(String x)
     {
         return acos(new BigDecimal(x)).toString();

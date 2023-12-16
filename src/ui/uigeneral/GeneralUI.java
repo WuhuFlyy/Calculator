@@ -19,6 +19,7 @@ import static ui.UIValues.*;
  */
 public class GeneralUI {
     public GeneralButtonPanel generalButtonPanel;
+
     /**
      * @Description 总界面构造方法，初始化window和精度输入
      * @author 罗孝俊
