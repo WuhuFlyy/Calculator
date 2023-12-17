@@ -74,7 +74,7 @@ public class MatrixPowUI {
     private void initLabel() {
         labelRow = new JLabel("方阵行数");
         labelExponential = new JLabel("指数(必须为整数)");
-        labelMatrix = new JLabel("矩阵输入\n(从左至右,从上至下,用空白符分隔)");
+        labelMatrix = new JLabel("矩阵输入(从左至右,从上至下)");
         labelAns = new JLabel("矩阵幂运算结果");
 
         labelRow.setBounds(MARGIN_X, MARGIN_Y, 400, 50);

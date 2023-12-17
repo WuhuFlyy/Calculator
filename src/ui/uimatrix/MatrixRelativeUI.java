@@ -99,7 +99,7 @@ public class MatrixRelativeUI {
     private void initLabel(){
         labelRow = new JLabel("矩阵行数");
         labelColumn = new JLabel("矩阵列数");
-        labelMatrix = new JLabel("矩阵输入\n(从左至右,从上至下,用空白符分隔)");
+        labelMatrix = new JLabel("矩阵输入(从左至右,从上至下)");
         labelInverse = new JLabel("逆矩阵");
         labelTrans = new JLabel("转置矩阵");
         labelRank = new JLabel("矩阵的秩");

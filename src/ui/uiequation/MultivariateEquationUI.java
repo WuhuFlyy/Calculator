@@ -206,6 +206,8 @@ public class MultivariateEquationUI {
             }
         }catch (ArrayIndexOutOfBoundsException e){
             JOptionPane.showMessageDialog(null, "输入系数数量与元数不符", "Warning", JOptionPane.WARNING_MESSAGE);
+        }catch (ArithmeticException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
         }
 
     }

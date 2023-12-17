@@ -16,6 +16,11 @@ import java.awt.*;
  */
 public class GeneralButtonPanel extends JPanel{
     public JButton btnCalculator, btnProbability, btnMatrix, btnGraphics, btnEquation;
+    /**
+     * @Description 按钮板构造
+     * @author 罗孝俊
+     * @date 2023/11/26 11:38
+    **/
     public GeneralButtonPanel(){
         setLayout(new GridLayout(5, 1, 0, 20));
         initButton();
@@ -25,6 +30,11 @@ public class GeneralButtonPanel extends JPanel{
         add(btnEquation);
         add(btnGraphics);
     }
+    /**
+     * @Description    初始化按钮
+     * @author 罗孝俊
+     * @date 2023/11/26 11:39
+    **/
     private void initButton(){
         btnCalculator = createButton("计算器");
         btnCalculator.addActionListener(event ->{
@@ -62,6 +72,13 @@ public class GeneralButtonPanel extends JPanel{
         });
     }
 
+    /**
+     * @Description 构造单个按钮对象
+     * @param label 按钮标签
+     * @return javax.swing.JButton 返回按钮对象
+     * @author 罗孝俊
+     * @date 2023/12/17 11:39
+    **/
     public JButton createButton(String label) {
         JButton btn = new JButton(label);
         btn.setFont(new Font("宋体", Font.BOLD, 24));

@@ -98,10 +98,10 @@ public class MatrixMultiplyUI {
     private void initLabel(){
         labelRow1 = new JLabel("左矩阵行数");
         labelColumn1 = new JLabel("左矩阵列数");
-        labelMatrix1 = new JLabel("左矩阵输入(用空白符分隔)");
+        labelMatrix1 = new JLabel("左矩阵输入");
         labelRow2 = new JLabel("右矩阵行数");
         labelColumn2 = new JLabel("右矩阵列数");
-        labelMatrix2 = new JLabel("右矩阵输入(用空白符分隔)");
+        labelMatrix2 = new JLabel("右矩阵输入");
         labelAns = new JLabel("相乘结果");
 
         labelRow1.setBounds(MARGIN_X, MARGIN_Y, 400, 50);

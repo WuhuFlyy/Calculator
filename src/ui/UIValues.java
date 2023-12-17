@@ -18,7 +18,7 @@ public class UIValues {
     public static final JFrame window = new JFrame("Calculation Tool");
     public static JLabel labelAccuracy = new JLabel("精度");
     public static JTextField inputAccuracy = new JTextField("10");
-    public static JLabel labelNotice = new JLabel("<html><body><p>允许使用小数和分数形式输入<br/>(一元线性回归、函数绘制、计算器除外)<br/>多数据输入请用空白符分隔</p></body></html>");
+    public static JLabel labelNotice = new JLabel("<html><body><p>允许使用小数和分数形式输入(一元线性回归、函数绘制、计算器除外)<br/>多数据输入请用空白符分隔<br/>改变精度后，请再次点击其他文本框</p></body></html>");
     public static final String FONT_NAME = "Consolas";
     public static final int WINDOW_WIDTH = 1000;
     public static final int WINDOW_HEIGHT = 850;
