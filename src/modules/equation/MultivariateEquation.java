@@ -93,21 +93,34 @@ public class MultivariateEquation {
         for(int j = 0; j < 3; j++){
             augmentedMatrix[j][3] = constant[j];
         }
-        // Gauss-Jordan
-        for(int i = 0; i < augmentedMatrix.length; i++){
-            double factor = augmentedMatrix[i][i];
-            for(int j = i; j < augmentedMatrix[i].length; j++){
-                augmentedMatrix[i][j] /= factor;
+
+        for(int i = 0; i < 3; i++){
+            if(augmentedMatrix[i][i] == 0){
+                for(int k = i + 1; k < 3; k++){
+                    if(augmentedMatrix[k][i] != 0){
+                        double[] temp = augmentedMatrix[i];
+                        augmentedMatrix[i] = augmentedMatrix[k];
+                        augmentedMatrix[k] = temp;
+                        break;
+                    }
+                }
             }
-            for(int j = 0; j < augmentedMatrix.length; j++){
-                if(j != i){
-                    double factor2 = augmentedMatrix[j][i];
-                    for(int k = i; k < augmentedMatrix[j].length; k++){
-                        augmentedMatrix[j][k] -= factor2 * augmentedMatrix[i][k];
+
+            double pivot = augmentedMatrix[i][i];
+            for(int j = i; j <= 3; j++){
+                augmentedMatrix[i][j] /= pivot;
+            }
+
+            for(int k = 0; k < 3; k++){
+                if(k != i){
+                    double factor = augmentedMatrix[k][i];
+                    for(int j = i; j <= 3; j++){
+                        augmentedMatrix[k][j] -= factor * augmentedMatrix[i][j];
                     }
                 }
             }
         }
+
         double x, y, z;
         x = augmentedMatrix[0][augmentedMatrix[0].length-1];
         y = augmentedMatrix[1][augmentedMatrix[1].length-1];
