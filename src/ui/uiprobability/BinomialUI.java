@@ -85,7 +85,7 @@ public class BinomialUI {
     private void initLabel(){
         labelN = new JLabel("X~B(n,p), n = ");
         labelP = new JLabel("X~B(n,p), p = ");
-        labelK = new JLabel("待求P(X=k)中的k(从1开始)");
+        labelK = new JLabel("待求P(X=k)中的k");
 
         labelN.setBounds(MARGIN_X, MARGIN_Y, 400, 50);
         labelP.setBounds(MARGIN_X, MARGIN_Y + 130, 400, 50);
@@ -106,8 +106,8 @@ public class BinomialUI {
      * @date 2023/12/12 13:53
     **/
     private void solve(){
-        if(!inputK.getText().matches(POSITIVE_INTEGER_REGEX)){
-            JOptionPane.showMessageDialog(null, "k应为正整数", "Warning", JOptionPane.WARNING_MESSAGE);
+        if(!inputK.getText().matches(INTEGER_REGEX)){
+            JOptionPane.showMessageDialog(null, "k应为非负整数", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -122,6 +122,11 @@ public class BinomialUI {
 
         int n = Integer.parseInt(inputN.getText());
         int k = Integer.parseInt(inputK.getText());
+        if(k < 0){
+            JOptionPane.showMessageDialog(null, "k应为非负整数", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         Fraction p = null;
         try{
             if(inputP.getText().matches(POSITIVE_FRACTION_REGEX)){
