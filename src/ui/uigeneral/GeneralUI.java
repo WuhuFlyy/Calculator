@@ -47,16 +47,19 @@ public class GeneralUI {
             public void focusLost(FocusEvent e) {
                 if(!inputAccuracy.getText().matches(POSITIVE_INTEGER_REGEX)){
                     JOptionPane.showMessageDialog(null, "请输入一个正整数精度", "Warning", JOptionPane.WARNING_MESSAGE);
+                    inputAccuracy.setText("0");
                 }else{
+                    int pre = GlobalVariable.decimalScale;
                     GlobalVariable.decimalScale = Integer.parseInt(inputAccuracy.getText());
                     OperationExtra.accuracy = GlobalVariable.decimalScale + 2;
                     OperationExtra.accuracyNum = BigDecimal.ONE.divide(BigDecimal.TEN.pow(OperationExtra.accuracy));
-                    if(GlobalVariable.decimalScale >= 30){
+                    if(GlobalVariable.decimalScale >= 30 && pre < 30){
                         JOptionPane.showMessageDialog(null, "注意：精度太高可能会导致输出难以显示", "Warning", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }
         });
+
         labelAccuracy.setBounds(MARGIN_X + BUTTON_PANEL_WIDTH - 160, 10, 100, 40);
         labelAccuracy.setFont(new Font("黑体", Font.BOLD, 28));
         window.add(inputAccuracy);

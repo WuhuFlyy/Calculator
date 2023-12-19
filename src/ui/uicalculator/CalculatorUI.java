@@ -120,7 +120,7 @@ public class CalculatorUI {
                 if(firstNumber.equals("0") && secondNumber.equals("0")){
                     return ERROR_MATH;
                 }
-                return Operation.pow(firstNumber, secondNumber);
+                return OperationExtra.getPow(firstNumber, secondNumber);
             case 'l':
                 try{
                     ans = OperationExtra.getLog(firstNumber, secondNumber);
