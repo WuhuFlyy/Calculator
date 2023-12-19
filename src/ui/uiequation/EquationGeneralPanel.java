@@ -1,9 +1,9 @@
 package ui.uiequation;
 
-import static ui.UIValues.*;
-
 import javax.swing.*;
 import java.awt.*;
+
+import static ui.UIValues.createButton;
 
 /**
  * @author 罗孝俊
@@ -16,12 +16,12 @@ public class EquationGeneralPanel extends JPanel {
     public JButton btnBack;
 
     /**
-     * @Description 按钮板构造
      * @param btnBack UI界面传入的返回按钮
+     * @Description 按钮板构造
      * @author 罗孝俊
      * @date 2023/12/8 23:45
-    **/
-    public EquationGeneralPanel(JButton btnBack){
+     **/
+    public EquationGeneralPanel(JButton btnBack) {
         this.btnBack = btnBack;
         setLayout(new GridLayout(2, 1, 0, 300));
         initButton();
@@ -33,8 +33,8 @@ public class EquationGeneralPanel extends JPanel {
      * @Description 初始化按钮
      * @author 罗孝俊
      * @date 2023/12/8 23:46
-    **/
-    private void initButton(){
+     **/
+    private void initButton() {
         btnPolynomial = createButton("一元多项式方程", "宋体");
         btnPolynomial.addActionListener(event -> {
             new PolynomialUI();

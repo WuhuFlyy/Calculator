@@ -1,13 +1,13 @@
 package ui.uimatrix;
 
-import static ui.UIValues.*;
-
 import javax.swing.*;
 import java.awt.*;
 
+import static ui.UIValues.createButton;
+
 /**
  * @author 罗孝俊
- * @Description:  矩阵运算主界面的按钮板
+ * @Description: 矩阵运算主界面的按钮板
  * @date 2023/12/8 13:24
  */
 public class MatrixGeneralPanel extends JPanel {
@@ -17,12 +17,12 @@ public class MatrixGeneralPanel extends JPanel {
     public JButton btnBack;
 
     /**
-     * @Description 按钮板构造
      * @param btnBack UI界面传入的返回按钮
+     * @Description 按钮板构造
      * @author 罗孝俊
      * @date 2023/12/8 13:28
-    **/
-    public MatrixGeneralPanel(JButton btnBack){
+     **/
+    public MatrixGeneralPanel(JButton btnBack) {
         this.btnBack = btnBack;
         setLayout(new GridLayout(3, 1, 0, 100));
         initButton();
@@ -35,8 +35,8 @@ public class MatrixGeneralPanel extends JPanel {
      * @Description 初始化按钮
      * @author 罗孝俊
      * @date 2023/12/8 13:32
-    **/
-    private void initButton(){
+     **/
+    private void initButton() {
         btnRelative = createButton("矩阵求逆与转置", "宋体");
         btnRelative.addActionListener(event -> {
             new MatrixRelativeUI();

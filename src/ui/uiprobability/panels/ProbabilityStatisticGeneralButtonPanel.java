@@ -11,16 +11,16 @@ import java.awt.*;
  * @Description: 概率统计界面主菜单按钮板
  * @date 2023/11/26 21:02
  */
-public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
+public class ProbabilityStatisticGeneralButtonPanel extends JPanel {
     public JButton btnClassical, btnConditional, btnIndependence, btnBayesian, btnBinomialDistribution, btnLinearRegression, btnBack;
 
     /**
-     * @Description   概统主界面按钮板构造
      * @param btnBack UI界面传入的返回按钮
+     * @Description 概统主界面按钮板构造
      * @author 罗孝俊
      * @date 2023/11/27 8:59
-    **/
-    public ProbabilityStatisticGeneralButtonPanel(JButton btnBack){
+     **/
+    public ProbabilityStatisticGeneralButtonPanel(JButton btnBack) {
         this.btnBack = btnBack;
         setLayout(new GridLayout(6, 1, 0, 40));
         initButton();
@@ -33,20 +33,20 @@ public class ProbabilityStatisticGeneralButtonPanel extends JPanel{
     }
 
     /**
-     * @Description   按钮初始化
+     * @Description 按钮初始化
      * @author 罗孝俊
      * @date 2023/11/27 9:00
-    **/
-    private void initButton(){
+     **/
+    private void initButton() {
         btnClassical = UIValues.createButton("古典概型", "宋体");
-        btnClassical.addActionListener(event ->{
+        btnClassical.addActionListener(event -> {
             new ClassicalUI();
             btnBack.setVisible(false);
             this.setVisible(false);
         });
 
         btnConditional = UIValues.createButton("条件概率", "宋体");
-        btnConditional.addActionListener(event ->{
+        btnConditional.addActionListener(event -> {
             new ConditionalUI();
             btnBack.setVisible(false);
             this.setVisible(false);

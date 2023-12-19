@@ -1,13 +1,11 @@
 package ui.uimatrix;
 
-import modules.basic.Fraction;
-import modules.basic.Operation;
 import modules.matrix.Matrix;
-
-import static ui.UIValues.*;
 
 import javax.swing.*;
 import java.awt.*;
+
+import static ui.UIValues.*;
 
 /**
  * @author 罗孝俊
@@ -21,7 +19,7 @@ public class MatrixPowUI {
     public JLabel labelRow, labelMatrix, labelExponential, labelAns;
     public JButton btnSolve, btnBack;
 
-    public MatrixPowUI(){
+    public MatrixPowUI() {
         inputRow = new JTextField("3");
         inputExponential = new JTextField("3");
         inputMatrix = new JTextArea("0 7 2\n1 5 0\n7 2 1");
@@ -70,7 +68,7 @@ public class MatrixPowUI {
      * @Description 初始化标签
      * @author 罗孝俊
      * @date 2023/12/8 22:52
-    **/
+     **/
     private void initLabel() {
         labelRow = new JLabel("方阵行数");
         labelExponential = new JLabel("指数(必须为整数)");
@@ -93,37 +91,37 @@ public class MatrixPowUI {
         window.add(labelAns);
     }
 
-    private void solve(){
+    private void solve() {
         int row, exp;
-        if(inputRow.getText().matches(POSITIVE_INTEGER_REGEX)){
+        if (inputRow.getText().matches(POSITIVE_INTEGER_REGEX)) {
             row = Integer.parseInt(inputRow.getText());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "方阵行数不合法", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        if(inputExponential.getText().matches(INTEGER_REGEX)){
+        if (inputExponential.getText().matches(INTEGER_REGEX)) {
             exp = Integer.parseInt(inputExponential.getText());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "指数不合法", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        try{
+        try {
             Matrix matrix = getMatrix(row, row, inputMatrix);
-            if(matrix == null){
+            if (matrix == null) {
                 return;
             }
             Matrix powMatrix = matrix.pow(exp);
             StringBuilder powString = new StringBuilder();
-            for(int i = 1; i <= row; i++){
-                for(int j = 1; j <= row; j++){
+            for (int i = 1; i <= row; i++) {
+                for (int j = 1; j <= row; j++) {
                     powString.append(powMatrix.matrix[i][j]).append(" ");
                 }
                 powString.append("\n");
             }
             outputAns.setText(powString.toString());
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }

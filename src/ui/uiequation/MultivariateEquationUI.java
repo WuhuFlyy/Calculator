@@ -2,11 +2,11 @@ package ui.uiequation;
 
 import modules.equation.MultivariateEquation;
 
-import static ui.UIValues.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
+
+import static ui.UIValues.*;
 
 /**
  * @author 罗孝俊
@@ -25,8 +25,8 @@ public class MultivariateEquationUI {
      * @Description 界面UI构造
      * @author 罗孝俊
      * @date 2023/12/13 0:01
-    **/
-    public MultivariateEquationUI(){
+     **/
+    public MultivariateEquationUI() {
         inputCoefficient1 = new JTextField("1 2 0");
         inputCoefficient2 = new JTextField("2 3 3");
         inputCoefficient3 = new JTextField("3 4 2 5");
@@ -82,8 +82,8 @@ public class MultivariateEquationUI {
      * @Description 初始化标签
      * @author 罗孝俊
      * @date 2023/12/13 0:10
-    **/
-    private void initLabel(){
+     **/
+    private void initLabel() {
         labelTimes = new JLabel("方程个数");
         labelCoefficient = new JLabel("(ax + by = c)中的a,b,c");
         labelAns = new JLabel("方程解");
@@ -101,20 +101,20 @@ public class MultivariateEquationUI {
         window.add(labelAns);
     }
 
-    private void initBox(){
+    private void initBox() {
         String[] times = {"2", "3"};
         boxTimes = new JComboBox<>(times);
         boxTimes.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
         boxTimes.setMaximumRowCount(2);
         boxTimes.setBounds(MARGIN_X, MARGIN_Y + 55, 100, 50);
         boxTimes.addItemListener(e -> {
-            if(e.getStateChange() == ItemEvent.SELECTED) {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
                 int i = boxTimes.getSelectedIndex();
-                if(i == 0){
+                if (i == 0) {
                     paneCoefficient3.setVisible(false);
                     inputCoefficient3.setVisible(false);
                     labelCoefficient.setText("(ax + by = c)中的a,b,c");
-                }else{
+                } else {
                     paneCoefficient3.setVisible(true);
                     inputCoefficient3.setVisible(true);
                     labelCoefficient.setText("(ax + by + cz = d)中的a,b,c,d");
@@ -128,75 +128,75 @@ public class MultivariateEquationUI {
      * @Description 解方程
      * @author 罗孝俊
      * @date 2023/12/13 0:10
-    **/
-    private void solve(){
+     **/
+    private void solve() {
         //总的构造
-        try{
+        try {
             String[] coefficientString1 = inputCoefficient1.getText().split("(\\s)+");
             String[] coefficientString2 = inputCoefficient2.getText().split("(\\s)+");
             double[] coefficient1 = new double[3];
             double[] coefficient2 = new double[3];
             double[] constant = new double[3];
-            for(int i = 0; i <= 1; i++){
-                if(!transform(i, coefficient1, coefficientString1[i])){
-                    JOptionPane.showMessageDialog(null, "第一个方程的第" + (i+1) + "个系数输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
+            for (int i = 0; i <= 1; i++) {
+                if (!transform(i, coefficient1, coefficientString1[i])) {
+                    JOptionPane.showMessageDialog(null, "第一个方程的第" + (i + 1) + "个系数输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
             }
 
-            for(int i = 0; i <= 1; i++){
-                if(!transform(i, coefficient2, coefficientString2[i])){
+            for (int i = 0; i <= 1; i++) {
+                if (!transform(i, coefficient2, coefficientString2[i])) {
                     JOptionPane.showMessageDialog(null, "第二个方程的系数输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
             }
 
-            if(boxTimes.getSelectedIndex() == 0){
+            if (boxTimes.getSelectedIndex() == 0) {
                 //二元
-                if(!transform(0, constant, coefficientString1[2])){
+                if (!transform(0, constant, coefficientString1[2])) {
                     JOptionPane.showMessageDialog(null, "第一个方程的常数项系数输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
 
-                if(!transform(1, constant, coefficientString2[2])){
+                if (!transform(1, constant, coefficientString2[2])) {
                     JOptionPane.showMessageDialog(null, "第二个方程的常数项系数输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
                 MultivariateEquation multivariateEquation = new MultivariateEquation(coefficient1, coefficient2, constant);
                 outputAns.setText(multivariateEquation.solveBinaryEquation());
-            }else{
+            } else {
                 //三元
                 String[] coefficientString3 = inputCoefficient3.getText().split("(\\s)+");
                 double[] coefficient3 = new double[3];
 
-                if(!transform(0, constant, coefficientString1[3])){
+                if (!transform(0, constant, coefficientString1[3])) {
                     JOptionPane.showMessageDialog(null, "第一个方程的常数项系数输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
 
-                if(!transform(1, constant, coefficientString2[3])){
+                if (!transform(1, constant, coefficientString2[3])) {
                     JOptionPane.showMessageDialog(null, "第二个方程的常数项系数输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
 
-                if(!transform(2, constant, coefficientString3[3])){
+                if (!transform(2, constant, coefficientString3[3])) {
                     JOptionPane.showMessageDialog(null, "第三个方程的常数项系数输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
 
-                if(!transform(2, coefficient1, coefficientString1[2])){
+                if (!transform(2, coefficient1, coefficientString1[2])) {
                     JOptionPane.showMessageDialog(null, "第一个方程的第3个系数输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
 
-                if(!transform(2, coefficient2, coefficientString2[2])){
+                if (!transform(2, coefficient2, coefficientString2[2])) {
                     JOptionPane.showMessageDialog(null, "第二个方程的第3个系数输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
 
-                for(int i = 0; i <= 2; i++){
-                    if(!transform(i, coefficient3, coefficientString3[i])){
-                        JOptionPane.showMessageDialog(null, "第三个方程的第" + (i+1) +"个系数输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
+                for (int i = 0; i <= 2; i++) {
+                    if (!transform(i, coefficient3, coefficientString3[i])) {
+                        JOptionPane.showMessageDialog(null, "第三个方程的第" + (i + 1) + "个系数输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                         return;
                     }
                 }
@@ -204,9 +204,9 @@ public class MultivariateEquationUI {
                 MultivariateEquation multivariateEquation = new MultivariateEquation(coefficient1, coefficient2, coefficient3, constant);
                 outputAns.setText(multivariateEquation.solveCubicEquation());
             }
-        }catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "输入系数数量与元数不符", "Warning", JOptionPane.WARNING_MESSAGE);
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
         }
 

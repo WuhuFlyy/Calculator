@@ -9,7 +9,6 @@ import java.awt.*;
 import java.util.regex.Pattern;
 
 import static ui.UIValues.*;
-import static ui.UIValues.window;
 
 /**
  * @author 罗孝俊
@@ -22,7 +21,7 @@ public class ConditionalUI {
     public JLabel labelPAB, labelPB;
     public JButton btnSolve, btnBack;
 
-    public ConditionalUI(){
+    public ConditionalUI() {
         inputPAB = new JTextField("0");
         inputPB = new JTextField("0");
         panePAB = new JScrollPane(inputPAB, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -62,11 +61,11 @@ public class ConditionalUI {
     }
 
     /**
-     * @Description  初始化两个输入提示标签
+     * @Description 初始化两个输入提示标签
      * @author 罗孝俊
      * @date 2023/12/3 11:22
      **/
-    private void initLabel(){
+    private void initLabel() {
         labelPAB = new JLabel("PAB");
         labelPB = new JLabel("PB");
         labelPAB.setBounds(MARGIN_X, MARGIN_Y, 300, 50);
@@ -80,29 +79,29 @@ public class ConditionalUI {
     }
 
     /**
-     * @Description  求解条件概率，将结果输出在outputText上
+     * @Description 求解条件概率，将结果输出在outputText上
      * @author 罗孝俊
      * @date 2023/12/3 12:11
-    **/
-    public void solve(){
+     **/
+    public void solve() {
         Fraction PAB, PB;
-        try{
-            if(Pattern.matches(POSITIVE_FRACTION_REGEX, inputPAB.getText())){
+        try {
+            if (Pattern.matches(POSITIVE_FRACTION_REGEX, inputPAB.getText())) {
                 String[] stringAB = inputPAB.getText().split("/");
                 PAB = new Fraction(stringAB[0], stringAB[1]);
-            }else if(Pattern.matches(POSITIVE_NUMBER_REGEX, inputPAB.getText())){
+            } else if (Pattern.matches(POSITIVE_NUMBER_REGEX, inputPAB.getText())) {
                 PAB = Operation.toFraction(inputPAB.getText());
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "请输入一个合法的概率值", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            if(Pattern.matches(POSITIVE_FRACTION_REGEX, inputPB.getText())){
+            if (Pattern.matches(POSITIVE_FRACTION_REGEX, inputPB.getText())) {
                 String[] stringB = inputPB.getText().split("/");
                 PB = new Fraction(stringB[0], stringB[1]);
-            }else if(Pattern.matches(POSITIVE_NUMBER_REGEX, inputPB.getText())){
+            } else if (Pattern.matches(POSITIVE_NUMBER_REGEX, inputPB.getText())) {
                 PB = Operation.toFraction(inputPB.getText());
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "请输入一个合法的概率值", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
@@ -110,7 +109,7 @@ public class ConditionalUI {
             Conditional conditional = new Conditional(PAB, PB);
             outputPAUnderB.setText("P(A|B) = " + conditional.calAunderB());
             outputPNotAUnderB.setText("~P(A|B) = " + conditional.calNotAunderB());
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }

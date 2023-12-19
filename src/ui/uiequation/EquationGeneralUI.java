@@ -2,9 +2,9 @@ package ui.uiequation;
 
 import ui.uigeneral.GeneralUI;
 
-import static ui.UIValues.*;
-
 import javax.swing.*;
+
+import static ui.UIValues.*;
 
 /**
  * @author 罗孝俊
@@ -19,8 +19,8 @@ public class EquationGeneralUI {
      * @Description 界面构造
      * @author 罗孝俊
      * @date 2023/12/8 23:51
-    **/
-    public EquationGeneralUI(){
+     **/
+    public EquationGeneralUI() {
         btnBack = createButton("<", FONT_NAME);
         initBtnBack(btnBack, event -> {
             equationGeneralPanel.setVisible(false);

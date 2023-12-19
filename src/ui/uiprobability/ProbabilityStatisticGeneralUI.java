@@ -18,11 +18,11 @@ public class ProbabilityStatisticGeneralUI {
     public ProbabilityStatisticGeneralButtonPanel probabilityStatisticGeneralButtonPanel;
 
     /**
-     * @Description   界面构造方法
+     * @Description 界面构造方法
      * @author 罗孝俊
      * @date 2023/11/27 8:58
-    **/
-    public ProbabilityStatisticGeneralUI(){
+     **/
+    public ProbabilityStatisticGeneralUI() {
         btnBack = UIValues.createButton("<", FONT_NAME);
         UIValues.initBtnBack(btnBack, event -> {
             probabilityStatisticGeneralButtonPanel.setVisible(false);

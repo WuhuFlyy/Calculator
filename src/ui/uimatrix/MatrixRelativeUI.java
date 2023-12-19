@@ -1,13 +1,11 @@
 package ui.uimatrix;
 
-import modules.basic.Fraction;
-import modules.basic.Operation;
 import modules.matrix.Matrix;
-
-import static ui.UIValues.*;
 
 import javax.swing.*;
 import java.awt.*;
+
+import static ui.UIValues.*;
 
 /**
  * @author 罗孝俊
@@ -25,8 +23,8 @@ public class MatrixRelativeUI {
      * @Description 界面UI构造方法
      * @author 罗孝俊
      * @date 2023/12/8 14:42
-    **/
-    public MatrixRelativeUI(){
+     **/
+    public MatrixRelativeUI() {
         inputRow = new JTextField("3");
         inputColumn = new JTextField("2");
         inputMatrix = new JTextArea("1 1\n2 1\n1 3");
@@ -95,8 +93,8 @@ public class MatrixRelativeUI {
      * @Description 初始化标签
      * @author 罗孝俊
      * @date 2023/12/8 14:30
-    **/
-    private void initLabel(){
+     **/
+    private void initLabel() {
         labelRow = new JLabel("矩阵行数");
         labelColumn = new JLabel("矩阵列数");
         labelMatrix = new JLabel("矩阵输入(从左至右,从上至下)");
@@ -134,45 +132,45 @@ public class MatrixRelativeUI {
      * @Description 求矩阵逆、转置和秩
      * @author 罗孝俊
      * @date 2023/12/8 14:32
-    **/
-    public void solve(){
+     **/
+    public void solve() {
         int row, column;
-        if(inputRow.getText().matches(POSITIVE_INTEGER_REGEX)){
+        if (inputRow.getText().matches(POSITIVE_INTEGER_REGEX)) {
             row = Integer.parseInt(inputRow.getText());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "矩阵行数不合法", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        if(inputColumn.getText().matches(POSITIVE_INTEGER_REGEX)){
+        if (inputColumn.getText().matches(POSITIVE_INTEGER_REGEX)) {
             column = Integer.parseInt(inputColumn.getText());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "矩阵列数不合法", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        try{
+        try {
             Matrix matrix = getMatrix(row, column, inputMatrix);
-            if(matrix == null){
+            if (matrix == null) {
                 return;
             }
 
             int rank = matrix.getRank();
-            if(row != column){
+            if (row != column) {
                 outputInverse.setFont(new Font("宋体", Font.PLAIN, 33));
                 outputInverse.setText("矩阵非方阵");
                 outputDeterminant.setText("Not Exist");
-            }else{
+            } else {
                 outputDeterminant.setText(matrix.getDeterminant().toString());
-                if(!matrix.invertible()){
+                if (!matrix.invertible()) {
                     outputInverse.setFont(new Font("宋体", Font.PLAIN, 33));
                     outputInverse.setText("矩阵不可逆");
-                }else{
+                } else {
                     outputInverse.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
                     StringBuilder inverseString = new StringBuilder();
                     Matrix inverseMatrix = matrix.inverse();
-                    for(int i = 1; i <= row; i++){
-                        for(int j = 1; j <= column; j++){
+                    for (int i = 1; i <= row; i++) {
+                        for (int j = 1; j <= column; j++) {
                             inverseString.append(inverseMatrix.matrix[i][j]).append(" ");
                         }
                         inverseString.append("\n");
@@ -183,15 +181,15 @@ public class MatrixRelativeUI {
 
             Matrix transMatrix = matrix.transposition();
             StringBuilder transString = new StringBuilder();
-            for(int i = 1; i <= column; i++){
-                for(int j = 1; j <= row; j++){
+            for (int i = 1; i <= column; i++) {
+                for (int j = 1; j <= row; j++) {
                     transString.append(transMatrix.matrix[i][j]).append(" ");
                 }
                 transString.append("\n");
             }
             outputTrans.setText(transString.toString());
             outputRank.setText(Integer.toString(rank));
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }

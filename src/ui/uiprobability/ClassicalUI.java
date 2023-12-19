@@ -2,11 +2,10 @@ package ui.uiprobability;
 
 import modules.probability.Classical;
 
-import static ui.UIValues.*;
-
 import javax.swing.*;
-
 import java.awt.*;
+
+import static ui.UIValues.*;
 
 /**
  * @author 罗孝俊
@@ -23,7 +22,7 @@ public class ClassicalUI {
      * @Description 古典概率UI设置
      * @author 罗孝俊
      * @date 2023/12/3 11:26
-    **/
+     **/
     public ClassicalUI() {
         inputK = new JTextField("0");
         inputN = new JTextField("0");
@@ -64,33 +63,33 @@ public class ClassicalUI {
     }
 
     /**
-     * @Description  solve按钮的点击事件
+     * @Description solve按钮的点击事件
      * @author 罗孝俊
      * @date 2023/12/3 11:22
-    **/
-    private void solve(){
-        if(!inputK.getText().matches(POSITIVE_INTEGER_REGEX) || !inputN.getText().matches(POSITIVE_INTEGER_REGEX)){
+     **/
+    private void solve() {
+        if (!inputK.getText().matches(POSITIVE_INTEGER_REGEX) || !inputN.getText().matches(POSITIVE_INTEGER_REGEX)) {
             JOptionPane.showMessageDialog(null, "请输入一个正整数", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         int n = Integer.parseInt(inputN.getText());
         int k = Integer.parseInt(inputK.getText());
-        try{
+        try {
             Classical classical = new Classical(n, k);
             outputPA.setText("P(A) = " + classical.calA());
             outputPNotA.setText("~P(A) = " + classical.calNotA());
-        }catch(ArithmeticException e){
+        } catch (ArithmeticException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }
 
     /**
-     * @Description  初始化两个输入提示标签
+     * @Description 初始化两个输入提示标签
      * @author 罗孝俊
      * @date 2023/12/3 11:22
-    **/
-    private void initLabel(){
+     **/
+    private void initLabel() {
         labelK = new JLabel("A包含的基本事件数k");
         labelN = new JLabel("样本空间事件总数N");
         labelK.setBounds(MARGIN_X, MARGIN_Y, 300, 50);

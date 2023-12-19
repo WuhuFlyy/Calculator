@@ -9,56 +9,56 @@ import modules.basic.Fraction;
  */
 public class TotalProbability {
     private int n;
-    private Fraction A;
-    private Fraction[] Bi;
-    private Fraction[] AunderBi;
+    private Fraction probabilityA;
+    private Fraction[] probabilityBi;
+    private Fraction[] probabilityAunderBi;
 
     /**
+     * @param n                   事件组的个数
+     * @param probabilityBi       第i个事件Bi发生的概率
+     * @param probabilityAunderBi 事件A在事件Bi发生条件下的概率
      * @Description
-     * @param n 事件组的个数
-     * @param Bi 第i个事件Bi发生的概率
-     * @param AunderBi 事件A在事件Bi发生条件下的概率
      * @author 吕顺
      * @date 2023/11/20 14:19
-    **/
-    public TotalProbability(int n, Fraction[] Bi, Fraction[] AunderBi){
-        if(n <= 0){
+     **/
+    public TotalProbability(int n, Fraction[] probabilityBi, Fraction[] probabilityAunderBi) {
+        if (n <= 0) {
             throw new ArithmeticException("事件组的个数n不合法");
         }
-        if(Bi.length != n){
+        if (probabilityBi.length != n) {
             throw new ArithmeticException("P(Bi)个数不合法");
         }
-        if(AunderBi.length != n){
+        if (probabilityAunderBi.length != n) {
             throw new ArithmeticException("P(A|Bi)个数不合法");
         }
-        for(int i = 0; i < n; i++){
-            double decimal = Double.parseDouble(Bi[i].toDecimal());
-            if(decimal > 1.0 || decimal < 0){
+        for (int i = 0; i < n; i++) {
+            double decimal = Double.parseDouble(probabilityBi[i].toDecimal());
+            if (decimal > 1.0 || decimal < 0) {
                 throw new ArithmeticException("P(B" + i + ")大小不合法");
             }
         }
-        for(int i = 0; i < n; i++){
-            double decimal = Double.parseDouble(AunderBi[i].toDecimal());
-            if(decimal > 1.0 || decimal < 0){
+        for (int i = 0; i < n; i++) {
+            double decimal = Double.parseDouble(probabilityAunderBi[i].toDecimal());
+            if (decimal > 1.0 || decimal < 0) {
                 throw new ArithmeticException("P(A|B" + i + ")大小不合法");
             }
         }
         this.n = n;
-        this.Bi = Bi;
-        this.AunderBi = AunderBi;
+        this.probabilityBi = probabilityBi;
+        this.probabilityAunderBi = probabilityAunderBi;
     }
 
     /**
-     * @Description  利用全概率公式计算事件A发生的概率
      * @return java.lang.String
+     * @Description 利用全概率公式计算事件A发生的概率
      * @author 吕顺
      * @date 2023/11/20 14:39
-    **/
-    public String calA(){
-        A = Bi[0].multiply(AunderBi[0]);
-        for(int i = 1; i < n; i++){
-            A = A.add(Bi[i].multiply(AunderBi[i]));
+     **/
+    public String calA() {
+        probabilityA = probabilityBi[0].multiply(probabilityAunderBi[0]);
+        for (int i = 1; i < n; i++) {
+            probabilityA = probabilityA.add(probabilityBi[i].multiply(probabilityAunderBi[i]));
         }
-        return A.toString();
+        return probabilityA.toString();
     }
 }

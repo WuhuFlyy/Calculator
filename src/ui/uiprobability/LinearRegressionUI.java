@@ -3,7 +3,6 @@ package ui.uiprobability;
 import modules.basic.OperationExtra;
 
 import javax.swing.*;
-
 import java.awt.*;
 
 import static ui.UIValues.*;
@@ -28,8 +27,8 @@ public class LinearRegressionUI {
      * @Description 构造界面UI
      * @author 罗孝俊
      * @date 2023/12/15 23:11
-    **/
-    public LinearRegressionUI(){
+     **/
+    public LinearRegressionUI() {
         inputX = new JTextArea("1 2 3");
         inputY = new JTextArea("1 2 3");
         inputDivisionValue = new JTextField("0.1");
@@ -141,8 +140,8 @@ public class LinearRegressionUI {
      * @Description 初始化标签
      * @author 罗孝俊
      * @date 2023/12/15 23:11
-    **/
-    private void initLabel(){
+     **/
+    private void initLabel() {
         labelX = new JLabel("自变量x输入");
         labelY = new JLabel("因变量y输入");
         labelDivisionValue = new JLabel("误差限输入");
@@ -204,9 +203,9 @@ public class LinearRegressionUI {
      * @Description 求解一元线性回归
      * @author 罗孝俊
      * @date 2023/12/15 23:35
-    **/
-    private void solve(){
-        try{
+     **/
+    private void solve() {
+        try {
             String dataX = inputX.getText();
             String dataY = inputY.getText();
             String dataDivisionValue = inputDivisionValue.getText();
@@ -220,7 +219,7 @@ public class LinearRegressionUI {
             outputUaIntercept.setText(OperationExtra.getUaIntercept(dataX, dataY, dataDivisionValue));
             outputUbIntercept.setText(OperationExtra.getUbIntercept(dataX, dataY, dataDivisionValue));
             outputUIntercept.setText(OperationExtra.getUIntercept(dataX, dataY, dataDivisionValue));
-        }catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }

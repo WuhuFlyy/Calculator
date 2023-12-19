@@ -2,10 +2,10 @@ package ui.uiequation;
 
 import modules.equation.UnivariateEquation;
 
-import static ui.UIValues.*;
-
 import javax.swing.*;
 import java.awt.*;
+
+import static ui.UIValues.*;
 
 /**
  * @author 罗孝俊
@@ -23,8 +23,8 @@ public class PolynomialUI {
      * @Description 界面UI构造
      * @author 罗孝俊
      * @date 2023/12/9 21:32
-    **/
-    public PolynomialUI(){
+     **/
+    public PolynomialUI() {
         inputTimes = new JTextField("3");
         inputCoefficient = new JTextArea("1 2 3 4");
         outputAns = new JTextArea();
@@ -70,8 +70,8 @@ public class PolynomialUI {
      * @Description 初始化标签
      * @author 罗孝俊
      * @date 2023/12/9 21:32
-    **/
-    private void initLabel(){
+     **/
+    private void initLabel() {
         labelTimes = new JLabel("方程次数(2~4)");
         labelCoefficient = new JLabel("方程系数(从高次到低次)");
         labelAns = new JLabel("方程解");
@@ -93,7 +93,7 @@ public class PolynomialUI {
      * @Description 解方程
      * @author 罗孝俊
      * @date 2023/12/9 21:32
-    **/
+     **/
     public void solve() {
         int num;
         if (inputTimes.getText().matches(POSITIVE_INTEGER_REGEX)) {
@@ -114,7 +114,7 @@ public class PolynomialUI {
         double[] coefficient = new double[num + 1];
         try {
             for (int i = 0; i <= num; i++) {
-                if(!transform(i, coefficient, coefficientStr[i])){
+                if (!transform(i, coefficient, coefficientStr[i])) {
                     JOptionPane.showMessageDialog(null, num - i + "次项输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }

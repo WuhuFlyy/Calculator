@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 
 import static ui.UIValues.*;
-import static ui.UIValues.window;
 
 /**
  * @author 罗孝俊
@@ -27,7 +26,7 @@ public class BayesianUI {
      * @Description UI界面的构造方法
      * @author 罗孝俊
      * @date 2023/12/4 21:41
-    **/
+     **/
     public BayesianUI() {
         inputN = new JTextField("3");
         inputJ = new JTextField("1");
@@ -40,7 +39,7 @@ public class BayesianUI {
         outputPBjUnderA = new JTextField("0");
         outputPA = new JTextField("0");
         panePBjUnderA = new JScrollPane(outputPBjUnderA, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        panePA = new JScrollPane(outputPA ,ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        panePA = new JScrollPane(outputPA, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         initInput(inputN, paneN, MARGIN_X, MARGIN_Y + 55);
         initInput(inputJ, paneJ, MARGIN_X, MARGIN_Y + 185);
@@ -86,7 +85,7 @@ public class BayesianUI {
     }
 
     /**
-     * @Description  初始化两个输入提示标签
+     * @Description 初始化两个输入提示标签
      * @author 罗孝俊
      * @date 2023/12/4 20:51
      **/
@@ -128,66 +127,66 @@ public class BayesianUI {
     }
 
     /**
-     * @Description  求解P(Bj|A) 和 P(A)
+     * @Description 求解P(Bj | A) 和 P(A)
      * @author 罗孝俊
      * @date 2023/12/4 20:51
-    **/
-    public void solve(){
+     **/
+    public void solve() {
         int num, j;
-        if(inputN.getText().matches(POSITIVE_INTEGER_REGEX)){
+        if (inputN.getText().matches(POSITIVE_INTEGER_REGEX)) {
             num = Integer.parseInt(inputN.getText());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "事件总数N不合法", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        if(inputJ.getText().matches(POSITIVE_INTEGER_REGEX)){
+        if (inputJ.getText().matches(POSITIVE_INTEGER_REGEX)) {
             j = Integer.parseInt(inputJ.getText());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "j的输入不合法(1 <= j <= n且j为正整数)", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        if(j > num){
+        if (j > num) {
             JOptionPane.showMessageDialog(null, "j的输入不合法(1 <= j <= n且j为正整数)", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         String[] probabilityBiString = inputPBi.getText().split("(\\s)+");
-        if(num != probabilityBiString.length){
+        if (num != probabilityBiString.length) {
             JOptionPane.showMessageDialog(null, "Bi的总数：" + probabilityBiString.length + "\n但是事件总数：" + num, "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         String[] probabilityAUnderBiString = inputPAUnderBi.getText().split("(\\s)+");
-        if(num != probabilityAUnderBiString.length){
+        if (num != probabilityAUnderBiString.length) {
             JOptionPane.showMessageDialog(null, "P(A|Bi)的总数：" + probabilityAUnderBiString.length + "\n但是事件总数：" + num, "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         Fraction[] probabilityBi = new Fraction[num];
         Fraction[] probabilityAUnderBi = new Fraction[num];
-        try{
-            for(int i = 0; i < num; i++){
+        try {
+            for (int i = 0; i < num; i++) {
                 String str = probabilityBiString[i];
-                if(str.matches(FRACTION_REGEX)){
+                if (str.matches(FRACTION_REGEX)) {
                     String[] tmp = str.split("/");
                     probabilityBi[i] = new Fraction(tmp[0], tmp[1]);
-                }else if(str.matches(NUMBER_REGEX)){
+                } else if (str.matches(NUMBER_REGEX)) {
                     probabilityBi[i] = Operation.toFraction(str);
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "P(B" + i + ")输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
             }
 
-            for(int i = 0; i < num; i++){
+            for (int i = 0; i < num; i++) {
                 String str = probabilityAUnderBiString[i];
-                if(str.matches(FRACTION_REGEX)){
+                if (str.matches(FRACTION_REGEX)) {
                     String[] tmp = str.split("/");
                     probabilityAUnderBi[i] = new Fraction(tmp[0], tmp[1]);
-                }else if(str.matches(NUMBER_REGEX)){
+                } else if (str.matches(NUMBER_REGEX)) {
                     probabilityAUnderBi[i] = Operation.toFraction(str);
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "P(A|B" + i + ")输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
@@ -197,7 +196,7 @@ public class BayesianUI {
             TotalProbability totalProbability = new TotalProbability(num, probabilityBi, probabilityAUnderBi);
             outputPBjUnderA.setText(bayesian.calBjunderA());
             outputPA.setText(totalProbability.calA());
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }

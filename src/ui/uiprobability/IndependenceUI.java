@@ -21,7 +21,7 @@ public class IndependenceUI {
     public JLabel labelN, labelPEvents, labelPMul, labelPSum, labelPSumNot;
     public JButton btnSolve, btnBack;
 
-    public IndependenceUI(){
+    public IndependenceUI() {
         inputN = new JTextField("3");
         inputPEvents = new JTextArea("0.1 0.3 1/7");
         paneN = new JScrollPane(inputN, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -72,11 +72,11 @@ public class IndependenceUI {
     }
 
     /**
-     * @Description  初始化两个输入提示标签
+     * @Description 初始化两个输入提示标签
      * @author 罗孝俊
      * @date 2023/12/3 11:22
      **/
-    private void initLabel(){
+    private void initLabel() {
         labelN = new JLabel("事件总数N");
         labelPEvents = new JLabel("各事件概率PAi");
         labelPMul = new JLabel("P(A1A2...An)");
@@ -109,34 +109,34 @@ public class IndependenceUI {
     }
 
     /**
-     * @Description  求解上述三个概率值
+     * @Description 求解上述三个概率值
      * @author 罗孝俊
      * @date 2023/12/3 12:11
      **/
-    public void solve(){
+    public void solve() {
         String[] probabilityEventsString = inputPEvents.getText().split("(\\s)+");
         int num;
-        if(inputN.getText().matches(INTEGER_REGEX)){
+        if (inputN.getText().matches(INTEGER_REGEX)) {
             num = Integer.parseInt(inputN.getText());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "事件总数N不合法", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if(num != probabilityEventsString.length){
+        if (num != probabilityEventsString.length) {
             JOptionPane.showMessageDialog(null, "事件数：" + probabilityEventsString.length + "\n但是事件总数：" + num, "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         Fraction[] probabilityEvents = new Fraction[num];
-        try{
-            for(int i = 0; i < num; i++){
+        try {
+            for (int i = 0; i < num; i++) {
                 String str = probabilityEventsString[i];
-                if(str.matches(FRACTION_REGEX)){
+                if (str.matches(FRACTION_REGEX)) {
                     String[] tmp = str.split("/");
                     probabilityEvents[i] = new Fraction(tmp[0], tmp[1]);
-                }else if(str.matches(NUMBER_REGEX)){
+                } else if (str.matches(NUMBER_REGEX)) {
                     probabilityEvents[i] = Operation.toFraction(str);
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "P(A" + i + ")输入不合法", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
@@ -146,7 +146,7 @@ public class IndependenceUI {
             outputPMul.setText(independence.calMulA());
             outputPSum.setText(independence.calSumA());
             outPutPSumNot.setText(independence.calSumNotA());
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }

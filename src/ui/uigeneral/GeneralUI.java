@@ -4,7 +4,6 @@ import modules.GlobalVariable;
 import modules.basic.OperationExtra;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -24,8 +23,8 @@ public class GeneralUI {
      * @Description 总界面构造方法，初始化window和精度输入
      * @author 罗孝俊
      * @date 2023/11/27 8:59
-    **/
-    public GeneralUI(){
+     **/
+    public GeneralUI() {
         window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         window.setLocationRelativeTo(null);
         window.setLayout(null);
@@ -42,18 +41,20 @@ public class GeneralUI {
         inputAccuracy.setBounds(MARGIN_X + BUTTON_PANEL_WIDTH - 70, 10, 70, 40);
         inputAccuracy.addFocusListener(new FocusListener() {
             @Override
-            public void focusGained(FocusEvent e) {}
+            public void focusGained(FocusEvent e) {
+            }
+
             @Override
             public void focusLost(FocusEvent e) {
-                if(!inputAccuracy.getText().matches(POSITIVE_INTEGER_REGEX)){
+                if (!inputAccuracy.getText().matches(POSITIVE_INTEGER_REGEX)) {
                     JOptionPane.showMessageDialog(null, "请输入一个正整数精度", "Warning", JOptionPane.WARNING_MESSAGE);
                     inputAccuracy.setText("0");
-                }else{
+                } else {
                     int pre = GlobalVariable.decimalScale;
                     GlobalVariable.decimalScale = Integer.parseInt(inputAccuracy.getText());
                     OperationExtra.accuracy = GlobalVariable.decimalScale + 2;
                     OperationExtra.accuracyNum = BigDecimal.ONE.divide(BigDecimal.TEN.pow(OperationExtra.accuracy));
-                    if(GlobalVariable.decimalScale >= 30 && pre < 30){
+                    if (GlobalVariable.decimalScale >= 30 && pre < 30) {
                         JOptionPane.showMessageDialog(null, "注意：精度太高可能会导致输出难以显示", "Warning", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }

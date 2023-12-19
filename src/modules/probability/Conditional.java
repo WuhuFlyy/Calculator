@@ -8,52 +8,52 @@ import modules.basic.Fraction;
  * @date 2023/11/20 11:07
  */
 public class Conditional {
-    private Fraction AB;
-    private Fraction B;
-    private Fraction AunderB;
-    private Fraction notAunderB;
+    private final Fraction probabilityAB;
+    private final Fraction probabilityB;
+    private Fraction probabilityAunderB;
+    private Fraction probabilitynotAunderB;
 
     /**
-     * @Description  构造方法
-     * @param AB 事件A和B共同发生的概率
-     * @param B 事件B发生的概率
+     * @param probabilityAB 事件A和B共同发生的概率
+     * @param probabilityB  事件B发生的概率
+     * @Description 构造方法
      * @author 吕顺
      * @date 2023/11/20 11:10
-    **/
-    public Conditional(Fraction AB, Fraction B){
-        double decimalP_AB = Double.parseDouble(AB.toDecimal());
-        double decimalP_B = Double.parseDouble(B.toDecimal());
-        if(decimalP_AB > 1.0 || decimalP_AB < 0 || decimalP_AB > decimalP_B){
+     **/
+    public Conditional(Fraction probabilityAB, Fraction probabilityB) {
+        double decimalP_AB = Double.parseDouble(probabilityAB.toDecimal());
+        double decimalP_B = Double.parseDouble(probabilityB.toDecimal());
+        if (decimalP_AB > 1.0 || decimalP_AB < 0 || decimalP_AB > decimalP_B) {
             throw new ArithmeticException("P(AB)大小不合法");
         }
-        if(decimalP_B > 1.0 || decimalP_B <= 0){
+        if (decimalP_B > 1.0 || decimalP_B <= 0) {
             throw new ArithmeticException("P(B)大小不合法");
         }
-        this.AB = AB;
-        this.B = B;
+        this.probabilityAB = probabilityAB;
+        this.probabilityB = probabilityB;
     }
 
     /**
-     * @Description  计算事件A在事件B发生条件下的概率
      * @return java.lang.String
+     * @Description 计算事件A在事件B发生条件下的概率
      * @author 吕顺
      * @date 2023/11/20 11:11
-    **/
-    public String calAunderB(){
-        AunderB = AB.divide(B);
-        return AunderB.toString();
+     **/
+    public String calAunderB() {
+        probabilityAunderB = probabilityAB.divide(probabilityB);
+        return probabilityAunderB.toString();
     }
 
     /**
-     * @Description  计算事件notA在事件B发生条件下的概率
      * @return java.lang.String
+     * @Description 计算事件notA在事件B发生条件下的概率
      * @author 吕顺
      * @date 2023/11/20 12:23
-    **/
-    public String calNotAunderB(){
-        AunderB = AB.divide(B);
+     **/
+    public String calNotAunderB() {
+        probabilityAunderB = probabilityAB.divide(probabilityB);
         Fraction one = new Fraction("1", "1");
-        notAunderB = one.subtract(AunderB);
-        return notAunderB.toString();
+        probabilitynotAunderB = one.subtract(probabilityAunderB);
+        return probabilitynotAunderB.toString();
     }
 }

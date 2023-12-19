@@ -6,6 +6,6 @@ package modules;
  * @date 2023/11/13 18:40
  */
 public class GlobalVariable {
-    public static int decimalScale=10;
+    public static int decimalScale = 10;
 
 }

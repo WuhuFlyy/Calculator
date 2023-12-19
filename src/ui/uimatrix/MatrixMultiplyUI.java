@@ -2,10 +2,10 @@ package ui.uimatrix;
 
 import modules.matrix.Matrix;
 
-import static ui.UIValues.*;
-
 import javax.swing.*;
 import java.awt.*;
+
+import static ui.UIValues.*;
 
 /**
  * @author 罗孝俊
@@ -23,8 +23,8 @@ public class MatrixMultiplyUI {
      * @Description 界面UI构造方法
      * @author 罗孝俊
      * @date 2023/12/8 16:56
-    **/
-    public MatrixMultiplyUI(){
+     **/
+    public MatrixMultiplyUI() {
         inputRow1 = new JTextField("3");
         inputColumn1 = new JTextField("2");
         inputRow2 = new JTextField("2");
@@ -94,8 +94,8 @@ public class MatrixMultiplyUI {
      * @Description 初始化标签
      * @author 罗孝俊
      * @date 2023/12/8 17:08
-    **/
-    private void initLabel(){
+     **/
+    private void initLabel() {
         labelRow1 = new JLabel("左矩阵行数");
         labelColumn1 = new JLabel("左矩阵列数");
         labelMatrix1 = new JLabel("左矩阵输入");
@@ -133,62 +133,62 @@ public class MatrixMultiplyUI {
      * @Description 相乘
      * @author 罗孝俊
      * @date 2023/12/8 17:16
-    **/
-    public void solve(){
+     **/
+    public void solve() {
         int row1, column1, row2, column2;
-        if(inputRow1.getText().matches(POSITIVE_INTEGER_REGEX)){
+        if (inputRow1.getText().matches(POSITIVE_INTEGER_REGEX)) {
             row1 = Integer.parseInt(inputRow1.getText());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "左矩阵行数不合法", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        if(inputColumn1.getText().matches(POSITIVE_INTEGER_REGEX)){
+        if (inputColumn1.getText().matches(POSITIVE_INTEGER_REGEX)) {
             column1 = Integer.parseInt(inputColumn1.getText());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "左矩阵列数不合法", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        if(inputRow2.getText().matches(POSITIVE_INTEGER_REGEX)){
+        if (inputRow2.getText().matches(POSITIVE_INTEGER_REGEX)) {
             row2 = Integer.parseInt(inputRow2.getText());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "右矩阵行数不合法", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        if(inputColumn2.getText().matches(POSITIVE_INTEGER_REGEX)){
+        if (inputColumn2.getText().matches(POSITIVE_INTEGER_REGEX)) {
             column2 = Integer.parseInt(inputColumn2.getText());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "右矩阵列数不合法", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        if(column1 != row2){
+        if (column1 != row2) {
             JOptionPane.showMessageDialog(null, "左矩阵列数不等于右矩阵行数", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        try{
+        try {
             Matrix matrix1 = getMatrix(row1, column1, inputMatrix1);
-            if(matrix1 == null){
+            if (matrix1 == null) {
                 return;
             }
             Matrix matrix2 = getMatrix(row2, column2, inputMatrix2);
-            if(matrix2 == null){
+            if (matrix2 == null) {
                 return;
             }
 
             Matrix product = matrix1.multiply(matrix2);
             StringBuilder productString = new StringBuilder();
-            for(int i = 1; i <= product.row; i++){
-                for(int j = 1; j <= product.column; j++){
+            for (int i = 1; i <= product.row; i++) {
+                for (int j = 1; j <= product.column; j++) {
                     productString.append(product.matrix[i][j]).append(" ");
                 }
                 productString.append("\n");
             }
             outputAns.setText(productString.toString());
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }

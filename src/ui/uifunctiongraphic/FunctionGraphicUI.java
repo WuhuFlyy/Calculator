@@ -18,11 +18,11 @@ import static ui.UIValues.*;
  * @date 2023/12/3 18:15
  */
 public class FunctionGraphicUI implements ItemListener {
+    public static String[] functions = {"ax^2+bx+c", "ae^bx+c", "a*sin(PIx+b)+c", "a*b^x+c", "a*x^b+c"};
     public JLabel labelA, labelB, labelC, labelChoose, labelUnitLength;
     public JTextField textA, textB, textC, textUnitLength;
     public JButton btnDraw, btnBack;
     public JComboBox functionChooseBox;
-    public static String[] functions = {"ax^2+bx+c", "ae^bx+c", "a*sin(PIx+b)+c","a*b^x+c","a*x^b+c"};
     public int functionIndex;
     public GraphicPanel graphicPanel = new GraphicPanel();
 
@@ -30,7 +30,7 @@ public class FunctionGraphicUI implements ItemListener {
      * @Description 初始化函数绘制UI
      * @author 罗孝俊
      * @date 2023/12/3 18:54
-    **/
+     **/
     public FunctionGraphicUI() {
         inputAccuracy.setVisible(false);
         labelAccuracy.setVisible(false);
@@ -47,8 +47,8 @@ public class FunctionGraphicUI implements ItemListener {
      * @Description 初始化标签
      * @author 罗孝俊
      * @date 2023/12/3 18:54
-    **/
-    private void initLabel(){
+     **/
+    private void initLabel() {
         labelA = new JLabel("a = ");
         labelB = new JLabel("b = ");
         labelC = new JLabel("c = ");
@@ -80,8 +80,8 @@ public class FunctionGraphicUI implements ItemListener {
      * @Description 初始化文本区域
      * @author 罗孝俊
      * @date 2023/12/3 18:54
-    **/
-    private void initText(){
+     **/
+    private void initText() {
         textA = new JTextField("0");
         textB = new JTextField("0");
         textC = new JTextField("0");
@@ -108,8 +108,8 @@ public class FunctionGraphicUI implements ItemListener {
      * @Description 初始化按钮
      * @author 罗孝俊
      * @date 2023/12/3 18:55
-    **/
-    private void initButton(){
+     **/
+    private void initButton() {
         btnDraw = createButton("draw", FONT_NAME);
         btnDraw.addActionListener(event -> {
             this.paintFn(event);
@@ -143,7 +143,7 @@ public class FunctionGraphicUI implements ItemListener {
      * @author 罗孝俊
      * @date 2023/12/3 18:55
      **/
-    private void initBox(){
+    private void initBox() {
         functionChooseBox = new JComboBox<>(functions);
         functionChooseBox.setBounds(MARGIN_X, MARGIN_Y + 30, 200, 30);
         functionChooseBox.setMaximumRowCount(3);
@@ -152,30 +152,30 @@ public class FunctionGraphicUI implements ItemListener {
     }
 
     /**
-     * @Description  重载用于复选框的itemStateChanged方法
      * @param e ItemEvent
+     * @Description 重载用于复选框的itemStateChanged方法
      * @author 罗孝俊
      * @date 2023/12/3 21:03
-    **/
+     **/
     @Override
     public void itemStateChanged(ItemEvent e) {
-        if(e.getStateChange() == ItemEvent.SELECTED){
+        if (e.getStateChange() == ItemEvent.SELECTED) {
             functionIndex = functionChooseBox.getSelectedIndex();
         }
     }
 
     /**
+     * @param e 事件e，调用时直接传的是lambda表达式的event
      * @Description 绘图调用
-     * @param e  事件e，调用时直接传的是lambda表达式的event
      * @author 罗孝俊
      * @date 2023/12/16 22:42
-    **/
-    public void paintFn(ActionEvent e){
-        if(!textUnitLength.getText().matches(POSITIVE_INTEGER_REGEX)){
+     **/
+    public void paintFn(ActionEvent e) {
+        if (!textUnitLength.getText().matches(POSITIVE_INTEGER_REGEX)) {
             JOptionPane.showMessageDialog(null, "请输入一个正整数的像素精度", "Warning", JOptionPane.WARNING_MESSAGE);
-        }else if(!textA.getText().matches(NUMBER_REGEX) || !textB.getText().matches(NUMBER_REGEX) || !textC.getText().matches(NUMBER_REGEX)){
+        } else if (!textA.getText().matches(NUMBER_REGEX) || !textB.getText().matches(NUMBER_REGEX) || !textC.getText().matches(NUMBER_REGEX)) {
             JOptionPane.showMessageDialog(null, "请输入一个合法的参数", "Warning", JOptionPane.WARNING_MESSAGE);
-        }else{
+        } else {
             graphicPanel.paintFn(Double.parseDouble(textA.getText()), Double.parseDouble(textB.getText()), Double.parseDouble(textC.getText()), Integer.parseInt(textUnitLength.getText()));
         }
     }
@@ -186,20 +186,20 @@ public class FunctionGraphicUI implements ItemListener {
      * @date 2023/12/3 18:15
      */
     class GraphicPanel extends JPanel {
+        int width, height, x, y;
         private double fa, fb, fc;
         //像素精度，越小越精细，显示范围也越小
         private int unitLength = 100;
-        int width, height, x, y;
 
         /**
-         * @Description
          * @param a 参数a
          * @param b 参数b
          * @param c 参数c
+         * @Description
          * @author 罗孝俊
          * @date 2023/12/3 19:21
          **/
-        public void paintFn(double a, double b, double c, int unitLength){
+        public void paintFn(double a, double b, double c, int unitLength) {
             fa = a;
             fb = b;
             fc = c;
@@ -207,14 +207,14 @@ public class FunctionGraphicUI implements ItemListener {
         }
 
         /**
-         * @Description 返回x对应的函数值
          * @param x 自变量的值
          * @return double 函数值
+         * @Description 返回x对应的函数值
          * @author 罗孝俊
          * @date 2023/12/3 19:32
          **/
-        public double functionValue(double x){
-            switch (functionIndex){
+        public double functionValue(double x) {
+            switch (functionIndex) {
                 case 0:
                     return fa * x * x + fb * x + fc;
                 case 1:
@@ -231,11 +231,11 @@ public class FunctionGraphicUI implements ItemListener {
         }
 
         /**
-         * @Description 重载paintComponent函数
          * @param g 图像绘制用的Graphics类，不归用户调用
+         * @Description 重载paintComponent函数
          * @author 罗孝俊
          * @date 2023/12/3 19:42
-        **/
+         **/
         @Override
         public void paintComponent(Graphics g) {
             width = WINDOW_WIDTH;
@@ -248,48 +248,48 @@ public class FunctionGraphicUI implements ItemListener {
         }
 
         /**
-         * @Description  画坐标轴
          * @param g 图像绘制用的Graphics类，不归用户调用
+         * @Description 画坐标轴
          * @author 罗孝俊
          * @date 2023/12/3 21:02
-        **/
+         **/
         private void drawAxes(Graphics g) {
             g.drawLine(0, y, width, y);
             g.drawLine(x, 0, x, height);
-            g.drawString("0",x + 2,y + 12);
-            for(int i = 1; i * unitLength < width; i++) {
+            g.drawString("0", x + 2, y + 12);
+            for (int i = 1; i * unitLength < width; i++) {
                 //画X轴
-                g.drawLine(x + i * unitLength,y-1,x + i * unitLength,y-6);
-                g.drawLine(x - i * unitLength, y-1, x - i * unitLength, y-6);
+                g.drawLine(x + i * unitLength, y - 1, x + i * unitLength, y - 6);
+                g.drawLine(x - i * unitLength, y - 1, x - i * unitLength, y - 6);
                 g.drawString(String.valueOf(i), x + i * unitLength - 3, y + 12);
                 g.drawString(String.valueOf(i * -1), x - i * unitLength - 3, y + 12);
                 //画Y轴
-                g.drawLine(x+1,y + i * unitLength,x+6,y + i * unitLength);
-                g.drawLine(x+1,y - i * unitLength,x+6,y - i * unitLength);
+                g.drawLine(x + 1, y + i * unitLength, x + 6, y + i * unitLength);
+                g.drawLine(x + 1, y - i * unitLength, x + 6, y - i * unitLength);
                 g.drawString(String.valueOf(i), x - 12, y - i * unitLength - 3);
                 g.drawString(String.valueOf(i * -1), x - 12, y + i * unitLength - 3);
             }
         }
 
         /**
-         * @Description 画图象
          * @param g 图像绘制用的Graphics类，不归用户调用
+         * @Description 画图象
          * @author 罗孝俊
          * @date 2023/12/3 19:51
-        **/
+         **/
         public void function(Graphics g) {
-            Point2D temp1,temp2;
+            Point2D temp1, temp2;
             //用户看到的坐标值
             double nowX, nowY;
-            Graphics2D graphic2D = (Graphics2D)g;
+            Graphics2D graphic2D = (Graphics2D) g;
             nowX = -1.0 * x / unitLength;
             //temp1返回面板的实际坐标值（以像素为单位）
             nowY = functionValue(nowX);
             temp1 = new Point2D.Double(this.alterX(nowX * unitLength), this.alterY(nowY * unitLength));
-            for(int i = 0 ; i < width; i++){
+            for (int i = 0; i < width; i++) {
                 nowX = nowX + 1.0 / unitLength;
                 nowY = functionValue(nowX);
-                if (Math.abs(nowY) < y){
+                if (Math.abs(nowY) < y) {
                     temp2 = new Point2D.Double(this.alterX(nowX * unitLength), this.alterY(nowY * unitLength));
                     graphic2D.draw(new Line2D.Double(temp1, temp2));
                     temp1 = temp2;
@@ -298,24 +298,24 @@ public class FunctionGraphicUI implements ItemListener {
         }
 
         /**
-         * @Description  新旧坐标转换(X)
          * @param nowX 虚拟坐标X
          * @return double 物理坐标X（以像素点为单位）
+         * @Description 新旧坐标转换(X)
          * @author 罗孝俊
          * @date 2023/12/3 20:59
-        **/
-        private double alterX(double nowX){
+         **/
+        private double alterX(double nowX) {
             return x + nowX;
         }
 
         /**
-         * @Description 新旧坐标转换(Y)
          * @param nowY 虚拟坐标Y
          * @return double 物理坐标Y
+         * @Description 新旧坐标转换(Y)
          * @author 罗孝俊
          * @date 2023/12/3 21:01
-        **/
-        private double alterY(double nowY){
+         **/
+        private double alterY(double nowY) {
             return -1 * (nowY - y);
         }
     }

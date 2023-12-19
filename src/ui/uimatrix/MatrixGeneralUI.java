@@ -20,8 +20,8 @@ public class MatrixGeneralUI {
      * @Description 界面构造
      * @author 罗孝俊
      * @date 2023/12/8 13:22
-    **/
-    public MatrixGeneralUI(){
+     **/
+    public MatrixGeneralUI() {
         btnBack = UIValues.createButton("<", FONT_NAME);
         initBtnBack(btnBack, event -> {
             matrixGeneralPanel.setVisible(false);
